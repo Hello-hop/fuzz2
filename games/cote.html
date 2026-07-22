@@ -10,23 +10,34 @@
 <link href="arcade.css" rel="stylesheet">
 <style>
   .versus{display:grid;grid-template-columns:1fr auto 1fr;gap:0;max-width:800px;margin:1.5rem auto;align-items:stretch;}
-  .side{position:relative;background:var(--space2);border:1px solid var(--border);overflow:hidden;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;text-align:center;cursor:pointer;transition:transform .15s;}
+  .side{position:relative;background:var(--space2);border:2px solid var(--border);overflow:hidden;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;text-align:center;cursor:pointer;transition:transform .15s,border-color .5s,background .5s;}
   .side:first-child{border-radius:14px 0 0 14px;}
   .side:last-child{border-radius:0 14px 14px 0;}
-  .side:hover{transform:scale(1.01);z-index:2;}
-  .side .ped-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;}
+  .side:not(.locked):hover{transform:scale(1.01);z-index:2;border-color:var(--teal);}
+  .side .ped-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;transition:opacity .5s;}
   .side .overlay{position:relative;z-index:1;padding:1.5rem;background:linear-gradient(transparent,rgba(10,14,20,.92) 55%);}
   .side .ped-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;text-transform:uppercase;line-height:1;margin-bottom:.4rem;}
   .side .ped-maker{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
   .side .guess-lbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
-  .side .price-reveal{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--orange);opacity:0;transition:opacity .4s;}
+  .side .price-reveal{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--orange);opacity:0;transition:opacity .5s;}
   .side.revealed .price-reveal{opacity:1;}
+  .side.locked{cursor:default;}
+  .side.win{border-color:var(--green);background:rgba(92,200,106,.1);}
+  .side.win .price-reveal{color:var(--green);}
+  .side.win::after{content:'✓ PLUS CHÈRE';position:absolute;top:.9rem;left:.9rem;z-index:2;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--green);background:rgba(10,14,20,.75);padding:.3em .7em;border-radius:6px;border:1px solid var(--green);}
+  .side.lose{border-color:var(--red);background:rgba(224,90,90,.1);}
+  .side.lose .price-reveal{color:var(--red);}
+  .side.lose::after{content:'✗ MOINS CHÈRE';position:absolute;top:.9rem;left:.9rem;z-index:2;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--red);background:rgba(10,14,20,.75);padding:.3em .7em;border-radius:6px;border:1px solid var(--red);}
   .vs-mid{display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;color:var(--orange);background:var(--space);width:56px;z-index:3;}
   .scorebar{display:flex;justify-content:center;gap:2.5rem;margin:1rem auto;}
   .scorebar div{text-align:center;}
-  .scorebar .num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;color:var(--teal);line-height:1;}
+  .scorebar .num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;color:var(--teal);line-height:1;transition:color .3s;}
+  .scorebar .num.flash-win{color:var(--green);}
+  .scorebar .num.flash-lose{color:var(--red);}
   .scorebar .lbl{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
-  .prompt-txt{text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:.5rem 0 1rem;}
+  .prompt-txt{text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:.5rem 0 1rem;min-height:1.4em;transition:color .3s;}
+  .prompt-txt.win{color:var(--green);}
+  .prompt-txt.lose{color:var(--red);}
 </style>
 </head>
 <body>
@@ -39,7 +50,7 @@
 <header class="g-head">
   <p class="g-eyebrow">● Marché de l'occasion</p>
   <h1>LA <span>CÔTE</span></h1>
-  <p class="sub">Deux pédales, une seule cote le plus cher en occasion. Clique sur celle que tu crois la plus chère et enchaîne les bonnes réponses.</p>
+  <p class="sub">Deux pédales, une seule cote le plus cher en occasion. Clique sur celle que tu crois la plus chère. Le jeu continue à l'infini — aucune limite d'essais.</p>
 </header>
 
 <div class="scorebar">
@@ -71,8 +82,6 @@
   </div>
 </div>
 
-<div id="endArea" style="text-align:center;display:none;" class="g-panel"></div>
-
 <footer class="g-foot">
   <p>Fuzz &amp; Friture · Arcade · <a href="index.html">Autres jeux →</a> · Cotes indicatives du marché de l'occasion</p>
 </footer>
@@ -84,6 +93,7 @@
 (function(){
   const priced=PEDALS.filter(p=>p.price);
   let score=0, best=+(localStorage.getItem('cote_best')||0), locked=false, pair=[];
+  const REVEAL_DELAY=2600; // temps laissé pour lire le résultat avant la manche suivante
   document.getElementById('best').textContent=best;
 
   function pick2(){
@@ -93,46 +103,50 @@
   }
   function render(){
     locked=false;pair=pick2();
+    const prompt=document.getElementById('prompt');
+    prompt.textContent='Laquelle cote le plus cher ?';
+    prompt.className='prompt-txt';
     ['A','B'].forEach((s,i)=>{
       const p=pair[i];
+      const side=document.getElementById('side'+s);
+      side.className='side';
       document.getElementById('img'+s).src=p.img;
       document.getElementById('name'+s).textContent=p.name;
       document.getElementById('maker'+s).textContent=p.maker+' · '+p.decade;
       document.getElementById('price'+s).textContent=p.priceLabel;
       document.getElementById('lbl'+s).style.display='block';
-      document.getElementById('side'+s).classList.remove('revealed');
     });
   }
-  function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600);}
+  function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),REVEAL_DELAY-300);}
 
   function choose(i){
     if(locked)return;locked=true;
-    document.getElementById('sideA').classList.add('revealed');
-    document.getElementById('sideB').classList.add('revealed');
-    document.getElementById('lblA').style.display='none';
-    document.getElementById('lblB').style.display='none';
     const chosen=pair[i], other=pair[1-i];
     const correct = chosen.price>=other.price;
+    const winSide = chosen.price>=other.price ? i : 1-i;
+    const sides=['A','B'];
+
+    sides.forEach((s,idx)=>{
+      const side=document.getElementById('side'+s);
+      side.classList.add('locked','revealed');
+      document.getElementById('lbl'+s).style.display='none';
+      side.classList.add(idx===winSide?'win':'lose');
+    });
+
+    const prompt=document.getElementById('prompt');
+    const scoreEl=document.getElementById('score');
     if(correct){
-      score++;document.getElementById('score').textContent=score;
+      score++;scoreEl.textContent=score;scoreEl.classList.add('flash-win');
       if(score>best){best=score;localStorage.setItem('cote_best',best);document.getElementById('best').textContent=best;}
-      toast('✓ Bien vu !');
-      setTimeout(render,1300);
+      prompt.textContent='✓ Bien vu !';prompt.classList.add('win');
+      toast('✓ Bonne réponse — série : '+score);
     } else {
-      toast('✗ Raté !');
-      setTimeout(gameOver,1500);
+      scoreEl.classList.add('flash-lose');
+      prompt.textContent='✗ Raté ! On enchaîne...';prompt.classList.add('lose');
+      toast('✗ Raté — la série repart de zéro');
+      score=0;scoreEl.textContent=0;
     }
-  }
-  function gameOver(){
-    const end=document.getElementById('endArea');
-    document.getElementById('versus').style.display='none';
-    document.getElementById('prompt').style.display='none';
-    end.style.display='block';
-    end.innerHTML=`<h2 style="font-family:'Barlow Condensed';font-weight:900;font-size:2rem;text-transform:uppercase;color:var(--orange);">Fin de série</h2>
-      <p style="color:var(--dim);margin:.5rem 0 1rem;">Tu as enchaîné <strong style="color:var(--teal);">${score}</strong> bonne(s) réponse(s).</p>
-      <button class="g-btn" id="again">Rejouer</button>
-      <a href="index.html" class="g-btn ghost" style="margin-left:.5rem;">Autres jeux</a>`;
-    document.getElementById('again').onclick=()=>{score=0;document.getElementById('score').textContent=0;end.style.display='none';document.getElementById('versus').style.display='grid';document.getElementById('prompt').style.display='block';render();};
+    setTimeout(()=>{scoreEl.classList.remove('flash-win','flash-lose');render();},REVEAL_DELAY);
   }
   document.getElementById('sideA').onclick=()=>choose(0);
   document.getElementById('sideB').onclick=()=>choose(1);
