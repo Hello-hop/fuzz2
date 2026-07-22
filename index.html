@@ -30,9 +30,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
 .nav-f{width:28px;height:34px;background:linear-gradient(160deg,#f9c84a 0%,#f5921e 55%,#e05a0a 100%);clip-path:polygon(0 0,100% 0,100% 22%,38% 22%,38% 43%,82% 43%,82% 60%,38% 60%,38% 100%,0 100%);transition:filter .4s;}
 .nav-logo span{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.06em;color:var(--orange);transition:color .4s;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);opacity:.5;text-decoration:none;transition:opacity .2s,color .2s;}
-.nav-links a:hover{opacity:1;color:var(--teal);}
 
 
 /* NEWSLETTER*/
@@ -275,7 +272,7 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){#manifesto{grid-template-columns:1fr;gap:3rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.about-giant{display:none;}}
-@media(max-width:900px){nav{padding:.9rem 1.2rem;background:rgba(10,14,20,.97);}.nav-links{display:none;}.hr3,.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
+@media(max-width:900px){nav{padding:.9rem 1.2rem;background:rgba(10,14,20,.97);}.hr3,.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
 /* ═══ ARCADE encart accueil ═══ */
 #arcade{max-width:1400px;margin:5rem auto 0;padding:0 3rem;}
 .arcade-lead{color:var(--dim);font-size:1.25rem;max-width:620px;margin-bottom:1.8rem;}
@@ -319,13 +316,6 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo"><div class="nav-f"></div><div class="nav-f"></div><span>Fuzz<span style="color:var(--teal)">&</span>Friture</span></a>
-  <ul class="nav-links">
-    <li><a href="#articles">Articles</a></li>
-    <li><a href="#pedal-match">Quiz</a></li><li><a href="games/index.html">Arcade</a></li>
-    <li><a href="#gallery-vintage">Vintage</a></li>
-    <li><a href="#gallery-recent">Récentes</a></li>
-    <li><a href="#about">À propos</a></li>
-  </ul>
 </nav>
 
 <!-- HERO -->
