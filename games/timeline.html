@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline — Remets les pédales dans l'ordre | Fuzz &amp; Friture</title>
+<meta name="description" content="Sauras-tu remettre ces pédales d'effets légendaires dans leur ordre de sortie chronologique ? Teste ta culture du matos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="arcade.css" rel="stylesheet">
+<style>
+  .tl-instruction{text-align:center;color:var(--dim);font-size:.9rem;margin-bottom:1.2rem;}
+  .tl-list{display:flex;flex-direction:column;gap:.6rem;list-style:none;}
+  .tl-item{display:flex;align-items:center;gap:1rem;background:var(--space);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;cursor:grab;transition:border-color .2s,background .2s;}
+  .tl-item:hover{border-color:var(--teal);}
+  .tl-item.dragging{opacity:.5;border-color:var(--orange);}
+  .tl-item.correct{border-color:var(--green);background:rgba(92,200,106,.08);}
+  .tl-item.wrong{border-color:var(--red);background:rgba(224,90,90,.08);}
+  .tl-thumb{width:52px;height:52px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+  .tl-info{flex:1;}
+  .tl-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;line-height:1;}
+  .tl-maker{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:.2rem;}
+  .tl-year{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:var(--orange);opacity:0;transition:opacity .4s;min-width:52px;text-align:right;}
+  .tl-item.revealed .tl-year{opacity:1;}
+  .tl-handle{color:var(--dim);font-size:1.1rem;}
+  .tl-arrows{display:flex;flex-direction:column;gap:.15rem;}
+  .tl-arrows button{background:var(--space2);border:1px solid var(--border);color:var(--cream);border-radius:5px;width:26px;height:20px;cursor:pointer;font-size:.7rem;line-height:1;padding:0;}
+  .tl-arrows button:hover{border-color:var(--teal);color:var(--teal);}
+</style>
+</head>
+<body>
+
+<nav class="g-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="index.html" class="back">← Toutes les bornes</a>
+</nav>
+
+<header class="g-head">
+  <p class="g-eyebrow">● Culture matos</p>
+  <h1>TIME<span>LINE</span></h1>
+  <p class="sub">Cinq pédales, cinq époques. Remets-les dans l'ordre chronologique de sortie — de la plus ancienne (en haut) à la plus récente.</p>
+</header>
+
+<div class="g-panel">
+  <p class="tl-instruction">Utilise les flèches ▲▼ pour réordonner, puis valide.</p>
+  <ul class="tl-list" id="tlList"></ul>
+  <div style="text-align:center;margin-top:1.5rem;">
+    <button class="g-btn" id="checkBtn">Vérifier l'ordre</button>
+  </div>
+  <div id="resultArea" style="text-align:center;margin-top:1.5rem;"></div>
+</div>
+
+<footer class="g-foot">
+  <p>Fuzz &amp; Friture · Arcade · <a href="index.html">Autres jeux →</a></p>
+</footer>
+
+<div class="g-toast" id="toast"></div>
+
+<script src="pedals-data.js"></script>
+<script>
+(function(){
+  let round=[]; let checked=false;
+  const listEl=document.getElementById('tlList');
+
+  function newRound(){
+    checked=false;
+    document.getElementById('resultArea').innerHTML='';
+    document.getElementById('checkBtn').style.display='inline-block';
+    // 5 pédales avec années distinctes
+    const uniq=[];const seen=new Set();
+    [...PEDALS].sort(()=>Math.random()-.5).forEach(p=>{if(!seen.has(p.year)){seen.add(p.year);uniq.push(p);}});
+    round=uniq.slice(0,5);
+    render();
+  }
+  function render(){
+    listEl.innerHTML='';
+    round.forEach((p,i)=>{
+      const li=document.createElement('li');li.className='tl-item';li.dataset.i=i;
+      li.innerHTML=`
+        <div class="tl-arrows">
+          <button aria-label="Monter" data-up>▲</button>
+          <button aria-label="Descendre" data-down>▼</button>
+        </div>
+        <img class="tl-thumb" src="${p.img}" alt="">
+        <div class="tl-info"><div class="tl-name">${p.name}</div><div class="tl-maker">${p.maker}</div></div>
+        <div class="tl-year">${p.year}</div>`;
+      li.querySelector('[data-up]').onclick=()=>{if(checked||i===0)return;[round[i-1],round[i]]=[round[i],round[i-1]];render();};
+      li.querySelector('[data-down]').onclick=()=>{if(checked||i===round.length-1)return;[round[i+1],round[i]]=[round[i],round[i+1]];render();};
+      listEl.appendChild(li);
+    });
+  }
+  function check(){
+    checked=true;
+    const correctOrder=[...round].sort((a,b)=>a.year-b.year);
+    let good=0;
+    document.querySelectorAll('.tl-item').forEach((li,i)=>{
+      li.classList.add('revealed');
+      if(round[i].year===correctOrder[i].year){li.classList.add('correct');good++;}
+      else li.classList.add('wrong');
+    });
+    document.getElementById('checkBtn').style.display='none';
+    const perfect=good===round.length;
+    document.getElementById('resultArea').innerHTML=`
+      <h2 style="font-family:'Barlow Condensed';font-weight:900;font-size:1.8rem;text-transform:uppercase;color:${perfect?'var(--green)':'var(--orange)'};">${perfect?'Sans-faute ! 🏆':good+' / '+round.length+' bien placées'}</h2>
+      <p style="color:var(--dim);margin:.5rem 0 1rem;">${perfect?'Tu connais ton histoire du matos sur le bout des doigts.':'Regarde les bonnes années révélées et retente ta chance.'}</p>
+      <button class="g-btn" id="againBtn">Nouvelle manche</button>
+      <button class="g-btn ghost" id="shareBtn" style="margin-left:.5rem;">Partager</button>`;
+    document.getElementById('againBtn').onclick=newRound;
+    document.getElementById('shareBtn').onclick=()=>{
+      const txt=`Timeline pédales sur Fuzz & Friture : ${good}/${round.length} ! Sauras-tu faire mieux ? fuzz-et-friture.fr`;
+      if(navigator.share){navigator.share({text:txt}).catch(()=>{});}
+      else{navigator.clipboard.writeText(txt).then(()=>{const t=document.getElementById('toast');t.textContent='Score copié !';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600);});}
+    };
+  }
+  document.getElementById('checkBtn').onclick=check;
+  newRound();
+})();
+</script>
+</body>
+</html>
