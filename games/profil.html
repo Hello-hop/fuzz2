@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quelle pédale es-tu ? | Fuzz &amp; Friture</title>
+<meta name="description" content="Réponds à 6 questions et découvre quelle pédale d'effet culte correspond à ta personnalité de guitariste.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="arcade.css" rel="stylesheet">
+<style>
+  .q-progress{display:flex;gap:.4rem;justify-content:center;margin-bottom:1.5rem;}
+  .q-pip{width:28px;height:5px;border-radius:3px;background:var(--border);transition:background .3s;}
+  .q-pip.done{background:var(--teal);}
+  .q-pip.current{background:var(--orange);}
+  .question h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;text-transform:uppercase;text-align:center;margin-bottom:1.5rem;line-height:1.05;}
+  .answers{display:flex;flex-direction:column;gap:.7rem;}
+  .answer{background:var(--space);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;cursor:pointer;font-size:1rem;transition:border-color .2s,background .2s,transform .1s;}
+  .answer:hover{border-color:var(--teal);background:rgba(62,184,192,.08);}
+  .answer:active{transform:scale(.99);}
+  .result{text-align:center;}
+  .result .res-img{width:100%;max-width:280px;height:220px;object-fit:cover;border-radius:14px;margin:0 auto 1rem;display:block;border:1px solid var(--border);}
+  .result .res-lbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);}
+  .result h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;color:var(--orange);margin:.3rem 0;}
+  .result .res-desc{color:var(--cream);line-height:1.7;margin:1rem 0;}
+  .read-link{display:inline-block;margin-top:.5rem;color:var(--teal);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);padding-bottom:2px;}
+</style>
+</head>
+<body>
+
+<nav class="g-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="index.html" class="back">← Toutes les bornes</a>
+</nav>
+
+<header class="g-head">
+  <p class="g-eyebrow">● Test de personnalité</p>
+  <h1>QUELLE PÉDALE <span>ES-TU ?</span></h1>
+  <p class="sub">Six questions, un verdict. Découvre la pédale culte qui te ressemble — et repars avec une reco.</p>
+</header>
+
+<div class="g-panel">
+  <div class="q-progress" id="progress"></div>
+  <div id="quizArea"></div>
+</div>
+
+<footer class="g-foot">
+  <p>Fuzz &amp; Friture · Arcade · <a href="index.html">Autres jeux →</a></p>
+</footer>
+
+<div class="g-toast" id="toast"></div>
+
+<script src="pedals-data.js"></script>
+<script>
+(function(){
+  // Chaque réponse ajoute des points à un ou plusieurs "profils" (type de pédale)
+  const QUESTIONS=[
+    {q:"Ton solo de rêve, c'est plutôt...",a:[
+      {t:"Un mur de saturation épais",s:{fuzz:2}},
+      {t:"Un son chaud qui pousse l'ampli",s:{od:2}},
+      {t:"Une texture qui ondule et respire",s:{mod:2}},
+    ]},
+    {q:"Ton budget pédale idéal ?",a:[
+      {t:"Peu importe, je veux LE son",s:{fuzz:1,od:1}},
+      {t:"Raisonnable, bon rapport qualité/prix",s:{od:1,mod:1}},
+      {t:"Je chasse les vieilleries rares",s:{fuzz:2}},
+    ]},
+    {q:"Quel guitariste te fait vibrer ?",a:[
+      {t:"Jimi Hendrix",s:{fuzz:2}},
+      {t:"Stevie Ray Vaughan",s:{od:2}},
+      {t:"David Gilmour",s:{mod:2}},
+    ]},
+    {q:"Ton rapport au réglage ?",a:[
+      {t:"Deux boutons, ça suffit largement",s:{fuzz:2}},
+      {t:"J'aime peaufiner finement",s:{mod:2}},
+      {t:"Je veux de la polyvalence",s:{od:1,mod:1}},
+    ]},
+    {q:"Le style que tu joues le plus ?",a:[
+      {t:"Rock 60s/70s, psyché",s:{fuzz:2}},
+      {t:"Blues, funk, soul",s:{od:2}},
+      {t:"Ambient, new wave, pop",s:{mod:2}},
+    ]},
+    {q:"Ta philosophie du son ?",a:[
+      {t:"Brut, sauvage, imprévisible",s:{fuzz:2}},
+      {t:"Naturel, ça sublime sans dénaturer",s:{od:2}},
+      {t:"Spatial, hypnotique, cinématique",s:{mod:2}},
+    ]},
+  ];
+
+  // Pédale "totem" par profil
+  const TOTEM={
+    fuzz:{find:"Dallas Arbiter Fuzz Face",lbl:"Tu es brut et authentique",desc:"Comme le Fuzz Face, tu ne t'embarrasses pas de fioritures. Deux réglages, une attitude, et un son qui réagit à la moindre nuance de ton jeu. Tu vis dans l'instant et tu laisses parler l'émotion."},
+    od:{find:"Ibanez Tube Screamer TS808",lbl:"Tu es le socle sur qui on compte",desc:"Comme le Tube Screamer, tu ne cherches pas à voler la vedette : tu sublimes ce qui t'entoure. Chaud, fiable, indémodable — le genre de présence dont personne ne veut se passer."},
+    mod:{find:"MXR Phase 90",lbl:"Tu es une âme qui ondule",desc:"Comme le Phase 90, tu apportes du mouvement et de la couleur. Tu vois le son en trois dimensions, tu aimes les textures qui respirent et les ambiances qui emmènent ailleurs."},
+  };
+
+  let idx=0; const scores={fuzz:0,od:0,mod:0};
+  const progEl=document.getElementById('progress');
+  const area=document.getElementById('quizArea');
+
+  function buildProgress(){progEl.innerHTML='';QUESTIONS.forEach((_,i)=>{const p=document.createElement('div');p.className='q-pip'+(i<idx?' done':i===idx?' current':'');progEl.appendChild(p);});}
+
+  function showQuestion(){
+    buildProgress();
+    const Q=QUESTIONS[idx];
+    area.innerHTML=`<div class="question"><h2>${Q.q}</h2><div class="answers"></div></div>`;
+    const ans=area.querySelector('.answers');
+    Q.a.forEach(a=>{const d=document.createElement('div');d.className='answer';d.textContent=a.t;d.onclick=()=>{for(const k in a.s)scores[k]+=a.s[k];idx++;idx<QUESTIONS.length?showQuestion():showResult();};ans.appendChild(d);});
+  }
+
+  function showResult(){
+    buildProgress();
+    let win='fuzz',mx=-1;for(const k in scores)if(scores[k]>mx){mx=scores[k];win=k;}
+    const t=TOTEM[win];
+    const ped=PEDALS.find(p=>p.name===t.find)||{};
+    area.innerHTML=`<div class="result">
+      <img class="res-img" src="${ped.img||''}" alt="${t.find}">
+      <div class="res-lbl">Ton totem sonore</div>
+      <h2>${t.find}</h2>
+      <p style="font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;">${t.lbl}</p>
+      <p class="res-desc">${t.desc}</p>
+      <a href="${ped.url||'index.html'}" class="read-link" target="_blank" rel="noopener">Découvrir cette pédale →</a>
+      <div class="g-share" style="margin-top:1.5rem;">
+        <button class="g-btn" id="shareBtn">Partager mon résultat</button>
+        <button class="g-btn ghost" id="retry">Recommencer</button>
+      </div></div>`;
+    document.getElementById('retry').onclick=()=>{idx=0;scores.fuzz=scores.od=scores.mod=0;showQuestion();};
+    document.getElementById('shareBtn').onclick=()=>{
+      const txt=`Sur Fuzz & Friture, ma pédale-totem est : ${t.find} ! Et toi ? fuzz-et-friture.fr`;
+      if(navigator.share){navigator.share({text:txt}).catch(()=>{});}
+      else{navigator.clipboard.writeText(txt).then(()=>{const t=document.getElementById('toast');t.textContent='Résultat copié !';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600);});}
+    };
+  }
+  showQuestion();
+})();
+</script>
+</body>
+</html>
