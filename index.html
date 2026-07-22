@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuzz & Friture — Since 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,700&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --space:#0a0e14;--space2:#0f1520;
+  --orange:#f5921e;--gold:#f9c84a;
+  --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(240,232,216,.6);
+  --border:rgba(245,146,30,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+body.bypass{cursor:auto;}
+
+/* ── BYPASS MODE ── */
+body.bypass{background:#fff;color:#111;}
+body.bypass #stars-canvas,
+body.bypass .hero-ring,
+body.bypass .orbit-wrap,
+body.bypass #hero::before{display:none!important;}
+body.bypass .hero-wordmark{color:#111;text-shadow:none;}
+body.bypass .hero-wordmark .amp{color:#111;}
+body.bypass .hero-since{color:#555;}
+body.bypass .hero-tagline{color:#444;}
+body.bypass nav{background:#fff;border-bottom:1px solid #ddd;}
+body.bypass .nav-logo span,body.bypass .nav-links a{color:#111;opacity:1;}
+body.bypass .hero-f{background:#111;filter:none;animation:none;}
+body.bypass .manifesto-left h2{color:#111;}
+body.bypass .manifesto-left h2 .w{color:#111;}
+body.bypass .manifesto-left p{color:#444;}
+body.bypass .big-knob,.bypass .mini-knob{animation:none;filter:grayscale(1);}
+body.bypass #articles,body.bypass #pedal-match,body.bypass #gallery-vintage,body.bypass #gallery-recent,body.bypass #about{filter:grayscale(1);}
+body.bypass .nf-card{background:#f5f5f5;border-color:#ddd;}
+body.bypass .nf-body h3{color:#111;}
+body.bypass .sec-head h2{color:#111;}
+body.bypass .sec-label{color:#666;}
+body.bypass footer{background:#f0f0f0;border-top:1px solid #ddd;}
+body.bypass .footer-logo,body.bypass .footer-links a,body.bypass .footer-copy{color:#333;}
+body.bypass .btn-space{background:#111;color:#fff;}
+body.bypass .btn-ghost{border-color:#999;color:#333;}
+body.bypass #cur,body.bypass #cur2{display:none;}
+body.bypass .bypass-label{color:#d00!important;}
+
+
+/* ── STARS ── */
+#stars-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ── TRUE BYPASS SWITCH ── */
+#bypass-wrap{
+  position:fixed;bottom:28px;right:28px;z-index:500;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.bp-label{
+  font-family:'Space Mono',monospace;font-size:.48rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(240,232,216,.5);text-align:center;
+  transition:color .3s;
+}
+.bp-label.bypass-label{color:#d00!important;}
+.bp-enclosure{
+  width:72px;height:88px;
+  background:linear-gradient(160deg,#2e3440,#1a1f2a);
+  border-radius:12px;
+  border:2px solid rgba(240,232,216,.12);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+  box-shadow:0 8px 32px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
+  position:relative;
+}
+.bp-led{
+  width:10px;height:10px;border-radius:50%;
+  background:#1a0a0a;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 0 0 2px rgba(0,0,0,.3);
+  transition:background .15s,box-shadow .15s;
+  flex-shrink:0;
+}
+.bp-led.on{
+  background:#ff2200;
+  box-shadow:0 0 8px 3px rgba(255,40,0,.6),0 0 20px rgba(255,40,0,.3);
+}
+.bp-switch{
+  width:48px;height:48px;border-radius:50%;
+  background:radial-gradient(circle at 35% 32%,#4a5060 0%,#282e3a 55%,#1a1e28 100%);
+  border:3px solid #3a4050;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.7),
+    0 2px 4px rgba(0,0,0,.5),
+    inset 0 2px 4px rgba(255,255,255,.08),
+    inset 0 -2px 4px rgba(0,0,0,.4);
+  
+  transition:transform .08s,box-shadow .08s;
+  position:relative;
+  flex-shrink:0;
+}
+.bp-switch::after{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  width:18px;height:18px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#5a6070,#22262e);
+  border:1px solid rgba(255,255,255,.06);
+}
+.bp-switch:active,
+.bp-switch.pressed{
+  transform:scale(.92) translateY(2px);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.8),
+    0 1px 2px rgba(0,0,0,.5),
+    inset 0 3px 8px rgba(0,0,0,.5),
+    inset 0 -1px 2px rgba(255,255,255,.04);
+}
+.bp-text{
+  font-family:'Space Mono',monospace;font-size:.38rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(240,232,216,.25);margin-top:2px;
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:linear-gradient(to bottom,rgba(10,14,20,.95) 0%,transparent 100%);transition:background .4s;}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.nav-f{width:28px;height:34px;background:linear-gradient(160deg,#f9c84a 0%,#f5921e 55%,#e05a0a 100%);clip-path:polygon(0 0,100% 0,100% 22%,38% 22%,38% 43%,82% 43%,82% 60%,38% 60%,38% 100%,0 100%);transition:filter .4s;}
+.nav-logo span{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.06em;color:var(--orange);transition:color .4s;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);opacity:.5;text-decoration:none;transition:opacity .2s,color .2s;}
+.nav-links a:hover{opacity:1;color:var(--teal);}
+.nav-burger{display:none;flex-direction:column;gap:5px;}
+.nav-burger span{width:24px;height:1.5px;background:var(--cream);display:block;}
+
+
+/* NEWSLETTER*/
+ .fz-newsletter {
+      background: var(--ink);
+      padding: 5.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .fz-newsletter::before {
+      content: 'SUBSCRIBE';
+      font-family: 'Passion One', sans-serif;
+      font-size: clamp(80px, 18vw, 180px);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.04;
+      color: var(--purple);
+      pointer-events: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .fz-nl-inner {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .fz-nl-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .fz-nl-title {
+      font-family: 'Passion One', sans-serif;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      text-transform: uppercase;
+      color: var(--paper);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+    .fz-nl-title span { color: var(--purple); }
+    .fz-nl-text {
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(245,239,227,0.6);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .fz-nl-form { display: flex; flex-direction: column; gap: 10px; }
+    .fz-nl-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 2px solid rgba(245,239,227,0.2);
+      padding: 1rem 1.2rem;
+      color: var(--paper);
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-style: italic;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fz-nl-input::placeholder { color: rgba(245,239,227,0.3); }
+    .fz-nl-input:focus { border-color: var(--purple); }
+    .fz-nl-submit {
+      background: var(--burnt);
+      color: var(--paper);
+      border: 2px solid var(--burnt);
+      padding: 1rem;
+      width: 100%;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .fz-nl-submit:hover { background: var(--purple); border-color: var(--purple); }
+    .fz-nl-disclaimer {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(245,239,227,0.3);
+      letter-spacing: 0.1em;
+      margin-top: 0.8rem;
+      line-height: 1.6;
+    }
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:8rem 2rem 6rem;text-align:center;overflow:hidden;}
+#hero::before{content:'';position:absolute;width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-55%);background:radial-gradient(ellipse,rgba(245,146,30,.1) 0%,rgba(62,184,192,.05) 45%,transparent 70%);pointer-events:none;z-index:1;animation:nebula 8s ease-in-out infinite alternate;}
+@keyframes nebula{from{opacity:.6;transform:translate(-50%,-55%) scale(1);}to{opacity:1;transform:translate(-50%,-55%) scale(1.1);}}
+.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(245,146,30,.07);pointer-events:none;z-index:1;}
+.hr1{width:440px;height:440px;top:50%;left:50%;transform:translate(-50%,-50%);}
+.hr2{width:680px;height:680px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:rgba(62,184,192,.05);}
+.hr3{width:920px;height:920px;top:50%;left:50%;transform:translate(-50%,-50%);}
+.orbit-wrap{position:absolute;inset:0;z-index:1;pointer-events:none;}
+.orbit-arm{position:absolute;top:50%;left:50%;transform-origin:0 0;animation:arm-spin linear infinite;}
+.orbit-arm.a1{animation-duration:20s;}.orbit-arm.a2{animation-duration:33s;animation-direction:reverse;}.orbit-arm.a3{animation-duration:48s;}.orbit-arm.a4{animation-duration:15s;animation-direction:reverse;}
+@keyframes arm-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.orbit-pedal{position:absolute;width:44px;height:44px;border-radius:8px;background:var(--space2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 18px rgba(245,146,30,.15);animation:arm-spin linear infinite;}
+.orbit-arm.a1 .orbit-pedal{animation-duration:20s;animation-direction:reverse;transform:translate(-50%,-50%) translateX(180px);}
+.orbit-arm.a2 .orbit-pedal{animation-duration:33s;animation-direction:normal;transform:translate(-50%,-50%) translateX(270px);}
+.orbit-arm.a3 .orbit-pedal{animation-duration:48s;animation-direction:reverse;transform:translate(-50%,-50%) translateX(360px);}
+.orbit-arm.a4 .orbit-pedal{animation-duration:15s;animation-direction:normal;transform:translate(-50%,-50%) translateX(130px);}
+.hero-eyebrow{position:relative;z-index:2;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:1.8rem;animation:fadeUp .8s ease both;}
+.hero-logo-wrap{position:relative;z-index:2;animation:fadeUp .9s .1s ease both;}
+.hero-f{width:clamp(55px,10vw,90px);margin:0 auto .8rem;aspect-ratio:1/1.2;background:linear-gradient(160deg,#f9c84a 0%,#f5921e 55%,#e05a0a 100%);clip-path:polygon(0 0,100% 0,100% 22%,38% 22%,38% 43%,82% 43%,82% 60%,38% 60%,38% 100%,0 100%);filter:drop-shadow(0 0 30px rgba(245,146,30,.5));animation:logo-glow 4s ease-in-out infinite alternate;}
+@keyframes logo-glow{from{filter:drop-shadow(0 0 18px rgba(245,146,30,.4));}to{filter:drop-shadow(0 0 45px rgba(245,146,30,.8));}}
+.hero-wordmark{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(3.5rem,11vw,8.5rem);letter-spacing:.05em;line-height:.92;color:var(--orange);text-transform:uppercase;transition:color .4s;}
+.hero-wordmark .amp{color:var(--teal);transition:color .4s;}
+.hero-since{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.4em;color:var(--teal);opacity:.8;margin-top:.6rem;transition:color .4s;}
+.hero-tagline{position:relative;z-index:2;font-size:clamp(1.05rem,2vw,1.25rem);font-weight:300;line-height:1.85;color:var(--dim);max-width:560px;margin:2rem auto 0;animation:fadeUp 1s .25s ease both;}
+.hero-cta{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;animation:fadeUp 1s .4s ease both;}
+.btn-space{display:inline-block;padding:.9rem 2.2rem;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:var(--orange);color:var(--space);border:none;border-radius:3px;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;font-weight:700;}
+.btn-space:hover{background:var(--gold);transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,146,30,.3);}
+.btn-ghost{display:inline-block;padding:.9rem 2.2rem;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;background:transparent;color:var(--teal);border:1px solid rgba(62,184,192,.4);border-radius:3px;text-decoration:none;transition:border-color .2s,transform .15s;}
+.btn-ghost:hover{border-color:var(--teal);transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeUp 1s .7s ease both;}
+.scroll-hint span{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;opacity:.35;}
+.scroll-beam{width:1px;height:45px;background:linear-gradient(to bottom,var(--orange),transparent);animation:beam 2.5s ease-in-out infinite;}
+@keyframes beam{0%,100%{opacity:.3;transform:scaleY(1);}50%{opacity:.9;transform:scaleY(1.4);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── MANIFESTO ── */
+#manifesto{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:8rem 2.5rem 7rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.manifesto-left .eyebrow{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;display:block;}
+.manifesto-left h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(3rem,5vw,5rem);line-height:.95;letter-spacing:.03em;text-transform:uppercase;color:var(--orange);margin-bottom:2rem;}
+.manifesto-left h2 .w{color:var(--cream);}
+.manifesto-left p{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.9;color:var(--dim);margin-bottom:1.2rem;}
+.knob-cluster{position:relative;width:220px;height:220px;margin:0 auto;}
+.big-knob{position:absolute;top:50%;left:50%;width:120px;height:120px;border-radius:50%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,#1a1f2a,#2a3040,#f5921e 80%,#1a1f2a 100%);border:3px solid rgba(245,146,30,.4);box-shadow:0 0 40px rgba(245,146,30,.25),inset 0 0 20px rgba(0,0,0,.5);animation:knob-rot 5s linear infinite;}
+.big-knob::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:3px;height:24px;background:var(--orange);border-radius:2px;}
+.mini-knob{position:absolute;width:50px;height:50px;border-radius:50%;background:conic-gradient(from 120deg,#111622,#222d3e,var(--teal) 70%,#111622);border:2px solid rgba(62,184,192,.35);animation:knob-rot linear infinite;}
+.mk1{top:0;left:10px;animation-duration:3s;animation-direction:reverse;}
+.mk2{top:0;right:10px;animation-duration:7s;}
+.mk3{bottom:10px;left:50%;transform:translateX(-50%)!important;animation-duration:4.5s;animation-direction:reverse;}
+@keyframes knob-rot{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+.knob-label{position:absolute;bottom:-2rem;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);opacity:.6;white-space:nowrap;}
+
+/* ── SECTION HEADER ── */
+.sec-head{max-width:1400px;margin:0 auto;padding:0 3rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;}
+.sec-head h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.2rem,4vw,3.5rem);line-height:.95;letter-spacing:.04em;text-transform:uppercase;color:var(--cream);}
+.sec-head h2 span{color:var(--orange);}
+.sec-head .see-all{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);padding-bottom:2px;white-space:nowrap;}
+.sec-label{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem;display:block;}
+
+/* ── NETFLIX ARTICLES ── */
+#articles{position:relative;z-index:2;padding:5rem 0 3rem;border-top:1px solid rgba(240,232,216,.04);}
+.netflix-row{max-width:1400px;margin:0 auto 2.5rem;padding:0 3rem;}
+.netflix-row-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream);opacity:.7;margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.netflix-row-title::after{content:'';flex:1;height:1px;background:rgba(240,232,216,.06);}
+.netflix-row-title .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.netflix-row.teal .netflix-row-title .dot{background:var(--teal);}
+.netflix-row.gold .netflix-row-title .dot{background:var(--gold);}
+.cards-row{display:flex;gap:1rem;overflow-x:auto;padding:.4rem .1rem 1.2rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.cards-row::-webkit-scrollbar{display:none;}
+.nf-card{flex:0 0 200px;scroll-snap-align:start;border-radius:8px;overflow:hidden;background:var(--space2);border:1px solid rgba(240,232,216,.06);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.25,.8,.25,1),border-color .25s,box-shadow .25s;position:relative;}
+.nf-card:hover{transform:scale(1.08) translateY(-4px);border-color:rgba(245,146,30,.4);box-shadow:0 20px 50px rgba(0,0,0,.7);z-index:10;}
+.nf-card.wide{flex:0 0 340px;}
+.nf-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.nf-thumb .nf-chip{z-index:2;}
+.nf-thumb::after{z-index:1;}
+.nf-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;flex-shrink:0;}
+.nf-card.wide .nf-thumb{height:160px;}
+.nf-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,14,20,.85));}
+.nf-chip{position:absolute;top:8px;left:8px;z-index:1;font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .55rem;border-radius:2px;background:rgba(10,14,20,.8);backdrop-filter:blur(4px);}
+.c-dist{color:var(--orange);}.c-fuzz{color:var(--gold);}.c-od{color:#b07aff;}.c-mod{color:var(--teal);}.c-guide{color:var(--gold);}.c-hist{color:#7eb8f0;}
+.nf-body{padding:1rem 1.1rem 1.2rem;flex:1;display:flex;flex-direction:column;gap:.4rem;}
+.nf-body h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;line-height:1.05;color:var(--cream);}
+.nf-card.wide .nf-body h3{font-size:1.2rem;}
+.nf-body p{font-size:.78rem;line-height:1.7;color:var(--dim);flex:1;}
+.nf-meta{font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;margin-top:.3rem;}
+
+/* ── PEDAL MATCH GAME ── */
+#pedal-match{position:relative;z-index:2;padding:6rem 0;border-top:1px solid rgba(240,232,216,.04);}
+.pm-intro{max-width:600px;margin:0 auto 2.5rem;text-align:center;padding:0 2rem;}
+.pm-intro p{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.85;color:var(--dim);}
+.pm-arena{position:relative;max-width:480px;margin:0 auto;padding:0 2rem;}
+.pm-progress{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.8rem;}
+.pm-pip{width:28px;height:4px;border-radius:2px;background:rgba(240,232,216,.12);transition:background .3s;}
+.pm-pip.done{background:var(--orange);}
+.pm-pip.current{background:var(--teal);}
+.pm-card-wrap{
+  position:relative;height:420px;
+  display:flex;align-items:center;justify-content:center;
+  touch-action:none;
+}
+.pm-card{
+  position:absolute;
+  width:100%;max-width:340px;
+  background:var(--space2);
+  border:1px solid rgba(240,232,216,.1);
+  border-radius:16px;overflow:hidden;
+  will-change:transform;
+  transition:box-shadow .2s;
+  user-select:none;
+}
+.pm-card-inner{
+  width:100%;height:260px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1rem;font-size:5rem;
+  position:relative;
+}
+.pm-card-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(10,14,20,.9));}
+.pm-pedal-name{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:1.6rem;text-align:center;color:var(--cream);
+  padding:1rem 1.2rem .3rem;line-height:1;
+}
+.pm-pedal-hint{
+  font-size:.8rem;line-height:1.7;color:var(--dim);
+  padding:.3rem 1.2rem 1.4rem;text-align:center;
+}
+/* swipe indicators */
+.pm-indicator{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;letter-spacing:.08em;
+  padding:.5rem 1.2rem;border-radius:8px;opacity:0;
+  pointer-events:none;transition:opacity .15s;
+  border:3px solid;
+}
+.pm-indicator.left{left:10px;color:#3eb8c0;border-color:var(--teal);}
+.pm-indicator.right{right:10px;color:var(--orange);border-color:var(--orange);}
+
+.pm-hints{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding:0 .5rem;}
+.pm-hint-side{display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.pm-hint-side .arrow{font-size:1.8rem;opacity:.35;}
+.pm-hint-side .hlabel{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;opacity:.5;}
+.pm-hint-side .hcat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.04em;}
+.pm-hint-side.left-side .hcat{color:var(--teal);}
+.pm-hint-side.right-side .hcat{color:var(--orange);}
+.pm-score{text-align:center;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);opacity:.6;margin-top:1.2rem;}
+
+/* result overlay */
+.pm-result{
+  display:none;
+  position:absolute;inset:0;
+  border-radius:16px;overflow:hidden;
+  background:rgba(10,14,20,.92);
+  backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:1rem;
+  text-align:center;padding:2rem;
+  z-index:20;
+}
+.pm-result.show{display:flex;}
+.pm-result-icon{font-size:3.5rem;}
+.pm-result-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;color:var(--cream);}
+.pm-result-sub{font-size:.9rem;line-height:1.8;color:var(--dim);}
+.pm-result-btn{margin-top:.5rem;padding:.8rem 1.8rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;background:var(--orange);color:var(--space);border:none;border-radius:3px;}
+
+/* Easter egg modal */
+#easter-egg{
+  display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(12px);
+  align-items:center;justify-content:center;
+}
+#easter-egg.show{display:flex;}
+.egg-box{
+  max-width:500px;width:90%;
+  background:var(--space2);border:1px solid var(--orange);
+  border-radius:16px;padding:3rem 2.5rem;text-align:center;
+  position:relative;
+  box-shadow:0 0 60px rgba(245,146,30,.25);
+  animation:egg-in .4s cubic-bezier(.25,.8,.25,1) both;
+}
+@keyframes egg-in{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+.egg-glow{
+  position:absolute;inset:-2px;border-radius:17px;
+  background:linear-gradient(135deg,var(--orange),var(--teal),var(--orange));
+  z-index:-1;animation:egg-border 3s linear infinite;
+  background-size:300% 300%;
+}
+@keyframes egg-border{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.egg-icon{font-size:4rem;margin-bottom:.8rem;}
+.egg-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.5rem;color:var(--orange);line-height:1;margin-bottom:.5rem;}
+.egg-sub{font-size:1rem;line-height:1.8;color:var(--dim);margin-bottom:1.5rem;}
+.egg-link{display:inline-block;padding:.8rem 1.8rem;background:var(--orange);color:var(--space);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;border-radius:3px;text-decoration:none;font-weight:700;margin-bottom:.8rem;}
+.egg-close{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);background:none;border:none;margin-top:.5rem;opacity:.6;}
+.egg-sparks{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:16px;}
+.spark{position:absolute;width:4px;height:4px;border-radius:50%;animation:spark-fly 1.2s ease-out forwards;}
+@keyframes spark-fly{from{opacity:1;transform:translate(0,0) scale(1);}to{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0);}}
+
+/* ── GALLERIES ── */
+#gallery-vintage,#gallery-recent{position:relative;z-index:2;padding:6rem 0 4rem;}
+#gallery-vintage{background:linear-gradient(to bottom,transparent,rgba(245,146,30,.03) 30%,rgba(245,146,30,.03) 70%,transparent);border-top:1px solid rgba(245,146,30,.07);}
+#gallery-recent{border-top:1px solid rgba(62,184,192,.06);}
+.gallery-scroll{display:flex;gap:1.2rem;overflow-x:auto;padding:.5rem 3rem 2rem;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(245,146,30,.3) transparent;}
+.gallery-scroll::-webkit-scrollbar{height:3px;}
+.gallery-scroll::-webkit-scrollbar-thumb{background:rgba(245,146,30,.3);border-radius:2px;}
+.gal-card{flex:0 0 260px;scroll-snap-align:start;border-radius:10px;overflow:hidden;border:1px solid rgba(240,232,216,.07);background:var(--space2);text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;}
+.gal-card:hover{transform:translateY(-6px) scale(1.02);border-color:rgba(245,146,30,.35);box-shadow:0 16px 40px rgba(0,0,0,.6);}
+#gallery-recent .gal-card:hover{border-color:rgba(62,184,192,.35);}
+.gal-img{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.gal-img .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;}
+.ph-icon{font-size:2.8rem;opacity:.7;}
+.ph-label{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;}
+
+.gal-badge{position:absolute;top:10px;right:10px;z-index:2;font-family:'Space Mono',monospace;font-size:.46rem;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .6rem;border-radius:2px;}
+.badge-vintage{background:rgba(249,200,74,.15);color:var(--gold);border:1px solid rgba(249,200,74,.3);}
+.badge-new{background:rgba(62,184,192,.12);color:var(--teal);border:1px solid rgba(62,184,192,.3);}
+.gal-info{padding:1rem 1.2rem 1.3rem;}
+.gal-info .brand{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:.35rem;}
+#gallery-recent .gal-info .brand{color:var(--teal);}
+.gal-info .model{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.04em;color:var(--cream);margin-bottom:.3rem;}
+.gal-info .era{font-size:.78rem;color:var(--dim);}
+.gal-add{flex:0 0 120px;border:2px dashed rgba(245,146,30,.2);background:transparent;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;transition:.2s;}
+.gal-add:hover{border-color:rgba(245,146,30,.5);}
+.gal-add span{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);opacity:.5;text-align:center;padding:0 1rem;}
+.gal-add .plus{font-size:1.8rem;color:var(--orange);opacity:.3;}
+
+/* ── ABOUT ── */
+#about{position:relative;z-index:2;padding:6rem 2.5rem;background:rgba(245,146,30,.04);border-top:1px solid rgba(245,146,30,.1);}
+.about-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-giant{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:9rem;line-height:1;color:var(--orange);opacity:.07;user-select:none;text-align:center;}
+.about-text span{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:1rem;}
+.about-text h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.2rem,4vw,3.5rem);text-transform:uppercase;line-height:1;color:var(--cream);margin-bottom:1.2rem;}
+.about-text p{font-size:clamp(1rem,1.6vw,1.15rem);line-height:1.95;color:var(--dim);}
+.stats{display:flex;gap:2.5rem;margin-top:2rem;flex-wrap:wrap;}
+.stat .n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.8rem;color:var(--orange);line-height:1;}
+.stat .l{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;opacity:.45;margin-top:.2rem;}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1.8rem;text-align:center;}
+.footer-logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;letter-spacing:.06em;color:var(--orange);}
+.footer-logo .amp{color:var(--teal);}
+.footer-links{display:flex;gap:2.2rem;flex-wrap:wrap;justify-content:center;}
+.footer-links a{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);opacity:.35;text-decoration:none;transition:.2s;}
+.footer-links a:hover{opacity:1;color:var(--teal);}
+.footer-copy{font-family:'Space Mono',monospace;font-size:.5rem;opacity:.2;letter-spacing:.08em;}
+
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.rev.in{opacity:1;transform:none;}
+.rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){#manifesto{grid-template-columns:1fr;gap:3rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.about-giant{display:none;}.orbit-arm.a3,.orbit-arm.a4{display:none;}}
+@media(max-width:640px){nav{padding:.9rem 1.2rem;}.nav-links{display:none;}.nav-burger{display:flex;}.orbit-arm.a2{display:none;}.hr3,.hr2{display:none;}.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
+</style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<!-- TRUE BYPASS SWITCH -->
+<div id="bypass-wrap">
+  <div class="bp-enclosure">
+    <div class="bp-led" id="bypassLed"></div>
+    <div class="bp-switch" id="bypassSwitch" title="True Bypass"></div>
+    <span class="bp-text">TRUE<br>BYPASS</span>
+  </div>
+  <div class="bp-label" id="bypassLabel">EFFECT ON</div>
+</div>
+
+<!-- EASTER EGG MODAL -->
+<div id="easter-egg">
+  <div class="egg-box">
+    <div class="egg-glow"></div>
+    <div class="egg-sparks" id="eggSparks"></div>
+    <div class="egg-icon">🔓</div>
+    <div class="egg-title">ARTICLE SECRET</div>
+    <div class="egg-sub">3/3 sans-faute.<br>Tu connais tes pédales mieux que la plupart. Voici l'article caché : l'histoire des circuits Germanium introuvables des années 60.</div>
+    <a href="https://linktr.ee/makemba.music" class="egg-link" target="_blank" rel="noopener">Lire l'article secret →</a><br>
+    <button class="egg-close" id="eggClose">Fermer</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><div class="nav-f"></div><div class="nav-f"></div><span>Fuzz<span style="color:var(--teal)">&</span>Friture</span></a>
+  <ul class="nav-links">
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#pedal-match">Quiz</a></li>
+    <li><a href="#gallery-vintage">Vintage</a></li>
+    <li><a href="#gallery-recent">Récentes</a></li>
+    <li><a href="#about">À propos</a></li>
+  </ul>
+  <div class="nav-burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ring hr1"></div><div class="hero-ring hr2"></div><div class="hero-ring hr3"></div>
+  <div class="orbit-wrap">
+    <div class="orbit-arm a1"><div class="orbit-pedal">🎛️</div></div>
+    <div class="orbit-arm a2"><div class="orbit-pedal">🔊</div></div>
+    <div class="orbit-arm a3"><div class="orbit-pedal">🎚️</div></div>
+    <div class="orbit-arm a4"><div class="orbit-pedal">⚡</div></div>
+  </div>
+  <p class="hero-eyebrow">● Transmission depuis l'orbite basse du son</p>
+  <div class="hero-logo-wrap">
+  <!-- HERO   <div class="hero-f"></div>-->
+    <div class="hero-wordmark">FUZZ<span class="amp">&</span>FRITURE</div>
+    <div class="hero-since">SINCE&nbsp;&nbsp;2026</div>
+  </div>
+  <p class="hero-tagline"> <strong>Papa, c'est quoi une pédale </strong>? tiens appuie là et écoute. <strong>oh trop cool ! et Papa, je peux l'avoir celle là ?</strong> bah oui ! mais Papa, je peux mettre le CD de Gary Moore ? <strong> bien sûr, assieds toi, je te raconte. </strong></p>
+  <div class="hero-cta">
+    <a href="#articles" class="btn-space">Lire les articles</a>
+    <a href="#pedal-match" class="btn-ghost">Tester mes connaissances</a>
+  </div>
+
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="manifesto-left rev">
+    <span class="eyebrow">// Manifeste de mission</span>
+    <h2><span class="w">Pourquoi</span><span style="color:var(--teal)">?</span></h2>
+    <p>Tout a commencé avec ce cousin, ce Fada de la gratte qu'on nommera Vincent et qui m'a tout appris. Il me présente une boîte métallique cabossée, et là - ce son impossible à décrire autrement que : <em> Wow, ça déchire ! </em>.</p>
+    <p>Du coup, petit à petit je me documente, je lis des histoires sur les petits trucs des guitaristes, je visite les usines de constructeurs japonais, bref je découvre encore des trucs sur le son, mais surtout j'essaye de vous partager les meilleures anecdotes, les meilleures astuces, rien que le meilleur. </p>
+  </div>
+  <div class="rev rd2" style="display:flex;align-items:center;justify-content:center;">
+    <div class="knob-cluster">
+      <div class="big-knob"></div>
+      <div class="mini-knob mk1"></div>
+      <div class="mini-knob mk2"></div>
+      <div class="mini-knob mk3"></div>
+      <span class="knob-label">GAIN · TONE · VOLUME</span>
+    </div>
+  </div>
+</section>
+
+<!-- NETFLIX ARTICLES -->
+<section id="articles">
+  <div class="sec-head rev"><h2>LES <span>ARTICLES</span></h2><a href="https://fuzz-et-friture.fr" class="see-all">Voir tout →</a></div>
+
+  <!-- ROW 1 : FUZZ -->
+  <div class="netflix-row rev">
+    <div class="netflix-row-title"><span class="dot"></span>Fuzz</div>
+    <div class="cards-row">
+      <a href="https://fuzz-et-friture.fr/la-guerre-des-fuzz/" class="nf-card wide">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/q859092-big-muff.jpg" alt="" loading="lazy"><span class="nf-chip c-fuzz">Fuzz</span></div>
+        <div class="nf-body"><h3>La fuzz — souvent oubliée, mais indispensable, même si t'as déjà une disto.</h3><p>Pourquoi la fuzz n'est pas une distortion comme les autres, et comment elle change tout.</p><div class="nf-meta">Découverte · 8 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/fuzz-mythique-et-disputee-la-plus-sous-cotee/" class="nf-card">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/fuzztone.jpg" alt="" loading="lazy"><span class="nf-chip c-fuzz">Fuzz</span></div>
+        <div class="nf-body"><h3>Fuzz — mythique et disputée — la plus sous-cotée</h3><p>L'histoire de la pédale que tout le monde sous-estime.</p><div class="nf-meta">Portrait · 7 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/" class="nf-card">
+        <div class="nf-thumb bg-fire"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/q5928-jimi-hendrix.jpg" alt="" loading="lazy"><span class="nf-chip c-fuzz">Fuzz</span></div>
+        <div class="nf-body"><h3>Guerre des FUZZ : Fuzz Face vs Big Muff vs Boss FZ-5</h3><p>Trois légendes, un seul ring. Comparatif sans concession.</p><div class="nf-meta">Comparatif · 10 min</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 2 : OVERDRIVE -->
+  <div class="netflix-row teal rev">
+    <div class="netflix-row-title"><span class="dot" style="background:var(--teal)"></span>Overdrive</div>
+    <div class="cards-row">
+      <a href="https://fuzz-et-friture.fr/overdrive-la-pedale-incontournable/" class="nf-card wide">
+        <div class="nf-thumb bg-purp"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-boss_sd1_super_overdrive.jpg" alt="" loading="lazy"><span class="nf-chip c-od">Overdrive</span></div>
+        <div class="nf-body"><h3>Overdrive — La Pédale Incontournable</h3><p>Tour d'horizon complet de l'overdrive : ce que c'est, comment ça sonne, pourquoi c'est indispensable.</p><div class="nf-meta">Guide · 10 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/pedale-tube-screamer-une-boite-verte-trois-potards/" class="nf-card">
+        <div class="nf-thumb bg-green"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-ibanez_ts808.jpg" alt="" loading="lazy"><span class="nf-chip c-od">Overdrive</span></div>
+        <div class="nf-body"><h3>Tube Screamer — le hurlement vert qui a sauvé le blues</h3><p>Une boîte verte, trois potards, et une révolution.</p><div class="nf-meta">Portrait · 8 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/" class="nf-card">
+        <div class="nf-thumb bg-purp"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-ibanez_ts9_tube_screamer.jpg" alt="" loading="lazy"><span class="nf-chip c-od">Overdrive</span></div>
+        <div class="nf-body"><h3>Ces overdrives qui ont rendu vos amplis accros</h3><p>Les circuits qui ont créé une dépendance sonore chez des générations de guitaristes.</p><div class="nf-meta">Sélection · 7 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/" class="nf-card">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/Q999999904-klon-ktr.jpg" alt="" loading="lazy"><span class="nf-chip c-od">Overdrive</span></div>
+        <div class="nf-body"><h3>KLON vs clones — 4 pédales pour le son du Centaur sans le prix</h3><p>Le mythe à 2000€ vs ses meilleurs clones. On compare.</p><div class="nf-meta">Comparatif · 9 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/meilleures-pedales-overdrive-guitare/" class="nf-card">
+        <div class="nf-thumb bg-purp"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-electro_harmonix_soul_food.jpg" alt="" loading="lazy"><span class="nf-chip c-od">Overdrive</span></div>
+        <div class="nf-body"><h3>Top 7 pédales d'overdrive en 2026 : le classement</h3><p>Le verdict 2026 pour choisir sans se tromper.</p><div class="nf-meta">Classement · 11 min</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 3 : MODULATION -->
+  <div class="netflix-row rev" style="--dot-color:var(--teal)">
+    <div class="netflix-row-title"><span class="dot" style="background:var(--teal)"></span>Modulation</div>
+    <div class="cards-row">
+      <a href="https://fuzz-et-friture.fr/chorus-article/" class="nf-card wide">
+        <div class="nf-thumb bg-teal"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/q315758-andy-summers.jpg" alt="" loading="lazy"><span class="nf-chip c-mod">Modulation</span></div>
+        <div class="nf-body"><h3>Le Chorus — du rock au zouk</h3><p>De Kurt Cobain aux Antilles, le chorus traverse tout. Histoire et usage d'un effet universel.</p><div class="nf-meta">Explainer · 8 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/flanger-mode-avion/" class="nf-card">
+        <div class="nf-thumb bg-blue"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/boss-bf361ne4po8lbL.jpg" alt="" loading="lazy"><span class="nf-chip c-mod">Modulation</span></div>
+        <div class="nf-body"><h3>Flanger : active le mode avion !</h3><p>Ce son de jet qui décolle — d'où vient-il et comment l'utiliser ?</p><div class="nf-meta">Découverte · 6 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/flanger-les-3-pedales-qui-font-decoller-le-rock-selon-gilmour-et-van-halen/" class="nf-card">
+        <div class="nf-thumb bg-blue"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/mxr-flanger-0710137026537.jpg" alt="" loading="lazy"><span class="nf-chip c-mod">Modulation</span></div>
+        <div class="nf-body"><h3>Flanger — les 3 pédales qui font décoller le rock selon Gilmour et Van Halen</h3><p>Les références absolues du flanger, décryptées.</p><div class="nf-meta">Sélection · 7 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/phaser-quand-la-guitare-se-met-a-respirer/" class="nf-card">
+        <div class="nf-thumb bg-teal"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/Q272012-eddie-van-halen-at-emmy-rehearsal-211282.jpg" alt="" loading="lazy"><span class="nf-chip c-mod">Modulation</span></div>
+        <div class="nf-body"><h3>Phaser — quand la guitare se met à respirer</h3><p>L'effet qui donne vie à chaque note. Principe, histoire, pédales.</p><div class="nf-meta">Portrait · 7 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/" class="nf-card">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/vintage-1970s-aria-diamond-wah-fuzz.jpg" alt="" loading="lazy"><span class="nf-chip c-mod">Wah</span></div>
+        <div class="nf-body"><h3>WhaWha — la pédale de Jimi et de tous les saints</h3><p>Du pied gauche de Hendrix aux funk masters. L'histoire du wah.</p><div class="nf-meta">Histoire · 8 min</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ROW 4 : GUIDES -->
+  <div class="netflix-row gold rev">
+    <div class="netflix-row-title"><span class="dot" style="background:var(--gold)"></span>Guides & Nouveautés</div>
+    <div class="cards-row">
+      <a href="https://fuzz-et-friture.fr/comment-choisir-ses-pedales-effets-guitare-2026/" class="nf-card wide">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-boss_rv_6.jpg" alt="" loading="lazy"><span class="nf-chip c-guide">Guide</span></div>
+        <div class="nf-body"><h3>Comment choisir ses pédales d'effets guitare en 2026 : le guide complet</h3><p>Par où commencer, dans quel ordre acheter, quoi éviter — tout est là.</p><div class="nf-meta">Guide · 14 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/les-6-pedales-que-tout-guitariste-devrait-avoir-sur-son-pedalboard-1/" class="nf-card">
+        <div class="nf-thumb bg-fire"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-boss_tu3.jpg" alt="" loading="lazy"><span class="nf-chip c-guide">Guide</span></div>
+        <div class="nf-body"><h3>Les pédales que tout guitariste devrait avoir !</h3><p>La liste de base, sans chichis, pour un pedalboard solide.</p><div class="nf-meta">Guide · 9 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/ordre-pedales-pedalier-guitare/" class="nf-card">
+        <div class="nf-thumb bg-gold"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-strymon_timeline.jpg" alt="" loading="lazy"><span class="nf-chip c-guide">Guide</span></div>
+        <div class="nf-body"><h3>Avant Après C'est Comme Tu Veux !</h3><p>L'ordre des pédales sur ton pedalboard — le guide qui tranche enfin.</p><div class="nf-meta">Guide · 10 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/boss-px-1-plugout-fx/" class="nf-card">
+        <div class="nf-thumb bg-fire"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/81613.webp" alt="" loading="lazy"><span class="nf-chip" style="color:#f97">Nouveauté</span></div>
+        <div class="nf-body"><h3>BOSS PX-1 : tu peux tester tous les effets BOSS ! (spoiler : non)</h3><p>On a testé le nouveau système PLUG-OUT de Boss. Verdict mitigé.</p><div class="nf-meta">Test · 8 min</div></div>
+      </a>
+      <a href="https://fuzz-et-friture.fr/pedales-ia-en-2026-le-futur-du-son-est-la/" class="nf-card">
+        <div class="nf-thumb bg-teal"><img class="nf-img" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/iridium-amp-ir-cab-hd-163780.webp" alt="" loading="lazy"><span class="nf-chip" style="color:#f97">IA · 2026</span></div>
+        <div class="nf-body"><h3>Pédales IA en 2026 ? Le Futur du son est Là !</h3><p>Les algorithmes envahissent le pedalboard. Ce que ça change vraiment.</p><div class="nf-meta">Analyse · 11 min</div></div>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- PEDAL MATCH GAME -->
+<section id="pedal-match">
+  <div class="sec-head rev"><div><span class="sec-label">// Mini-jeu comme Tinder en mieux</span><h2>PEDAL MATCH : <span> BLIND TEST!</span></h2></div></div>
+  <div class="pm-intro rev">
+    <p> c'est comme Tinder : Glisse à droite si tu penses que la pédale est une <strong style="color:var(--orange)">Distorsion ou une Fuzz</strong>, Glisse à gauche si c'est plutôt <strong style="color:var(--teal)">Modulation ou Overdrive léger </strong>. 3 bonnes réponses et tu gagnes un truc de fou : la découverte d'un nouveau groupe Toulousain !</p>
+  </div>
+  <div class="pm-arena">
+    <div class="pm-progress" id="pmProgress"></div>
+    <div class="pm-card-wrap" id="pmWrap">
+      <div class="pm-card" id="pmCard">
+        <div class="pm-card-inner" id="pmThumb"></div>
+        <div class="pm-pedal-name" id="pmName"></div>
+        <div class="pm-pedal-hint" id="pmHint"></div>
+        <div class="pm-indicator left" id="pmLeft">MOD/OD</div>
+        <div class="pm-indicator right" id="pmRight">FUZZ/DIST</div>
+      </div>
+      <div class="pm-result" id="pmResult">
+        <div class="pm-result-icon" id="pmResultIcon"></div>
+        <div class="pm-result-title" id="pmResultTitle"></div>
+        <div class="pm-result-sub" id="pmResultSub"></div>
+        <button class="pm-result-btn" id="pmResultBtn">Continuer →</button>
+      </div>
+    </div>
+    <div class="pm-hints">
+      <div class="pm-hint-side left-side"><span class="arrow">←</span><span class="hlabel">Swipe gauche</span><span class="hcat">MOD / OVERDRIVE</span></div>
+      <div class="pm-hint-side right-side"><span class="arrow">→</span><span class="hlabel">Swipe droite</span><span class="hcat">FUZZ / DISTORTION</span></div>
+    </div>
+    <div class="pm-score" id="pmScore">Question 1 / 5 · Score : 0</div>
+  </div>
+</section>
+
+<!-- GALLERY VINTAGE -->
+<section id="gallery-vintage">
+  <div class="sec-head rev"><div><span class="sec-label">// Collection analogique</span><h2>PÉDALES <span>VINTAGE</span>Pourquoi sont elles mythiques ? </h2></div><a href="#" class="see-all">Tout voir →</a></div>
+  <div class="gallery-scroll">
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-gold"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-ibanez_ts808-1.jpg"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Dallas Arbiter</div><div class="model">Fuzz Face</div><div class="era">1966 — Germanium NKT275</div></div></a>
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-fire"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/telechargement.jpg"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Electro-Harmonix</div><div class="model">Big Muff Pi</div><div class="era">1969 — Triangle circuit</div></div></a>
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-green"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/fuzztone.jpg"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Maestro</div><div class="model">Fuzz-Tone FZ-1</div><div class="era">1962 — Premier fuzz commercial</div></div></a>
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-purp"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/Sola-Sound-Tone-Bender-Professional-MKII-03.webp"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Colorsound</div><div class="model">Tone Bender MkII</div><div class="era">1966 — Made in England</div></div></a>
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-blue"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/vintage-1970s-aria-diamond-wah-fuzz.jpg"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Aria</div><div class="model">Diamond Fuzz</div><div class="era">1970s — MIJ Rare</div></div></a>
+    <a href="#" class="gal-card gal-card-vintage"><div class="gal-img bg-teal"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/05/thomann-ibanez_ts808-1.jpg"></span></div><span class="gal-badge badge-vintage">Vintage</span></div><div class="gal-info"><div class="brand">Ibanez</div><div class="model">Tube Screamer TS808</div><div class="era">1979 — Green legend</div></div></a>
+    <div class="gal-card gal-add"><span class="plus">+</span><span>Ajouter une photo</span></div>
+  </div>
+</section>
+<section id="gallery-recent">
+  <div class="sec-head rev"><div><span class="sec-label" style="color:var(--teal)">// Actuelles </span><h2>PÉDALES <span style="color:var(--teal)">MODERNES</span></h2></div><a href="#" class="see-all">Tout voir →</a></div>
+  <div class="gallery-scroll">
+    <a href="#" class="gal-card"><div class="gal-img bg-teal"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/boss-pedale-ds-1-distorsion-50th-anniversary-edition-limitee.jpg"></span></div><span class="gal-badge badge-new">Nouveau</span></div><div class="gal-info"><div class="brand" style="color:var(--teal)">Boss</div><div class="model">DS-1 50th Anniversary</div><div class="era">2024 — Edition limitée</div></div></a>
+    <a href="#" class="gal-card"><div class="gal-img bg-blue"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/keeley-caverns-v2.jpg"></span></div><span class="gal-badge badge-new">Nouveau</span></div><div class="gal-info"><div class="brand" style="color:var(--teal)">Keeley</div><div class="model">Caverns V2</div><div class="era">2023 — Reverb & Delay</div></div></a>
+    <a href="#" class="gal-card"><div class="gal-img bg-purp"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/iridium-amp-ir-cab-hd-163780.webp"></span></div></div><div class="gal-info"><div class="brand" style="color:var(--teal)">Strymon</div><div class="model">Iridium</div><div class="era">2022 — Amp simulator</div></div></a>
+    <a href="#" class="gal-card"><div class="gal-img bg-fire"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/jhs-superbolt-v2.webp"></span></div><span class="gal-badge badge-new">Nouveau</span></div><div class="gal-info"><div class="brand" style="color:var(--teal)">JHS</div><div class="model">Superbolt V2</div><div class="era">2023 — Plexi drive</div></div></a>
+    <a href="#" class="gal-card"><div class="gal-img bg-green"><div class="ph"><span class="ph-icon">📷</span><span class="ph-label"><img decoding="async" src="https://fuzz-et-friture.fr/wp-content/uploads/2026/06/pedal_tumnus.jpg"></span></div><span class="gal-badge badge-new">Nouveau</span></div><div class="gal-info"><div class="brand" style="color:var(--teal)">Wampler</div><div class="model">Tumnus Deluxe</div><div class="era">2023 — Klon inspired</div></div></a>
+    <div class="gal-card gal-add" style="border-color:rgba(62,184,192,.2)"><span class="plus" style="color:var(--teal)">+</span><span style="color:var(--teal)">bientôt ..</span></div>
+  </div>
+</section>
+<!-- ══════════════ NEWSLETTER ══════════════ -->
+<section class="fz-newsletter" id="fz-newsletter">
+  <div class="fz-nl-inner">
+    <span class="fz-nl-label">✦ La newsletter de Math ✦</span>
+<div class="sec-head rev">   <h2>Newsletter : Une anecdote chaque mois ?</h2>
+    
+<div class="wpcf7 no-js" id="wpcf7-f217-p8-o1" lang="fr-FR" dir="ltr" data-wpcf7-id="217">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/#wpcf7-f217-p8-o1" method="post" class="wpcf7-form init" aria-label="Formulaire de contact" novalidate="novalidate" data-status="init">
+<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7" value="217" /><input type="hidden" name="_wpcf7_version" value="6.1.5" /><input type="hidden" name="_wpcf7_locale" value="fr_FR" /><input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f217-p8-o1" /><input type="hidden" name="_wpcf7_container_post" value="8" /><input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</fieldset>
+<div class="newsletter-form">
+	<p><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40" maxlength="400" class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email newsletter-input" aria-required="true" aria-invalid="false" placeholder="Ton email" value="" type="email" name="your-email" /></span><br />
+<input type="submit" value="S'abonner" class="newsletter-submit" />
+	</p>
+</div><div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner rev">
+    <div class="about-giant">F&F</div>
+    <div class="about-text">
+      <span>// À propos</span>
+      <h2>Un blog de passionné, oui. <br>une boutique, non .</h2>
+      <p>Fuzz & Friture est écrit par un guitariste indépendant qui farfouille, qui documente quelques trouvailles et qui t'évite de chercher toute ta vie le bon son. Chaque article est une plongée dans une nouvelle époque — avec des liens affiliés pour financer l'aventure, certes, mais le prix est le même pour toi, donc profite. </p>
+      <div class="stats">
+        <div class="stat"><div class="n">20+</div><div class="l">Articles</div></div>
+        <div class="stat"><div class="n">100+</div><div class="l">Pédales</div></div>
+        <div class="stat"><div class="n">60 ans</div><div class="l">d'histoire</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">FUZZ<span class="amp">&</span>FRITURE</div>
+  <nav class="footer-links">
+    <a href="#articles">Articles</a><a href="#pedal-match">Quiz</a>
+    <a href="#gallery-vintage">Vintage</a><a href="#gallery-recent">Récentes</a><a href="#about">À propos</a>
+  </nav>
+  <p class="footer-copy">© 2026 Fuzz & Friture · fuzz-et-friture.fr · Liens affiliés Amazon + Reverb </p>
+</footer>
+
+<script>
+/* ═══ STARS ═══ */
+(function(){
+  const c=document.getElementById('stars-canvas'),ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;init();}
+  function init(){stars=[];const n=Math.floor(W*H/2800);for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.1,tw:Math.random()*Math.PI*2,sp:Math.random()*.5+.2});}
+  function draw(){ctx.clearRect(0,0,W,H);const t=Date.now()/1000;stars.forEach(s=>{const a=.15+.55*(.5+.5*Math.sin(s.tw+t*s.sp));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(240,232,216,${a})`;ctx.fill();});requestAnimationFrame(draw);}
+  window.addEventListener('resize',resize);resize();draw();
+})();
+
+
+/* ═══ REVEAL ═══ */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}}),{threshold:.1});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+/* ═══════════════════════════════════════════════
+   TRUE BYPASS SWITCH
+═══════════════════════════════════════════════ */
+(function(){
+  const sw=document.getElementById('bypassSwitch');
+  const led=document.getElementById('bypassLed');
+  const label=document.getElementById('bypassLabel');
+  let bypassed=false;
+  let audioCtx=null;
+
+  function getAudioCtx(){
+    if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function playClick(on){
+    try{
+      const ctx=getAudioCtx();
+      // Mechanical click: two short noise bursts
+      const buf=ctx.createBuffer(1,ctx.sampleRate*.045,ctx.sampleRate);
+      const d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++){
+        // sharp attack + fast decay noise
+        const env=Math.exp(-i/(ctx.sampleRate*.004));
+        d[i]=(Math.random()*2-1)*env*.9;
+      }
+      // second micro-click at 12ms
+      const buf2=ctx.createBuffer(1,ctx.sampleRate*.02,ctx.sampleRate);
+      const d2=buf2.getChannelData(0);
+      for(let i=0;i<d2.length;i++){d2[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*.003))*.5;}
+
+      const s1=ctx.createBufferSource();s1.buffer=buf;
+      const s2=ctx.createBufferSource();s2.buffer=buf2;
+      // slight low-pass for metallic feel
+      const filt=ctx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=on?3200:2400;
+      const gain=ctx.createGain();gain.gain.value=on?.7:.5;
+      s1.connect(filt);s2.connect(filt);filt.connect(gain);gain.connect(ctx.destination);
+      s1.start(ctx.currentTime);
+      s2.start(ctx.currentTime+.012);
+
+      if(on){
+        // brief 50Hz hum swell = "effect on" rumble
+        const osc=ctx.createOscillator();osc.frequency.value=60;
+        const g2=ctx.createGain();g2.gain.setValueAtTime(0,ctx.currentTime+.015);
+        g2.gain.linearRampToValueAtTime(.12,ctx.currentTime+.06);
+        g2.gain.linearRampToValueAtTime(0,ctx.currentTime+.22);
+        osc.connect(g2);g2.connect(ctx.destination);
+        osc.start(ctx.currentTime+.015);osc.stop(ctx.currentTime+.25);
+      }
+    }catch(e){}
+  }
+
+  function toggle(){
+    bypassed=!bypassed;
+    sw.classList.add('pressed');
+    setTimeout(()=>sw.classList.remove('pressed'),120);
+
+    playClick(!bypassed); // !bypassed = effect coming on
+
+    if(bypassed){
+      document.body.classList.add('bypass');
+      led.classList.remove('on');
+      label.textContent='TRUE BYPASS';
+      label.classList.add('bypass-label');
+    } else {
+      document.body.classList.remove('bypass');
+      led.classList.add('on');
+      label.textContent='EFFECT ON';
+      label.classList.remove('bypass-label');
+    }
+  }
+
+  // Start with effect ON (LED lit)
+  led.classList.add('on');
+
+  sw.addEventListener('click',toggle);
+  sw.addEventListener('touchstart',e=>{e.preventDefault();toggle();},{passive:false});
+})();
+
+/* ═══════════════════════════════════════════════
+   PEDAL MATCH GAME
+═══════════════════════════════════════════════ */
+(function(){
+  const PEDALS=[
+    {name:'Klon Centaur',hint:'Overdrive légendaire à plus de 2000€ sur le marché de l\'occasion. Testé dans notre article Klon vs clones.',emoji:'🏇',bg:'bg-gold',cat:'od',url:'https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/'},
+    {name:'Dallas Arbiter Fuzz Face',hint:'Circuit germanium NKT275. Le son de Jimi Hendrix sur Purple Haze. Analysé dans notre article Fuzz.',emoji:'💥',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/la-guerre-des-fuzz/'},
+    {name:'MXR Phase 90',hint:'4 étages de déphasage. Utilisé par Van Halen sur "Eruption". Référencé dans notre article Phaser.',emoji:'🔄',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/phaser-quand-la-guitare-se-met-a-respirer/'},
+    {name:'Big Muff Pi (Triangle)',hint:'4 transistors en cascade. Version 1969 d\'Electro-Harmonix. Tête d\'affiche de notre Guerre des Fuzz.',emoji:'🌀',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'Ibanez Tube Screamer TS808',hint:'Saturation douce, mid-boost caractéristique, boîtier vert iconique. Sujet de notre article dédié.',emoji:'🟢',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/pedale-tube-screamer-une-boite-verte-trois-potards/'},
+    {name:'Boss BF-2 Flanger',hint:'Effet qui simule deux bandes magnétiques légèrement désynchronisées. Voir notre article Flanger mode avion.',emoji:'✈️',bg:'bg-blue',cat:'mod',url:'https://fuzz-et-friture.fr/flanger-mode-avion/'},
+    {name:'Electro-Harmonix Big Muff (Sovtek)',hint:'Version russe de la Big Muff, son plus lourd et plus sombre. Dans notre comparatif Fuzz Face vs Big Muff.',emoji:'🐻',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'Boss CE-2 Chorus',hint:'Le chorus analogique qui a tout popularisé. Du rock au zouk, analysé dans notre article Chorus.',emoji:'🌊',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/chorus-article/'},
+    {name:'Colorsound Powerboost',hint:'Boost overdrive class-A. L\'arme secrète de Gilmour et Ronson. Dans nos overdrives incontournables.',emoji:'💛',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/'},
+    {name:'Dunlop Cry Baby',hint:'Wah à balancement du pied, popularisé par Hendrix et Clapton. Sujet de notre article WhaWha.',emoji:'👣',bg:'bg-gold',cat:'mod',url:'https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/'},
+    {name:'Boss FZ-5 Fuzz',hint:'Fuzz numérique de Boss qui émule trois circuits vintage. Comparé dans notre Guerre des Fuzz.',emoji:'⚡',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'TC Electronic Flashback',hint:'Delay numérique polyvalent avec TonePrint. Référencé dans notre guide des 6 pédales essentielles.',emoji:'⏱️',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/les-6-pedales-que-tout-guitariste-devrait-avoir-sur-son-pedalboard-1/'},
+  ];
+
+  // shuffle
+  const deck=[...PEDALS].sort(()=>Math.random()-.5).slice(0,5);
+  const TOTAL=5;
+  const PERFECT_STREAK=3; // consecutive for easter egg
+
+  let idx=0,score=0,streak=0,maxStreak=0,answered=false;
+
+  const wrap=document.getElementById('pmWrap');
+  const card=document.getElementById('pmCard');
+  const thumb=document.getElementById('pmThumb');
+  const nameEl=document.getElementById('pmName');
+  const hintEl=document.getElementById('pmHint');
+  const scoreEl=document.getElementById('pmScore');
+  const progEl=document.getElementById('pmProgress');
+  const indLeft=document.getElementById('pmLeft');
+  const indRight=document.getElementById('pmRight');
+  const resultEl=document.getElementById('pmResult');
+  const resultIcon=document.getElementById('pmResultIcon');
+  const resultTitle=document.getElementById('pmResultTitle');
+  const resultSub=document.getElementById('pmResultSub');
+  const resultBtn=document.getElementById('pmResultBtn');
+
+  let audioCtx2=null;
+  function getCtx(){if(!audioCtx2)audioCtx2=new(window.AudioContext||window.webkitAudioContext)();return audioCtx2;}
+  function playTone(freq,dur,type='sine',vol=.15){
+    try{const c=getCtx();const o=c.createOscillator();const g=c.createGain();
+    o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur);
+    o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur);}catch(e){}
+  }
+  function playCorrect(){playTone(660,.08,'square',.12);setTimeout(()=>playTone(880,.15,'sine',.12),80);}
+  function playWrong(){playTone(180,.25,'sawtooth',.1);}
+  function playEasterEgg(){
+    [440,550,660,880,1100].forEach((f,i)=>setTimeout(()=>playTone(f,.2,'sine',.18),i*80));
+  }
+
+  function buildProgress(){
+    progEl.innerHTML='';
+    deck.forEach((_,i)=>{
+      const p=document.createElement('div');
+      p.className='pm-pip'+(i<idx?' done':i===idx?' current':'');
+      progEl.appendChild(p);
+    });
+  }
+
+  function showCard(){
+    answered=false;
+    resultEl.classList.remove('show');
+    const p=deck[idx];
+    // bg
+    thumb.className='pm-card-inner '+p.bg;
+    thumb.innerHTML=`<span style="font-size:4.5rem;z-index:1;position:relative">${p.emoji}</span>`;
+    nameEl.textContent=p.name;
+    hintEl.textContent=p.hint;
+    card.style.transform='';card.style.opacity='1';
+    indLeft.style.opacity='0';indRight.style.opacity='0';
+    scoreEl.textContent=`Question ${idx+1} / ${TOTAL} · Score : ${score}`;
+    buildProgress();
+  }
+
+  function answer(dir){
+    if(answered)return;
+    answered=true;
+    const p=deck[idx];
+    // dir: 'right'=fuzz/dist, 'left'=mod/od
+    const isRight=(dir==='right')&&(p.cat==='fuzz'||p.cat==='dist');
+    const isLeft=(dir==='left')&&(p.cat==='mod'||p.cat==='od');
+    const correct=isRight||isLeft;
+
+    if(correct){score++;streak++;if(streak>maxStreak)maxStreak=streak;playCorrect();}
+    else{streak=0;playWrong();}
+
+    // animate out
+    const tx=dir==='right'?120:-120;
+    card.style.transition='transform .35s ease,opacity .35s ease';
+    card.style.transform=`translateX(${tx}px) rotate(${dir==='right'?12:-12}deg)`;
+    card.style.opacity='0';
+
+    setTimeout(()=>{
+      card.style.transition='';
+      resultIcon.textContent=correct?'✅':'❌';
+      resultTitle.textContent=correct?'Correct !':'Pas tout à fait';
+      const catLabel=p.cat==='fuzz'?'Fuzz':p.cat==='dist'?'Distortion':p.cat==='mod'?'Modulateur':'Overdrive';
+      const articleLink=p.url?` <a href="${p.url}" target="_blank" style="color:var(--teal);text-decoration:underline">Lire l'article →</a>`:'';
+      resultSub.innerHTML=correct
+        ?`Oui, le ${p.name} est bien un ${catLabel}.${articleLink}`
+        :`Le ${p.name} est en fait un ${catLabel}.${articleLink}`;
+      resultEl.style.background=correct?'rgba(10,30,20,.92)':'rgba(30,10,10,.92)';
+      resultEl.classList.add('show');
+      card.style.transform='';card.style.opacity='1';
+    },360);
+  }
+
+  resultBtn.addEventListener('click',()=>{
+    idx++;
+    if(idx>=TOTAL){
+      // End game
+      const perfect=(maxStreak>=PERFECT_STREAK||score>=PERFECT_STREAK);
+      resultIcon.textContent=perfect?'🏆':'🎸';
+      resultTitle.textContent=perfect?'Sans-Faute !':'Bonne session';
+      resultSub.textContent=`Score final : ${score}/${TOTAL}. ${perfect?'Vous avez atteint 3 bonnes réponses consécutives — article secret débloqué.':'Encore un peu d\'entraînement ?'}`;
+      resultBtn.textContent=perfect?'Débloquer l\'article 🔓':'Rejouer';
+      resultEl.style.background='rgba(10,14,20,.96)';
+      resultBtn.onclick=()=>{
+        if(perfect){showEasterEgg();}
+        else{idx=0;score=0;streak=0;maxStreak=0;deck.sort(()=>Math.random()-.5);resultBtn.textContent='Continuer →';resultBtn.onclick=null;resultBtn.addEventListener('click',()=>{idx++;showCard();});showCard();}
+      };
+      return;
+    }
+    showCard();
+  });
+
+  function showEasterEgg(){
+    playEasterEgg();
+    const modal=document.getElementById('easter-egg');
+    modal.classList.add('show');
+    // sparks
+    const sparks=document.getElementById('eggSparks');
+    sparks.innerHTML='';
+    for(let i=0;i<30;i++){
+      const s=document.createElement('div');s.className='spark';
+      const angle=Math.random()*Math.PI*2;const dist=60+Math.random()*160;
+      s.style.cssText=`left:50%;top:50%;background:${['#f5921e','#f9c84a','#3eb8c0'][Math.floor(Math.random()*3)]};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;animation-delay:${Math.random()*.3}s;`;
+      sparks.appendChild(s);
+    }
+    document.getElementById('eggClose').onclick=()=>modal.classList.remove('show');
+    modal.onclick=e=>{if(e.target===modal)modal.classList.remove('show');};
+  }
+
+  /* ── SWIPE / DRAG ── */
+  let startX=null,startY=null,currentX=0,dragging=false;
+  function onStart(x,y){startX=x;startY=y;currentX=0;dragging=true;card.style.transition='';}
+  function onMove(x){
+    if(!dragging||answered)return;
+    currentX=x-startX;
+    const rot=currentX*.08;
+    card.style.transform=`translateX(${currentX}px) rotate(${rot}deg)`;
+    const ratio=Math.min(Math.abs(currentX)/80,1);
+    indLeft.style.opacity=currentX<0?ratio*1.2:0;
+    indRight.style.opacity=currentX>0?ratio*1.2:0;
+  }
+  function onEnd(){
+    if(!dragging)return;dragging=false;
+    if(Math.abs(currentX)>70){
+      answer(currentX>0?'right':'left');
+    } else {
+      card.style.transition='transform .25s ease';
+      card.style.transform='';
+      indLeft.style.opacity='0';indRight.style.opacity='0';
+    }
+  }
+  card.addEventListener('mousedown',e=>{onStart(e.clientX,e.clientY);e.preventDefault();});
+  document.addEventListener('mousemove',e=>{onMove(e.clientX);});
+  document.addEventListener('mouseup',onEnd);
+  card.addEventListener('touchstart',e=>{onStart(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+  card.addEventListener('touchmove',e=>{onMove(e.touches[0].clientX);e.preventDefault();},{passive:false});
+  card.addEventListener('touchend',onEnd);
+
+  // Keyboard
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')answer('right');
+    if(e.key==='ArrowLeft')answer('left');
+  });
+
+  showCard();
+})();
+</script>
+</body>
+</html>
