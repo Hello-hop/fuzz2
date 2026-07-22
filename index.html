@@ -17,112 +17,13 @@
 html{scroll-behavior:smooth;}
 
 body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden;}
-body.bypass{cursor:auto;}
 
 /* ── BYPASS MODE ── */
-body.bypass{background:#fff;color:#111;}
-body.bypass #stars-canvas,
-body.bypass .hero-ring,
-body.bypass .orbit-wrap,
-body.bypass #hero::before{display:none!important;}
-body.bypass .hero-wordmark{color:#111;text-shadow:none;}
-body.bypass .hero-wordmark .amp{color:#111;}
-body.bypass .hero-since{color:#555;}
-body.bypass .hero-tagline{color:#444;}
-body.bypass nav{background:#fff;border-bottom:1px solid #ddd;}
-body.bypass .nav-logo span,body.bypass .nav-links a{color:#111;opacity:1;}
-body.bypass .hero-f{background:#111;filter:none;animation:none;}
-body.bypass .manifesto-left h2{color:#111;}
-body.bypass .manifesto-left h2 .w{color:#111;}
-body.bypass .manifesto-left p{color:#444;}
-body.bypass .big-knob,.bypass .mini-knob{animation:none;filter:grayscale(1);}
-body.bypass #articles,body.bypass #pedal-match,body.bypass #gallery-vintage,body.bypass #gallery-recent,body.bypass #about{filter:grayscale(1);}
-body.bypass .nf-card{background:#f5f5f5;border-color:#ddd;}
-body.bypass .nf-body h3{color:#111;}
-body.bypass .sec-head h2{color:#111;}
-body.bypass .sec-label{color:#666;}
-body.bypass footer{background:#f0f0f0;border-top:1px solid #ddd;}
-body.bypass .footer-logo,body.bypass .footer-links a,body.bypass .footer-copy{color:#333;}
-body.bypass .btn-space{background:#111;color:#fff;}
-body.bypass .btn-ghost{border-color:#999;color:#333;}
-body.bypass #cur,body.bypass #cur2{display:none;}
-body.bypass .bypass-label{color:#d00!important;}
 
 
 /* ── STARS ── */
 #stars-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-/* ── TRUE BYPASS SWITCH ── */
-#bypass-wrap{
-  position:fixed;bottom:28px;right:28px;z-index:500;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-}
-.bp-label{
-  font-family:'Space Mono',monospace;font-size:.48rem;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(240,232,216,.5);text-align:center;
-  transition:color .3s;
-}
-.bp-label.bypass-label{color:#d00!important;}
-.bp-enclosure{
-  width:72px;height:88px;
-  background:linear-gradient(160deg,#2e3440,#1a1f2a);
-  border-radius:12px;
-  border:2px solid rgba(240,232,216,.12);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;
-  box-shadow:0 8px 32px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
-  position:relative;
-}
-.bp-led{
-  width:10px;height:10px;border-radius:50%;
-  background:#1a0a0a;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 0 0 2px rgba(0,0,0,.3);
-  transition:background .15s,box-shadow .15s;
-  flex-shrink:0;
-}
-.bp-led.on{
-  background:#ff2200;
-  box-shadow:0 0 8px 3px rgba(255,40,0,.6),0 0 20px rgba(255,40,0,.3);
-}
-.bp-switch{
-  width:48px;height:48px;border-radius:50%;
-  background:radial-gradient(circle at 35% 32%,#4a5060 0%,#282e3a 55%,#1a1e28 100%);
-  border:3px solid #3a4050;
-  box-shadow:
-    0 6px 14px rgba(0,0,0,.7),
-    0 2px 4px rgba(0,0,0,.5),
-    inset 0 2px 4px rgba(255,255,255,.08),
-    inset 0 -2px 4px rgba(0,0,0,.4);
-  
-  transition:transform .08s,box-shadow .08s;
-  position:relative;
-  flex-shrink:0;
-}
-.bp-switch::after{
-  content:'';position:absolute;
-  top:50%;left:50%;
-  width:18px;height:18px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:radial-gradient(circle at 40% 35%,#5a6070,#22262e);
-  border:1px solid rgba(255,255,255,.06);
-}
-.bp-switch:active,
-.bp-switch.pressed{
-  transform:scale(.92) translateY(2px);
-  box-shadow:
-    0 2px 6px rgba(0,0,0,.8),
-    0 1px 2px rgba(0,0,0,.5),
-    inset 0 3px 8px rgba(0,0,0,.5),
-    inset 0 -1px 2px rgba(255,255,255,.04);
-}
-.bp-text{
-  font-family:'Space Mono',monospace;font-size:.38rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(240,232,216,.25);margin-top:2px;
-}
 
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:linear-gradient(to bottom,rgba(10,14,20,.95) 0%,transparent 100%);transition:background .4s;}
@@ -230,19 +131,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:8rem 2rem 6rem;text-align:center;overflow:hidden;}
 #hero::before{content:'';position:absolute;width:900px;height:900px;top:50%;left:50%;transform:translate(-50%,-55%);background:radial-gradient(ellipse,rgba(245,146,30,.1) 0%,rgba(62,184,192,.05) 45%,transparent 70%);pointer-events:none;z-index:1;animation:nebula 8s ease-in-out infinite alternate;}
 @keyframes nebula{from{opacity:.6;transform:translate(-50%,-55%) scale(1);}to{opacity:1;transform:translate(-50%,-55%) scale(1.1);}}
-.hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(245,146,30,.07);pointer-events:none;z-index:1;}
-.hr1{width:440px;height:440px;top:50%;left:50%;transform:translate(-50%,-50%);}
-.hr2{width:680px;height:680px;top:50%;left:50%;transform:translate(-50%,-50%);border-color:rgba(62,184,192,.05);}
-.hr3{width:920px;height:920px;top:50%;left:50%;transform:translate(-50%,-50%);}
-.orbit-wrap{position:absolute;inset:0;z-index:1;pointer-events:none;}
-.orbit-arm{position:absolute;top:50%;left:50%;transform-origin:0 0;animation:arm-spin linear infinite;}
-.orbit-arm.a1{animation-duration:20s;}.orbit-arm.a2{animation-duration:33s;animation-direction:reverse;}.orbit-arm.a3{animation-duration:48s;}.orbit-arm.a4{animation-duration:15s;animation-direction:reverse;}
 @keyframes arm-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-.orbit-pedal{position:absolute;width:44px;height:44px;border-radius:8px;background:var(--space2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 18px rgba(245,146,30,.15);animation:arm-spin linear infinite;}
-.orbit-arm.a1 .orbit-pedal{animation-duration:20s;animation-direction:reverse;transform:translate(-50%,-50%) translateX(180px);}
-.orbit-arm.a2 .orbit-pedal{animation-duration:33s;animation-direction:normal;transform:translate(-50%,-50%) translateX(270px);}
-.orbit-arm.a3 .orbit-pedal{animation-duration:48s;animation-direction:reverse;transform:translate(-50%,-50%) translateX(360px);}
-.orbit-arm.a4 .orbit-pedal{animation-duration:15s;animation-direction:normal;transform:translate(-50%,-50%) translateX(130px);}
 .hero-eyebrow{position:relative;z-index:2;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:1.8rem;animation:fadeUp .8s ease both;}
 .hero-logo-wrap{position:relative;z-index:2;animation:fadeUp .9s .1s ease both;}
 .hero-f{width:clamp(55px,10vw,90px);margin:0 auto .8rem;aspect-ratio:1/1.2;background:linear-gradient(160deg,#f9c84a 0%,#f5921e 55%,#e05a0a 100%);clip-path:polygon(0 0,100% 0,100% 22%,38% 22%,38% 43%,82% 43%,82% 60%,38% 60%,38% 100%,0 100%);filter:drop-shadow(0 0 30px rgba(245,146,30,.5));animation:logo-glow 4s ease-in-out infinite alternate;}
@@ -476,23 +365,14 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 .rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}
 
 /* ── RESPONSIVE ── */
-@media(max-width:960px){#manifesto{grid-template-columns:1fr;gap:3rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.about-giant{display:none;}.orbit-arm.a3,.orbit-arm.a4{display:none;}}
-@media(max-width:640px){nav{padding:.9rem 1.2rem;}.nav-links{display:none;}.nav-burger{display:flex;}.orbit-arm.a2{display:none;}.hr3,.hr2{display:none;}.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
+@media(max-width:960px){#manifesto{grid-template-columns:1fr;gap:3rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.about-giant{display:none;}}
+@media(max-width:640px){nav{padding:.9rem 1.2rem;}.nav-links{display:none;}.nav-burger{display:flex;}.hr3,.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
 </style>
 </head>
 <body>
 
 <canvas id="stars-canvas"></canvas>
 
-<!-- TRUE BYPASS SWITCH -->
-<div id="bypass-wrap">
-  <div class="bp-enclosure">
-    <div class="bp-led" id="bypassLed"></div>
-    <div class="bp-switch" id="bypassSwitch" title="True Bypass"></div>
-    <span class="bp-text">TRUE<br>BYPASS</span>
-  </div>
-  <div class="bp-label" id="bypassLabel">EFFECT ON</div>
-</div>
 
 <!-- EASTER EGG MODAL -->
 <div id="easter-egg">
@@ -522,9 +402,6 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-ring hr1"></div><div class="hero-ring hr2"></div><div class="hero-ring hr3"></div>
-  <div class="orbit-wrap">
-    <div class="orbit-arm a1"><div class="orbit-pedal">🎛️</div></div>
     <div class="orbit-arm a2"><div class="orbit-pedal">🔊</div></div>
     <div class="orbit-arm a3"><div class="orbit-pedal">🎚️</div></div>
     <div class="orbit-arm a4"><div class="orbit-pedal">⚡</div></div>
@@ -787,84 +664,6 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target);}}),{threshold:.1});
 document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
 
-/* ═══════════════════════════════════════════════
-   TRUE BYPASS SWITCH
-═══════════════════════════════════════════════ */
-(function(){
-  const sw=document.getElementById('bypassSwitch');
-  const led=document.getElementById('bypassLed');
-  const label=document.getElementById('bypassLabel');
-  let bypassed=false;
-  let audioCtx=null;
-
-  function getAudioCtx(){
-    if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    return audioCtx;
-  }
-
-  function playClick(on){
-    try{
-      const ctx=getAudioCtx();
-      // Mechanical click: two short noise bursts
-      const buf=ctx.createBuffer(1,ctx.sampleRate*.045,ctx.sampleRate);
-      const d=buf.getChannelData(0);
-      for(let i=0;i<d.length;i++){
-        // sharp attack + fast decay noise
-        const env=Math.exp(-i/(ctx.sampleRate*.004));
-        d[i]=(Math.random()*2-1)*env*.9;
-      }
-      // second micro-click at 12ms
-      const buf2=ctx.createBuffer(1,ctx.sampleRate*.02,ctx.sampleRate);
-      const d2=buf2.getChannelData(0);
-      for(let i=0;i<d2.length;i++){d2[i]=(Math.random()*2-1)*Math.exp(-i/(ctx.sampleRate*.003))*.5;}
-
-      const s1=ctx.createBufferSource();s1.buffer=buf;
-      const s2=ctx.createBufferSource();s2.buffer=buf2;
-      // slight low-pass for metallic feel
-      const filt=ctx.createBiquadFilter();filt.type='lowpass';filt.frequency.value=on?3200:2400;
-      const gain=ctx.createGain();gain.gain.value=on?.7:.5;
-      s1.connect(filt);s2.connect(filt);filt.connect(gain);gain.connect(ctx.destination);
-      s1.start(ctx.currentTime);
-      s2.start(ctx.currentTime+.012);
-
-      if(on){
-        // brief 50Hz hum swell = "effect on" rumble
-        const osc=ctx.createOscillator();osc.frequency.value=60;
-        const g2=ctx.createGain();g2.gain.setValueAtTime(0,ctx.currentTime+.015);
-        g2.gain.linearRampToValueAtTime(.12,ctx.currentTime+.06);
-        g2.gain.linearRampToValueAtTime(0,ctx.currentTime+.22);
-        osc.connect(g2);g2.connect(ctx.destination);
-        osc.start(ctx.currentTime+.015);osc.stop(ctx.currentTime+.25);
-      }
-    }catch(e){}
-  }
-
-  function toggle(){
-    bypassed=!bypassed;
-    sw.classList.add('pressed');
-    setTimeout(()=>sw.classList.remove('pressed'),120);
-
-    playClick(!bypassed); // !bypassed = effect coming on
-
-    if(bypassed){
-      document.body.classList.add('bypass');
-      led.classList.remove('on');
-      label.textContent='TRUE BYPASS';
-      label.classList.add('bypass-label');
-    } else {
-      document.body.classList.remove('bypass');
-      led.classList.add('on');
-      label.textContent='EFFECT ON';
-      label.classList.remove('bypass-label');
-    }
-  }
-
-  // Start with effect ON (LED lit)
-  led.classList.add('on');
-
-  sw.addEventListener('click',toggle);
-  sw.addEventListener('touchstart',e=>{e.preventDefault();toggle();},{passive:false});
-})();
 
 /* ═══════════════════════════════════════════════
    PEDAL MATCH GAME
