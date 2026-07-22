@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedaldle — La pédale mystère du jour | Fuzz &amp; Friture</title>
+<meta name="description" content="Devine la pédale d'effet mystère du jour en 6 essais. Un nouveau défi chaque jour sur Fuzz &amp; Friture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="arcade.css" rel="stylesheet">
+<style>
+  .guess-row{display:flex;gap:.5rem;margin-bottom:.6rem;}
+  .clue{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:.7rem;display:flex;align-items:center;gap:1rem;opacity:0;transform:translateY(10px);animation:clueIn .4s ease forwards;}
+  @keyframes clueIn{to{opacity:1;transform:none;}}
+  .clue .k{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);min-width:90px;}
+  .clue .v{font-size:1rem;color:var(--cream);}
+  .pedaldle-input{width:100%;font-family:'Barlow',sans-serif;font-size:1rem;background:var(--space);border:1px solid var(--border);border-radius:8px;padding:.9em 1em;color:var(--cream);margin-bottom:.8rem;}
+  .pedaldle-input:focus{border-color:var(--teal);outline:none;}
+  .suggestions{background:var(--space2);border:1px solid var(--border);border-radius:8px;max-height:180px;overflow-y:auto;margin-top:-.5rem;margin-bottom:.8rem;}
+  .suggestions div{padding:.6em 1em;cursor:pointer;font-size:.9rem;}
+  .suggestions div:hover{background:rgba(62,184,192,.12);color:var(--teal);}
+  .tries{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem;text-align:center;}
+  .past-guess{font-family:'Space Mono',monospace;font-size:.8rem;padding:.5em .8em;border-radius:6px;margin-bottom:.4rem;background:rgba(224,90,90,.12);border:1px solid rgba(224,90,90,.3);color:#e88;}
+  .win-box,.lose-box{text-align:center;padding:1.5rem;}
+  .win-box h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--green);text-transform:uppercase;}
+  .lose-box h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--red);text-transform:uppercase;}
+  .answer-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;color:var(--orange);text-transform:uppercase;margin:.5rem 0;}
+  .read-link{display:inline-block;margin-top:1rem;color:var(--teal);font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);padding-bottom:2px;}
+</style>
+</head>
+<body>
+
+<nav class="g-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="index.html" class="back">← Toutes les bornes</a>
+</nav>
+
+<header class="g-head">
+  <p class="g-eyebrow">● Le défi quotidien</p>
+  <h1>PEDAL<span>DLE</span></h1>
+  <p class="sub">Une pédale d'effet mystère chaque jour. Les indices se dévoilent à chaque essai raté. À toi de la trouver en 6 coups.</p>
+</header>
+
+<div class="g-panel">
+  <div class="tries" id="tries">Essai 1 / 6</div>
+  <div id="clues"></div>
+  <div id="pastGuesses"></div>
+
+  <div id="playArea">
+    <input type="text" class="pedaldle-input" id="guessInput" placeholder="Tape le nom d'une pédale..." autocomplete="off">
+    <div class="suggestions" id="suggestions" style="display:none;"></div>
+    <div style="display:flex;gap:.6rem;">
+      <button class="g-btn" id="guessBtn" style="flex:1;">Valider</button>
+      <button class="g-btn ghost" id="skipBtn">Passer →</button>
+    </div>
+  </div>
+
+  <div id="endArea" style="display:none;"></div>
+</div>
+
+<p style="text-align:center;color:var(--dim);font-size:.85rem;max-width:500px;margin:1rem auto;">💡 Reviens demain pour une nouvelle pédale. Le défi est le même pour tout le monde chaque jour.</p>
+
+<footer class="g-foot">
+  <p>Fuzz &amp; Friture · Arcade · <a href="index.html">Autres jeux →</a></p>
+</footer>
+
+<div class="g-toast" id="toast"></div>
+
+<script src="pedals-data.js"></script>
+<script>
+(function(){
+  // ── Pédale du jour : déterministe selon la date ──
+  const EPOCH = new Date('2026-01-01').getTime();
+  const today = new Date();
+  const dayNum = Math.floor((Date.UTC(today.getFullYear(),today.getMonth(),today.getDate()) - EPOCH)/86400000);
+  const answer = PEDALS[((dayNum % PEDALS.length)+PEDALS.length)%PEDALS.length];
+
+  // ── Indices progressifs ──
+  const clueOrder = [
+    {k:'Décennie', v:answer.decade},
+    {k:'Type', v:answer.typeLabel},
+    {k:'Fabricant', v:answer.maker},
+    {k:'Circuit', v:answer.circuit},
+    {k:'Guitariste', v:answer.artist},
+  ];
+
+  let tries=0; const MAX=6; let done=false; const guesses=[];
+  const cluesEl=document.getElementById('clues');
+  const triesEl=document.getElementById('tries');
+  const pastEl=document.getElementById('pastGuesses');
+  const input=document.getElementById('guessInput');
+  const sugEl=document.getElementById('suggestions');
+
+  function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+
+  function showClue(i){
+    if(i>=clueOrder.length) return;
+    const c=clueOrder[i];
+    const d=document.createElement('div');d.className='clue';
+    d.innerHTML=`<span class="k">${c.k}</span><span class="v">${c.v}</span>`;
+    cluesEl.appendChild(d);
+  }
+  showClue(0); // premier indice offert d'emblée
+
+  // ── Autocomplete ──
+  input.addEventListener('input',()=>{
+    const q=norm(input.value);
+    if(q.length<2){sugEl.style.display='none';return;}
+    const matches=PEDALS.filter(p=>norm(p.name).includes(q)).slice(0,6);
+    if(!matches.length){sugEl.style.display='none';return;}
+    sugEl.innerHTML='';
+    matches.forEach(p=>{const d=document.createElement('div');d.textContent=p.name;d.onclick=()=>{input.value=p.name;sugEl.style.display='none';};sugEl.appendChild(d);});
+    sugEl.style.display='block';
+  });
+
+  function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800);}
+
+  function submitGuess(){
+    if(done) return;
+    const val=input.value.trim();
+    if(!val){toast('Écris le nom d\'une pédale');return;}
+    if(norm(val)===norm(answer.name)){win();return;}
+    // mauvais
+    guesses.push(val);
+    const g=document.createElement('div');g.className='past-guess';g.textContent='✗ '+val;pastEl.appendChild(g);
+    tries++;
+    input.value='';sugEl.style.display='none';
+    if(tries>=MAX){lose();return;}
+    triesEl.textContent=`Essai ${tries+1} / ${MAX}`;
+    showClue(tries);
+  }
+
+  function skip(){
+    if(done) return;
+    guesses.push('(passé)');
+    const g=document.createElement('div');g.className='past-guess';g.textContent='→ essai passé';pastEl.appendChild(g);
+    tries++;
+    if(tries>=MAX){lose();return;}
+    triesEl.textContent=`Essai ${tries+1} / ${MAX}`;
+    showClue(tries);
+  }
+
+  function emojiLine(won){
+    let line='';
+    for(let i=0;i<MAX;i++){
+      if(won && i===tries) {line+='🟩';break;}
+      else if(i<tries) line+='🟥';
+    }
+    return line;
+  }
+
+  function endScreen(won){
+    done=true;
+    document.getElementById('playArea').style.display='none';
+    const end=document.getElementById('endArea');end.style.display='block';
+    const shareTxt=`Pedaldle #${dayNum} ${won?(tries+1)+'/'+MAX:'X/'+MAX}\n${emojiLine(won)}\nfuzz-et-friture.fr`;
+    end.innerHTML=`
+      <div class="${won?'win-box':'lose-box'}">
+        <h2>${won?'Trouvé ! 🎉':'Raté !'}</h2>
+        <div class="g-result-emoji">${emojiLine(won)}</div>
+        <p style="color:var(--dim);">La pédale du jour était</p>
+        <div class="answer-name">${answer.name}</div>
+        <a href="${answer.url}" class="read-link" target="_blank" rel="noopener">Lire l'article lié →</a>
+        <div class="g-share">
+          <button class="g-btn" id="shareBtn">Partager mon score</button>
+        </div>
+      </div>`;
+    document.getElementById('shareBtn').onclick=()=>{
+      if(navigator.share){navigator.share({text:shareTxt}).catch(()=>{});}
+      else{navigator.clipboard.writeText(shareTxt).then(()=>toast('Score copié !'));}
+    };
+  }
+  function win(){endScreen(true);}
+  function lose(){endScreen(false);}
+
+  document.getElementById('guessBtn').onclick=submitGuess;
+  document.getElementById('skipBtn').onclick=skip;
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
+})();
+</script>
+</body>
+</html>
