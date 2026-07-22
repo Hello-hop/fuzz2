@@ -367,6 +367,19 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 /* ── RESPONSIVE ── */
 @media(max-width:960px){#manifesto{grid-template-columns:1fr;gap:3rem;}.about-inner{grid-template-columns:1fr;gap:2rem;}.about-giant{display:none;}}
 @media(max-width:640px){nav{padding:.9rem 1.2rem;}.nav-links{display:none;}.nav-burger{display:flex;}.hr3,.netflix-row,.sec-head{padding-left:1.2rem;padding-right:1.2rem;}.gallery-scroll{padding-left:1.2rem;}}
+/* ═══ ARCADE encart accueil ═══ */
+#arcade{max-width:1400px;margin:5rem auto 0;padding:0 3rem;}
+.arcade-lead{color:var(--dim);font-size:1.02rem;max-width:620px;margin-bottom:1.8rem;}
+.arcade-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;}
+.arc-card{position:relative;display:flex;flex-direction:column;background:var(--space2);border:1px solid var(--border);border-radius:14px;padding:1.6rem;text-decoration:none;transition:transform .25s,border-color .25s,box-shadow .25s;overflow:hidden;}
+.arc-card:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 12px 34px rgba(0,0,0,.4);}
+.arc-badge{position:absolute;top:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--space);background:var(--gold);padding:.28em .65em;border-radius:20px;}
+.arc-ic{font-size:2.2rem;margin-bottom:.8rem;}
+.arc-t{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.35rem;text-transform:uppercase;line-height:1;margin-bottom:.5rem;color:var(--cream);}
+.arc-d{color:var(--dim);font-size:.9rem;line-height:1.5;flex:1;}
+.arc-go{margin-top:1rem;font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);}
+@media(max-width:640px){#arcade{padding:0 1.2rem;margin-top:3.5rem;}}
+
 </style>
 </head>
 <body>
@@ -392,7 +405,7 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
   <a href="#" class="nav-logo"><div class="nav-f"></div><div class="nav-f"></div><span>Fuzz<span style="color:var(--teal)">&</span>Friture</span></a>
   <ul class="nav-links">
     <li><a href="#articles">Articles</a></li>
-    <li><a href="#pedal-match">Quiz</a></li>
+    <li><a href="#pedal-match">Quiz</a></li><li><a href="games/index.html">Arcade</a></li>
     <li><a href="#gallery-vintage">Vintage</a></li>
     <li><a href="#gallery-recent">Récentes</a></li>
     <li><a href="#about">À propos</a></li>
@@ -546,6 +559,18 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 </section>
 
 <!-- PEDAL MATCH GAME -->
+<!-- ═══ ARCADE : encart jeux ═══ -->
+<section id="arcade">
+  <div class="sec-head rev"><div><span class="sec-label">// Tu veux apprendre en t'amusant ?</span><h2>L'<span>ARCADE</span></h2></div><a href="games/index.html" class="see-all">Toutes les bornes →</a></div>
+  <p class="arcade-lead rev">Clique sur l'un de ces jeux et deviens incollable sur les pédales d'effets — sans t'en rendre compte.</p>
+  <div class="arcade-row rev">
+    <a href="games/pedaldle.html" class="arc-card"><span class="arc-badge">Chaque jour</span><span class="arc-ic">🎯</span><span class="arc-t">Pedaldle</span><span class="arc-d">La pédale mystère du jour en 6 essais.</span><span class="arc-go">Jouer →</span></a>
+    <a href="games/cote.html" class="arc-card"><span class="arc-ic">💰</span><span class="arc-t">La Côte</span><span class="arc-d">Plus cher ou moins cher ? Le duel vintage.</span><span class="arc-go">Jouer →</span></a>
+    <a href="games/profil.html" class="arc-card"><span class="arc-ic">🎭</span><span class="arc-t">Quelle pédale es-tu ?</span><span class="arc-d">6 questions, ta pédale-totem révélée.</span><span class="arc-go">Jouer →</span></a>
+    <a href="games/timeline.html" class="arc-card"><span class="arc-ic">📅</span><span class="arc-t">Timeline</span><span class="arc-d">Remets les pédales dans l'ordre du temps.</span><span class="arc-go">Jouer →</span></a>
+  </div>
+</section>
+
 <section id="pedal-match">
   <div class="sec-head rev"><div><span class="sec-label">// Mini-jeu comme Tinder en mieux</span><h2>PEDAL MATCH : <span> BLIND TEST!</span></h2></div></div>
   <div class="pm-intro rev">
