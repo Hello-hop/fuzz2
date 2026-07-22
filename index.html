@@ -132,9 +132,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 }
 .pm-card-inner{
   width:100%;height:260px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1rem;font-size:5rem;
-  position:relative;
+  position:relative;overflow:hidden;background:#000;
 }
 .pm-pedal-name{
   font-family:'Barlow Condensed',sans-serif;font-weight:900;
@@ -479,6 +477,7 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
   <div class="sec-head rev"><div><span class="sec-label">// Tu veux apprendre en t'amusant ?</span><h2>L'<span>ARCADE</span></h2></div><a href="games/index.html" class="see-all">Toutes les bornes →</a></div>
   <p class="arcade-lead rev">Ici, des jeux 100% gratuits — il n'y a rien à gagner, juste le plaisir de devenir incollable sur les pédales d'effets. Clique sur l'un d'eux pour commencer.</p>
   <div class="arcade-row rev">
+    <a href="games/pedal-match.html" class="arc-card"><span class="arc-ic">🎴</span><span class="arc-t">Pedal Match</span><span class="arc-d">Comme Tinder : swipe Fuzz ou Modulation.</span><span class="arc-go">Jouer →</span></a>
     <a href="games/cote.html" class="arc-card"><span class="arc-ic">💰</span><span class="arc-t">La Côte</span><span class="arc-d">Plus cher ou moins cher ? Le duel vintage.</span><span class="arc-go">Jouer →</span></a>
     <a href="games/profil.html" class="arc-card"><span class="arc-ic">🎭</span><span class="arc-t">Quelle pédale es-tu ?</span><span class="arc-d">6 questions, ta pédale-totem révélée.</span><span class="arc-go">Jouer →</span></a>
     <a href="games/timeline.html" class="arc-card"><span class="arc-ic">📅</span><span class="arc-t">Timeline</span><span class="arc-d">Remets les pédales dans l'ordre du temps.</span><span class="arc-go">Jouer →</span></a>
@@ -588,18 +587,18 @@ document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
 ═══════════════════════════════════════════════ */
 (function(){
   const PEDALS=[
-    {name:'Klon Centaur',hint:'Overdrive légendaire à plus de 2000€ sur le marché de l\'occasion. Testé dans notre article Klon vs clones.',emoji:'🏇',bg:'bg-gold',cat:'od',url:'https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/'},
-    {name:'Dallas Arbiter Fuzz Face',hint:'Circuit germanium NKT275. Le son de Jimi Hendrix sur Purple Haze. Analysé dans notre article Fuzz.',emoji:'💥',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/la-guerre-des-fuzz/'},
-    {name:'MXR Phase 90',hint:'4 étages de déphasage. Utilisé par Van Halen sur "Eruption". Référencé dans notre article Phaser.',emoji:'🔄',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/phaser-quand-la-guitare-se-met-a-respirer/'},
-    {name:'Big Muff Pi (Triangle)',hint:'4 transistors en cascade. Version 1969 d\'Electro-Harmonix. Tête d\'affiche de notre Guerre des Fuzz.',emoji:'🌀',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
-    {name:'Ibanez Tube Screamer TS808',hint:'Saturation douce, mid-boost caractéristique, boîtier vert iconique. Sujet de notre article dédié.',emoji:'🟢',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/pedale-tube-screamer-une-boite-verte-trois-potards/'},
-    {name:'Boss BF-2 Flanger',hint:'Effet qui simule deux bandes magnétiques légèrement désynchronisées. Voir notre article Flanger mode avion.',emoji:'✈️',bg:'bg-blue',cat:'mod',url:'https://fuzz-et-friture.fr/flanger-mode-avion/'},
-    {name:'Electro-Harmonix Big Muff (Sovtek)',hint:'Version russe de la Big Muff, son plus lourd et plus sombre. Dans notre comparatif Fuzz Face vs Big Muff.',emoji:'🐻',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
-    {name:'Boss CE-2 Chorus',hint:'Le chorus analogique qui a tout popularisé. Du rock au zouk, analysé dans notre article Chorus.',emoji:'🌊',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/chorus-article/'},
-    {name:'Colorsound Powerboost',hint:'Boost overdrive class-A. L\'arme secrète de Gilmour et Ronson. Dans nos overdrives incontournables.',emoji:'💛',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/'},
-    {name:'Dunlop Cry Baby',hint:'Wah à balancement du pied, popularisé par Hendrix et Clapton. Sujet de notre article WhaWha.',emoji:'👣',bg:'bg-gold',cat:'mod',url:'https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/'},
-    {name:'Boss FZ-5 Fuzz',hint:'Fuzz numérique de Boss qui émule trois circuits vintage. Comparé dans notre Guerre des Fuzz.',emoji:'⚡',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
-    {name:'TC Electronic Flashback',hint:'Delay numérique polyvalent avec TonePrint. Référencé dans notre guide des 6 pédales essentielles.',emoji:'⏱️',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/les-6-pedales-que-tout-guitariste-devrait-avoir-sur-son-pedalboard-1/'},
+    {name:'Klon Centaur',img:'images/Q999999904-klon-ktr.jpg',hint:'Overdrive légendaire à plus de 2000€ sur le marché de l\'occasion. Testé dans notre article Klon vs clones.',emoji:'🏇',bg:'bg-gold',cat:'od',url:'https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/'},
+    {name:'Dallas Arbiter Fuzz Face',img:'images/q5928-jimi-hendrix.jpg',hint:'Circuit germanium NKT275. Le son de Jimi Hendrix sur Purple Haze. Analysé dans notre article Fuzz.',emoji:'💥',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/la-guerre-des-fuzz/'},
+    {name:'MXR Phase 90',img:'images/mxr-flanger-0710137026537.jpg',hint:'4 étages de déphasage. Utilisé par Van Halen sur "Eruption". Référencé dans notre article Phaser.',emoji:'🔄',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/phaser-quand-la-guitare-se-met-a-respirer/'},
+    {name:'Big Muff Pi (Triangle)',img:'images/q859092-big-muff.jpg',hint:'4 transistors en cascade. Version 1969 d\'Electro-Harmonix. Tête d\'affiche de notre Guerre des Fuzz.',emoji:'🌀',bg:'bg-gold',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'Ibanez Tube Screamer TS808',img:'images/thomann-ibanez_ts808.jpg',hint:'Saturation douce, mid-boost caractéristique, boîtier vert iconique. Sujet de notre article dédié.',emoji:'🟢',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/pedale-tube-screamer-une-boite-verte-trois-potards/'},
+    {name:'Boss BF-2 Flanger',img:'images/boss-bf361ne4po8lbL.jpg',hint:'Effet qui simule deux bandes magnétiques légèrement désynchronisées. Voir notre article Flanger mode avion.',emoji:'✈️',bg:'bg-blue',cat:'mod',url:'https://fuzz-et-friture.fr/flanger-mode-avion/'},
+    {name:'Electro-Harmonix Big Muff (Sovtek)',img:'images/telechargement.jpg',hint:'Version russe de la Big Muff, son plus lourd et plus sombre. Dans notre comparatif Fuzz Face vs Big Muff.',emoji:'🐻',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'Boss CE-2 Chorus',img:'images/q315758-andy-summers.jpg',hint:'Le chorus analogique qui a tout popularisé. Du rock au zouk, analysé dans notre article Chorus.',emoji:'🌊',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/chorus-article/'},
+    {name:'Colorsound Powerboost',img:'images/thomann-ibanez_ts9_tube_screamer.jpg',hint:'Boost overdrive class-A. L\'arme secrète de Gilmour et Ronson. Dans nos overdrives incontournables.',emoji:'💛',bg:'bg-purp',cat:'od',url:'https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/'},
+    {name:'Dunlop Cry Baby',img:'images/vintage-1970s-aria-diamond-wah-fuzz.jpg',hint:'Wah à balancement du pied, popularisé par Hendrix et Clapton. Sujet de notre article WhaWha.',emoji:'👣',bg:'bg-gold',cat:'mod',url:'https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/'},
+    {name:'Boss FZ-5 Fuzz',img:'images/fuzztone.jpg',hint:'Fuzz numérique de Boss qui émule trois circuits vintage. Comparé dans notre Guerre des Fuzz.',emoji:'⚡',bg:'bg-fire',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'TC Electronic Flashback',img:'images/thomann-strymon_timeline.jpg',hint:'Delay numérique polyvalent avec TonePrint. Référencé dans notre guide des 6 pédales essentielles.',emoji:'⏱️',bg:'bg-teal',cat:'mod',url:'https://fuzz-et-friture.fr/les-6-pedales-que-tout-guitariste-devrait-avoir-sur-son-pedalboard-1/'},
   ];
 
   // shuffle
@@ -652,8 +651,8 @@ document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
     resultEl.classList.remove('show');
     const p=deck[idx];
     // bg
-    thumb.className='pm-card-inner '+p.bg;
-    thumb.innerHTML=`<span style="font-size:4.5rem;z-index:1;position:relative">${p.emoji}</span>`;
+    thumb.className='pm-card-inner';
+    thumb.innerHTML=`<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;">`;
     nameEl.textContent=p.name;
     hintEl.textContent=p.hint;
     card.style.transform='';card.style.opacity='1';
