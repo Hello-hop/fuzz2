@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedal Match — Fuzz ou Modulation ? | Fuzz &amp; Friture</title>
+<meta name="description" content="Comme Tinder, mais pour les pédales : swipe à droite pour Fuzz/Distorsion, à gauche pour Modulation/Overdrive. Trouve les bonnes catégories !">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="arcade.css" rel="stylesheet">
+<style>
+  .pm-arena{position:relative;max-width:480px;margin:1.5rem auto 0;padding:0 1.5rem;}
+  .pm-progress{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.8rem;}
+  .pm-pip{width:28px;height:5px;border-radius:3px;background:rgba(240,232,216,.14);transition:background .3s;}
+  .pm-pip.done{background:var(--orange);}
+  .pm-pip.current{background:var(--teal);}
+  .pm-card-wrap{position:relative;height:460px;display:flex;align-items:center;justify-content:center;touch-action:none;}
+  .pm-card{position:absolute;width:100%;max-width:340px;background:var(--space2);border:1px solid rgba(240,232,216,.12);border-radius:16px;overflow:hidden;will-change:transform;transition:box-shadow .2s;user-select:none;}
+  .pm-card-inner{width:100%;height:280px;position:relative;overflow:hidden;background:#000;}
+  .pm-card-inner img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+  .pm-pedal-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.7rem;text-align:center;color:var(--cream);padding:1rem 1.2rem .3rem;line-height:1;}
+  .pm-pedal-hint{font-size:.95rem;line-height:1.6;color:var(--dim);padding:.3rem 1.2rem 1.4rem;text-align:center;}
+  .pm-indicator{position:absolute;top:45%;transform:translateY(-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.6rem;letter-spacing:.06em;padding:.5rem 1rem;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .15s;border:3px solid;background:rgba(10,14,20,.7);z-index:5;}
+  .pm-indicator.left{left:12px;color:var(--teal);border-color:var(--teal);}
+  .pm-indicator.right{right:12px;color:var(--orange);border-color:var(--orange);}
+  .pm-hints{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;padding:0 .5rem;}
+  .pm-hint-side{display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+  .pm-hint-side .arrow{font-size:1.8rem;opacity:.4;}
+  .pm-hint-side .hlabel{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+  .pm-hint-side .hcat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.04em;}
+  .pm-hint-side.left-side .hcat{color:var(--teal);}
+  .pm-hint-side.right-side .hcat{color:var(--orange);}
+  .pm-score{text-align:center;font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:1.4rem;font-weight:700;}
+  .pm-result{display:none;position:absolute;inset:0;border-radius:16px;overflow:hidden;background:rgba(10,14,20,.94);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;gap:1rem;text-align:center;padding:2rem;z-index:20;}
+  .pm-result.show{display:flex;}
+  .pm-result-icon{font-size:3.5rem;}
+  .pm-result-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.2rem;color:var(--cream);}
+  .pm-result-sub{font-size:1.05rem;line-height:1.7;color:var(--cream);}
+  .pm-result-sub a{color:var(--teal);text-decoration:underline;}
+  .pm-result-btn{margin-top:.5rem;padding:.9rem 2rem;font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;background:var(--orange);color:var(--space);border:none;border-radius:6px;cursor:pointer;font-weight:700;}
+  .pm-tap-btns{display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;}
+  .pm-tap{flex:1;max-width:170px;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.9em 1em;border-radius:8px;cursor:pointer;border:2px solid;background:transparent;font-weight:700;transition:background .2s,color .2s;}
+  .pm-tap.left{color:var(--teal);border-color:var(--teal);}
+  .pm-tap.left:hover{background:var(--teal);color:var(--space);}
+  .pm-tap.right{color:var(--orange);border-color:var(--orange);}
+  .pm-tap.right:hover{background:var(--orange);color:var(--space);}
+</style>
+</head>
+<body>
+
+<nav class="g-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="index.html" class="back">← Toutes les bornes</a>
+</nav>
+
+<header class="g-head">
+  <p class="g-eyebrow">● Comme Tinder, mais pour le son</p>
+  <h1>PEDAL <span>MATCH</span></h1>
+  <p class="sub">Swipe à droite si c'est une <strong style="color:var(--orange);">Fuzz ou une Distorsion</strong>, à gauche si c'est plutôt <strong style="color:var(--teal);">Modulation ou Overdrive</strong>. Trouve les bonnes catégories !</p>
+</header>
+
+<div class="pm-arena">
+  <div class="pm-progress" id="pmProgress"></div>
+  <div class="pm-card-wrap" id="pmWrap">
+    <div class="pm-card" id="pmCard">
+      <div class="pm-card-inner" id="pmThumb"></div>
+      <div class="pm-pedal-name" id="pmName"></div>
+      <div class="pm-pedal-hint" id="pmHint"></div>
+      <div class="pm-indicator left" id="pmLeft">MOD / OD</div>
+      <div class="pm-indicator right" id="pmRight">FUZZ / DIST</div>
+    </div>
+    <div class="pm-result" id="pmResult">
+      <div class="pm-result-icon" id="pmResultIcon"></div>
+      <div class="pm-result-title" id="pmResultTitle"></div>
+      <div class="pm-result-sub" id="pmResultSub"></div>
+      <button class="pm-result-btn" id="pmResultBtn">Continuer →</button>
+    </div>
+  </div>
+
+  <div class="pm-tap-btns">
+    <button class="pm-tap left" id="pmTapLeft">← Mod / Overdrive</button>
+    <button class="pm-tap right" id="pmTapRight">Fuzz / Disto →</button>
+  </div>
+
+  <div class="pm-hints">
+    <div class="pm-hint-side left-side"><span class="arrow">←</span><span class="hlabel">Swipe gauche</span><span class="hcat">MOD / OVERDRIVE</span></div>
+    <div class="pm-hint-side right-side"><span class="arrow">→</span><span class="hlabel">Swipe droite</span><span class="hcat">FUZZ / DISTORTION</span></div>
+  </div>
+  <div class="pm-score" id="pmScore">Question 1 / 5 · Score : 0</div>
+</div>
+
+<footer class="g-foot">
+  <p>Fuzz &amp; Friture · Arcade · <a href="index.html">Autres jeux →</a></p>
+</footer>
+
+<div class="g-toast" id="toast"></div>
+
+<script>
+(function(){
+  const IMG="../images/";
+  const PEDALS=[
+    {name:'Klon Centaur',hint:'Overdrive légendaire à plus de 2000€ en occasion.',img:IMG+'Q999999904-klon-ktr.jpg',cat:'od',url:'https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/'},
+    {name:'Dallas Arbiter Fuzz Face',hint:'Circuit germanium NKT275, le son de Hendrix sur Purple Haze.',img:IMG+'q5928-jimi-hendrix.jpg',cat:'fuzz',url:'https://fuzz-et-friture.fr/la-guerre-des-fuzz/'},
+    {name:'MXR Phase 90',hint:'4 étages de déphasage, utilisé par Van Halen sur "Eruption".',img:IMG+'mxr-flanger-0710137026537.jpg',cat:'mod',url:'https://fuzz-et-friture.fr/phaser-quand-la-guitare-se-met-a-respirer/'},
+    {name:'Big Muff Pi',hint:'4 transistors en cascade, version 1969 d\'Electro-Harmonix.',img:IMG+'q859092-big-muff.jpg',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'Ibanez Tube Screamer TS808',hint:'Saturation douce, mid-boost, boîtier vert iconique.',img:IMG+'thomann-ibanez_ts808.jpg',cat:'od',url:'https://fuzz-et-friture.fr/pedale-tube-screamer-une-boite-verte-trois-potards/'},
+    {name:'Boss BF-2 Flanger',hint:'Simule deux bandes magnétiques désynchronisées.',img:IMG+'boss-bf361ne4po8lbL.jpg',cat:'mod',url:'https://fuzz-et-friture.fr/flanger-mode-avion/'},
+    {name:'Boss CE-2 Chorus',hint:'Le chorus analogique qui a tout popularisé.',img:IMG+'q315758-andy-summers.jpg',cat:'mod',url:'https://fuzz-et-friture.fr/chorus-article/'},
+    {name:'Colorsound Powerboost',hint:'Boost overdrive class-A, l\'arme secrète de Gilmour.',img:IMG+'thomann-ibanez_ts9_tube_screamer.jpg',cat:'od',url:'https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/'},
+    {name:'Dunlop Cry Baby',hint:'Wah au pied, popularisée par Hendrix et Clapton.',img:IMG+'vintage-1970s-aria-diamond-wah-fuzz.jpg',cat:'mod',url:'https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/'},
+    {name:'Boss FZ-5 Fuzz',hint:'Fuzz numérique de Boss qui émule trois circuits vintage.',img:IMG+'fuzztone.jpg',cat:'fuzz',url:'https://fuzz-et-friture.fr/comparatif-fuzz-face-big-muff-boss-fz5/'},
+    {name:'EHX Soul Food',hint:'Overdrive transparent, clone abordable du Klon.',img:IMG+'thomann-electro_harmonix_soul_food.jpg',cat:'od',url:'https://fuzz-et-friture.fr/klon-vs-clones-4-pedales-pour-le-son-du-centaur-sans-le-prix/'},
+    {name:'Strymon Timeline',hint:'Delay numérique haut de gamme, une référence studio.',img:IMG+'thomann-strymon_timeline.jpg',cat:'mod',url:'https://fuzz-et-friture.fr/les-6-pedales-que-tout-guitariste-devrait-avoir-sur-son-pedalboard-1/'},
+  ];
+
+  const TOTAL=5;
+  const PERFECT_STREAK=3;
+  let deck=[...PEDALS].sort(()=>Math.random()-.5).slice(0,TOTAL);
+  let idx=0,score=0,streak=0,maxStreak=0,answered=false;
+
+  const card=document.getElementById('pmCard');
+  const thumb=document.getElementById('pmThumb');
+  const nameEl=document.getElementById('pmName');
+  const hintEl=document.getElementById('pmHint');
+  const scoreEl=document.getElementById('pmScore');
+  const progEl=document.getElementById('pmProgress');
+  const indLeft=document.getElementById('pmLeft');
+  const indRight=document.getElementById('pmRight');
+  const resultEl=document.getElementById('pmResult');
+  const resultIcon=document.getElementById('pmResultIcon');
+  const resultTitle=document.getElementById('pmResultTitle');
+  const resultSub=document.getElementById('pmResultSub');
+  const resultBtn=document.getElementById('pmResultBtn');
+
+  let audioCtx=null;
+  function getCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx;}
+  function playTone(freq,dur,type='sine',vol=.15){try{const c=getCtx();const o=c.createOscillator();const g=c.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(vol,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur);}catch(e){}}
+  function playCorrect(){playTone(660,.08,'square',.12);setTimeout(()=>playTone(880,.15,'sine',.12),80);}
+  function playWrong(){playTone(180,.25,'sawtooth',.1);}
+
+  function buildProgress(){progEl.innerHTML='';deck.forEach((_,i)=>{const p=document.createElement('div');p.className='pm-pip'+(i<idx?' done':i===idx?' current':'');progEl.appendChild(p);});}
+
+  function showCard(){
+    answered=false;
+    resultEl.classList.remove('show');
+    const p=deck[idx];
+    thumb.innerHTML=`<img src="${p.img}" alt="${p.name}">`;
+    nameEl.textContent=p.name;
+    hintEl.textContent=p.hint;
+    card.style.transform='';card.style.opacity='1';
+    indLeft.style.opacity='0';indRight.style.opacity='0';
+    scoreEl.textContent=`Question ${idx+1} / ${TOTAL} · Score : ${score}`;
+    buildProgress();
+  }
+
+  function answer(dir){
+    if(answered)return;answered=true;
+    const p=deck[idx];
+    const isRight=(dir==='right')&&(p.cat==='fuzz'||p.cat==='dist');
+    const isLeft=(dir==='left')&&(p.cat==='mod'||p.cat==='od');
+    const correct=isRight||isLeft;
+    if(correct){score++;streak++;if(streak>maxStreak)maxStreak=streak;playCorrect();}
+    else{streak=0;playWrong();}
+    const tx=dir==='right'?140:-140;
+    card.style.transition='transform .35s ease,opacity .35s ease';
+    card.style.transform=`translateX(${tx}px) rotate(${dir==='right'?12:-12}deg)`;
+    card.style.opacity='0';
+    setTimeout(()=>{
+      card.style.transition='';
+      resultIcon.textContent=correct?'✅':'❌';
+      resultTitle.textContent=correct?'Correct !':'Pas tout à fait';
+      const catLabel=p.cat==='fuzz'?'Fuzz':p.cat==='dist'?'Distortion':p.cat==='mod'?'Modulateur':'Overdrive';
+      const link=p.url?` <a href="${p.url}" target="_blank" rel="noopener">Lire l'article →</a>`:'';
+      resultSub.innerHTML=correct?`Oui, le ${p.name} est bien un ${catLabel}.${link}`:`Le ${p.name} est en fait un ${catLabel}.${link}`;
+      resultEl.style.background=correct?'rgba(10,30,20,.94)':'rgba(30,10,10,.94)';
+      resultEl.classList.add('show');
+      card.style.transform='';card.style.opacity='1';
+    },360);
+  }
+
+  resultBtn.addEventListener('click',function next(){
+    idx++;
+    if(idx>=TOTAL){
+      const perfect=(maxStreak>=PERFECT_STREAK||score>=PERFECT_STREAK);
+      resultIcon.textContent=perfect?'🏆':'🎸';
+      resultTitle.textContent=perfect?'Sans-faute !':'Bonne session';
+      resultSub.innerHTML=`Score final : ${score}/${TOTAL}. ${perfect?'Tu as l\'oreille !':'Encore un peu d\'entraînement ?'}`;
+      resultBtn.textContent='Rejouer';
+      resultEl.style.background='rgba(10,14,20,.96)';
+      resultBtn.onclick=()=>{idx=0;score=0;streak=0;maxStreak=0;deck=[...PEDALS].sort(()=>Math.random()-.5).slice(0,TOTAL);resultBtn.textContent='Continuer →';resultBtn.onclick=null;resultBtn.addEventListener('click',next);showCard();};
+      return;
+    }
+    showCard();
+  });
+
+  // swipe/drag
+  let startX=null,currentX=0,dragging=false;
+  function onStart(x){startX=x;currentX=0;dragging=true;card.style.transition='';}
+  function onMove(x){if(!dragging||answered)return;currentX=x-startX;card.style.transform=`translateX(${currentX}px) rotate(${currentX*.08}deg)`;const ratio=Math.min(Math.abs(currentX)/80,1);indLeft.style.opacity=currentX<0?ratio*1.2:0;indRight.style.opacity=currentX>0?ratio*1.2:0;}
+  function onEnd(){if(!dragging)return;dragging=false;if(Math.abs(currentX)>70){answer(currentX>0?'right':'left');}else{card.style.transition='transform .25s ease';card.style.transform='';indLeft.style.opacity='0';indRight.style.opacity='0';}}
+  card.addEventListener('mousedown',e=>{onStart(e.clientX);e.preventDefault();});
+  document.addEventListener('mousemove',e=>onMove(e.clientX));
+  document.addEventListener('mouseup',onEnd);
+  card.addEventListener('touchstart',e=>onStart(e.touches[0].clientX),{passive:true});
+  card.addEventListener('touchmove',e=>{onMove(e.touches[0].clientX);e.preventDefault();},{passive:false});
+  card.addEventListener('touchend',onEnd);
+  document.getElementById('pmTapLeft').onclick=()=>answer('left');
+  document.getElementById('pmTapRight').onclick=()=>answer('right');
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')answer('right');if(e.key==='ArrowLeft')answer('left');});
+
+  showCard();
+})();
+</script>
+</body>
+</html>
