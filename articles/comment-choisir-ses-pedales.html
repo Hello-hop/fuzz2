@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment choisir ses pédales d'effets guitare en 2026 : le guide complet | Fuzz &amp; Friture</title>
+<meta name="description" content="Le guide complet pour choisir ses pédales d'effets en 2026 : 5 critères, les 5 pédales essentielles, l'ordre de branchement et un plan d'achat selon ton budget.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0a0e14;--space2:#0f1520;--space3:#161d2b;
+    --orange:#f5921e;--gold:#f9c84a;
+    --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(245,241,232,.92);
+    --border:rgba(245,146,30,.18);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;font-size:18px;line-height:1.8;overflow-x:hidden;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  img{max-width:100%;display:block;}
+
+  /* NAV */
+  .a-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,14,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+  .a-nav .logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.05em;color:var(--orange);text-decoration:none;}
+  .a-nav .logo span{color:var(--teal);}
+  .a-nav .back{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream);opacity:.7;text-decoration:none;transition:opacity .2s,color .2s;}
+  .a-nav .back:hover{opacity:1;color:var(--teal);}
+
+  /* HERO */
+  .a-hero{position:relative;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden;border-bottom:1px solid var(--border);}
+  .a-hero::before{content:'GUIDE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(7rem,22vw,17rem);color:rgba(245,146,30,.05);pointer-events:none;white-space:nowrap;z-index:0;letter-spacing:.05em;}
+  .a-hero>*{position:relative;z-index:1;}
+  .a-kicker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;}
+  .a-hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;text-transform:uppercase;letter-spacing:.01em;}
+  .a-hero h1 em{color:var(--orange);font-style:normal;}
+  .a-hero .subtitle{font-style:italic;font-size:1.2rem;color:var(--dim);max-width:640px;margin:1.6rem auto 0;}
+  .a-hero .meta{margin-top:1.8rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+
+  /* LAYOUT */
+  .a-wrap{max-width:820px;margin:0 auto;padding:0 1.5rem;}
+  .a-wrap p{margin:1.4rem 0;color:var(--dim);}
+  .a-wrap h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;letter-spacing:.01em;margin:3.5rem 0 .4rem;color:var(--cream);line-height:1.05;}
+  .a-wrap h2 .u{display:block;width:56px;height:4px;background:var(--orange);margin-top:.7rem;border-radius:2px;}
+  .a-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;margin:2rem 0 .5rem;color:var(--cream);}
+  .a-wrap strong{color:var(--cream);}
+  .a-wrap em{color:var(--gold);font-style:italic;}
+  .a-wrap a:not(.btn):not(.music-link){color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
+
+  /* TL;DR */
+  .tldr{background:var(--space2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:2rem 2.2rem;margin:3rem auto;}
+  .tldr h2{margin:0 0 1.2rem;font-size:1.4rem;}
+  .tldr ul{list-style:none;}
+  .tldr li{padding:.7rem 0;border-bottom:1px solid rgba(245,241,232,.08);font-size:1rem;color:var(--dim);}
+  .tldr li:last-child{border-bottom:none;}
+  .tldr .fav{margin-top:1.3rem;padding-top:1.3rem;border-top:2px solid var(--orange);display:flex;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .btn-fav{background:var(--orange);color:var(--space)!important;border:none;padding:.7em 1.3em;border-radius:8px;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;}
+
+  /* CRITERIA CARDS */
+  .criteria{display:grid;gap:1rem;margin:2rem 0;}
+  .crit{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:1.3rem 1.6rem;}
+  .crit h3{margin:0 0 .4rem;font-size:1.25rem;}
+  .crit p{margin:0;font-size:.98rem;}
+
+  /* PRODUCT CARD */
+  .prod{background:var(--space2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:2.5rem 0;}
+  .prod-img{width:100%;height:260px;object-fit:cover;border-bottom:1px solid var(--border);background:#fff;}
+  .prod-body{padding:2rem;}
+  .prod-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:.3em .8em;border-radius:20px;margin-bottom:1rem;background:rgba(249,200,74,.14);color:var(--gold);border:1px solid rgba(249,200,74,.3);}
+  .prod-body h3{margin:0 0 .3rem;font-size:1.8rem;}
+  .prod-maker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+  .ideal{background:rgba(62,184,192,.08);border:1px solid rgba(62,184,192,.25);border-radius:8px;padding:.9rem 1.2rem;font-size:.95rem;margin:1.2rem 0;color:var(--dim);}
+  .ideal strong{color:var(--teal);}
+
+  /* AFFILIATE BUTTONS */
+  .aff-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem;}
+  .btn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8em 1.4em;border-radius:8px;text-decoration:none;font-weight:700;transition:transform .15s,filter .2s;border:2px solid;}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .btn-amazon{background:var(--orange);color:var(--space);border-color:var(--orange);}
+  .btn-reverb{background:transparent;color:var(--gold);border-color:var(--gold);}
+  .music-link{color:var(--teal);font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);}
+
+  /* SIGNAL CHAIN */
+  .chain{background:var(--space2);border:1px solid var(--border);border-radius:14px;padding:2rem;margin:2rem 0;}
+  .chain-flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;}
+  .chain-step{background:var(--space3);border:1px solid var(--border);border-radius:8px;padding:.6em 1em;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.05em;color:var(--cream);white-space:nowrap;}
+  .chain-step.hi{border-color:var(--orange);color:var(--gold);}
+  .chain-arrow{color:var(--orange);font-weight:700;}
+
+  /* GUITARISTS */
+  .masters{background:var(--space2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3.5rem 1.5rem;margin:4rem 0;}
+  .masters-inner{max-width:900px;margin:0 auto;}
+  .masters h2{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);text-transform:uppercase;margin-bottom:2.5rem;}
+  .masters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;}
+  .master{text-align:center;}
+  .master img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:1px solid var(--border);filter:grayscale(.3);transition:filter .3s;}
+  .master:hover img{filter:grayscale(0);}
+  .master .m-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-top:.8rem;color:var(--cream);}
+  .master .m-pedal{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin:.3rem 0;}
+  .master .m-track{font-size:.9rem;font-style:italic;color:var(--dim);line-height:1.5;}
+
+  /* TABLE */
+  .table-wrap{overflow-x:auto;margin:2rem 0;border-radius:12px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px;}
+  thead th{background:var(--space3);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;padding:1rem;text-align:left;}
+  tbody td{padding:.9rem 1rem;border-top:1px solid var(--border);color:var(--dim);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02);}
+  .win{color:var(--gold);font-weight:700;}
+
+  /* VERDICT */
+  .verdict{background:linear-gradient(135deg,rgba(245,146,30,.1),rgba(62,184,192,.06));border:1px solid var(--border);border-radius:16px;padding:2.5rem;margin:3rem 0;}
+  .verdict h2{margin-top:0;}
+  .verdict-item{padding:1rem 0;border-bottom:1px solid rgba(245,241,232,.08);color:var(--dim);}
+  .verdict-item:last-child{border-bottom:none;}
+  .verdict-item strong{color:var(--orange);}
+
+  /* FAQ */
+  .faq-item{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1rem;}
+  .faq-item h3{margin:0 0 .5rem;font-size:1.2rem;color:var(--gold);}
+  .faq-item p{margin:0;font-size:.98rem;}
+
+  /* WHERE TO BUY */
+  .buy-list{list-style:none;margin:1.5rem 0;}
+  .buy-list li{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+  .buy-list .buy-img{width:100%;height:180px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:1rem;padding:.5rem;}
+  .buy-list .buy-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:var(--cream);margin-bottom:.8rem;}
+
+  /* RELATED */
+  .related{margin:3rem 0;}
+  .related ul{list-style:none;display:grid;gap:.7rem;}
+  .related li a{display:block;background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.3rem;text-decoration:none;color:var(--cream);font-weight:500;transition:border-color .2s,transform .2s;}
+  .related li a:hover{border-color:var(--teal);transform:translateX(4px);color:var(--teal);}
+
+  /* DISCLAIMER */
+  .disclaimer{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;margin:3rem 0;font-size:.85rem;font-style:italic;color:var(--dim);opacity:.85;line-height:1.6;}
+
+  /* FOOTER */
+  .a-foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);color:var(--dim);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+  .a-foot a{color:var(--teal);text-decoration:none;}
+
+  @media(max-width:640px){
+    .a-hero{padding:3.5rem 1rem 3rem;}
+    .prod-body{padding:1.4rem;}
+    .masters{padding:2.5rem 1rem;}
+    .chain{padding:1.3rem;}
+    .verdict{padding:1.6rem;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav class="a-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="../index.html" class="back">← Retour au site</a>
+</nav>
+
+<header class="a-hero">
+  <p class="a-kicker">✦ Guide débutant · Pédales d'effets · 2026 ✦</p>
+  <h1>Comment choisir ses <em>pédales d'effets</em></h1>
+  <p class="subtitle">Le guide complet pour ne pas se planter au premier achat.</p>
+  <p class="meta">👇 Scroll ça donne la frite</p>
+</header>
+
+<article class="a-wrap">
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <h2>⚡ Pas le temps : le résumé 30 secondes</h2>
+    <ul>
+      <li><strong>Ibanez TS9</strong> — L'overdrive de référence. Chaud, musical, intemporel.</li>
+      <li><strong>Dunlop Cry Baby</strong> — La wah-wah originale. Le filtre vocal qui ne prend pas de rides.</li>
+      <li><strong>Boss DD-3T</strong> — Le delay numérique fiable. Simple, propre, pas d'options superflues.</li>
+      <li><strong>MXR Dyna Comp</strong> — Le compresseur d'entrée de gamme des pros. Invisible mais indispensable.</li>
+      <li><strong>Boss TU-3</strong> — L'accordeur de pied. Indestructible. Premier achat obligatoire.</li>
+    </ul>
+    <div class="fav">
+      <span>⭐ <strong>Premier achat :</strong></span>
+      <a href="#buy-ts9" class="btn-fav">Voir le TS9 →</a>
+    </div>
+  </div>
+
+  <p>Ton premier achat de pédale d'effets, c'est souvent une catastrophe. Pas parce que la pédale est mauvaise — parce que personne ne t'a expliqué dans quel ordre acheter, pourquoi, et comment les brancher.</p>
+
+  <p>Une pédale d'effet, c'est un transformateur de signal. Elle prend le son brut de ta guitare et le sculpte — le compresse, le sature, le retarde, le module. En 2026, l'offre est vertigineuse : des centaines de marques, des milliers de modèles, du clone à 30 euros au boutique à 300. Pour un guitariste qui débute, c'est la paralysie du choix garantie.</p>
+
+  <p>Ce guide ne te dit pas quelle est « la meilleure pédale » — ça n'existe pas. Il te donne les 5 types d'effets à connaître en premier, la chaîne de signal à respecter, et les produits concrets qui font consensus pour chaque catégorie. Sans bullshit, sans nostalgie inutile. Juste ce qu'il faut pour monter ton premier rig solide.</p>
+
+  <h2>Pourquoi les pédales d'effets existent — et depuis quand<span class="u"></span></h2>
+
+  <p>Tout commence dans les années 50 avec des accidents heureux : des câbles mal branchés, des amplificateurs à bout de souffle, des transistors défaillants qui saturaient le signal d'une façon que personne n'avait prévue. Ce son accidentel — gras, agressif, imparfait — est devenu l'overdrive, puis la distorsion, puis le fuzz. Les premiers guitaristes à s'en emparer ont compris qu'un son cassé pouvait être plus expressif qu'un son propre.</p>
+
+  <p>La première pédale commerciale est le DeArmond Trem-Trol (1948), un trémolo à base d'électrolyte. Mais c'est dans les années 60 que tout s'accélère : le Maestro Fuzz-Tone (1962), immortalisé sur <em>Satisfaction</em> des Rolling Stones, lance l'ère des pédales de distorsion. La wah-wah de Vox arrive en 1966, le chorus, le flanger et le delay analogique explosent dans les années 70. Et depuis, l'industrie du gear n'a jamais ralenti.</p>
+
+  <p>En 2026, une pédale d'entrée de gamme offre souvent plus de possibilités sonores qu'un studio professionnel des années 80. La question n'est plus « ai-je accès à ce son ? » mais <strong>« par où est-ce que je commence ? »</strong></p>
+
+  <p>🎵 <a class="music-link" href="https://www.google.com/search?q=Rolling+Stones+Satisfaction+fuzz+Maestro" target="_blank" rel="noopener">(I Can't Get No) Satisfaction — Rolling Stones · le fuzz qui a tout changé</a></p>
+
+  <h2>🎛️ 5 critères pour choisir une pédale d'effets<span class="u"></span></h2>
+  <div class="criteria">
+    <div class="crit"><h3>🎸 Ton style musical</h3><p>Blues &amp; rock : overdrive ou fuzz. Funk : wah-wah &amp; compresseur. Post-rock : delay &amp; reverb. Part de là.</p></div>
+    <div class="crit"><h3>🔊 Ton ampli</h3><p>Un overdrive sonne mieux sur un ampli chaud. Un delay numérique s'adapte à tout. La pédale dépend de l'ampli.</p></div>
+    <div class="crit"><h3>💰 Ton budget</h3><p>Entrée de gamme (30–80 €) : parfait pour débuter. Ne pas croire qu'il faut dépenser plus pour bien sonner.</p></div>
+    <div class="crit"><h3>🔌 Analogique ou numérique</h3><p>Analogique = son chaud, organique, réactif. Numérique = plus de possibilités, plus propre, plus pratique en live.</p></div>
+    <div class="crit"><h3>📐 La place dans la chaîne</h3><p>L'ordre des pédales change tout. Un fuzz avant un buffer sonne différent d'un fuzz après. Toujours tester les deux.</p></div>
+  </div>
+
+  <h2>🎸 Les 5 pédales essentielles pour débuter<span class="u"></span></h2>
+
+  <!-- TS9 -->
+  <div class="prod" id="prod-ts9">
+    <img class="prod-img" src="../images/thomann-ibanez_ts9_tube_screamer.jpg" alt="Ibanez TS9 Tube Screamer">
+    <div class="prod-body">
+      <span class="prod-tag">Overdrive · Analogique</span>
+      <h3>Ibanez TS9 Tube Screamer</h3>
+      <p class="prod-maker">Ibanez</p>
+      <p>Le Tube Screamer TS9 est sans doute la pédale la plus copiée, clonée et citée de l'histoire. Son secret : il pousse les médiums et compresse légèrement le signal, créant un son chaud et « musical » qui s'insère parfaitement devant un ampli à lampes. Stevie Ray Vaughan en avait deux chaînés. John Mayer ne s'en sépare pas. Et des milliers de guitaristes de blues, de rock et de country en font leur première pédale. Sa magie : <strong>il sonne bien à presque tous les réglages</strong>.</p>
+      <div class="ideal"><strong>Idéal pour :</strong> blues, rock, country — et comme toute première pédale de saturation.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4PJC6?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=ibanez+ts9" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRY BABY -->
+  <div class="prod" id="prod-crybaby">
+    <img class="prod-img" src="../images/vintage-1970s-aria-diamond-wah-fuzz.jpg" alt="Pédale wah-wah">
+    <div class="prod-body">
+      <span class="prod-tag">Wah-wah · Filtre à balancement</span>
+      <h3>Dunlop Cry Baby GCB95</h3>
+      <p class="prod-maker">Jim Dunlop</p>
+      <p>La Cry Baby GCB95, c'est la wah-wah originale dans sa forme définitive. Tu poses le pied dessus, tu balances — l'inducteur Fasel jaune crée ce filtre « vowel » incomparable, entre le « wah » grave et l'aigu brillant. C'est une pédale qui se joue avec les jambes autant qu'avec les doigts, et qui nécessite un peu de pratique pour en tirer toute la musicalité. Mais quand tu y arrives, c'est <strong>la pédale la plus expressive de tout ton pédalier</strong>.</p>
+      <div class="ideal"><strong>Idéal pour :</strong> funk, blues, rock — tout ce qui demande de l'expressivité au pied.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002CZVK0?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+cry+baby+gcb95" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DD-3T -->
+  <div class="prod" id="prod-dd3t">
+    <img class="prod-img" src="../images/thomann-boss_rv_6.jpg" alt="Pédale Boss compacte">
+    <div class="prod-body">
+      <span class="prod-tag">Delay · Numérique</span>
+      <h3>Boss DD-3T</h3>
+      <p class="prod-maker">Boss</p>
+      <p>Le Boss DD-3T est l'évolution moderne du DD-3, l'un des delays numériques les plus vendus de l'histoire. Il ajoute le tap tempo au format classique Boss compact — ce qui change tout en live. De 1 à 800 ms, avec répétitions contrôlables et mode « hold » pour les boucles courtes. Le son numérique est propre, précis, parfait pour le rock et le country. Si tu veux du chaud et de l'analogique, prends l'MXR Carbon Copy. Mais pour commencer, <strong>le DD-3T fait tout ce qu'il faut</strong>.</p>
+      <div class="ideal"><strong>Idéal pour :</strong> tous styles — le delay est l'effet le plus universel après la saturation.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B07YDGK9M1?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=boss+dd-3t" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DYNA COMP -->
+  <div class="prod" id="prod-dynacomp">
+    <img class="prod-img" src="../images/mxr-flanger-0710137026537.jpg" alt="Pédale MXR">
+    <div class="prod-body">
+      <span class="prod-tag">Compresseur · Analogique</span>
+      <h3>MXR Dyna Comp</h3>
+      <p class="prod-maker">MXR</p>
+      <p>Le Dyna Comp MXR est la référence du compresseur de guitare depuis presque 50 ans. Sa simplicité est sa force : deux boutons, « Sensitivity » et « Output », et un circuit CA3080 qui compresse le signal d'une façon distinctivement musicale — pas transparent, mais caractériel. Parfait pour le funk, le country et le « chicken pickin' » du blues. <strong>Les guitaristes qui ne l'utilisent pas pensent ne pas avoir besoin d'un compresseur. Ceux qui l'ont essayé ne s'en séparent plus.</strong></p>
+      <div class="ideal"><strong>Idéal pour :</strong> funk, country, pop — partout où le son clean doit rester égal et claquant.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002E51ZS?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=mxr+dyna+comp" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TU-3 -->
+  <div class="prod" id="prod-tu3">
+    <img class="prod-img" src="../images/thomann-boss_tu3.jpg" alt="Boss TU-3 accordeur chromatique">
+    <div class="prod-body">
+      <span class="prod-tag">Accordeur · Numérique</span>
+      <h3>Boss TU-3</h3>
+      <p class="prod-maker">Boss</p>
+      <p>Le Boss TU-3, ce n'est pas glamour. Mais c'est <strong>LE premier achat à faire avant tout le reste</strong>. Précis à un centième de demi-ton, il mute le signal pendant que tu accordes (plus de son qui filtre dans les retours), il résiste à tout — on a vu des TU-3 survivre à des chutes de scène, des tournées en fourgon non chauffé, des déversements de bière. Son seul défaut : son buffer n'est pas totalement transparent — mais en première position dans la chaîne, on ne l'entend pas.</p>
+      <div class="ideal"><strong>Idéal pour :</strong> absolument tout le monde. C'est la pédale à acheter en premier.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B004D8KX7K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=boss+tu-3" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>🔌 Dans quel ordre brancher ses pédales ?<span class="u"></span></h2>
+
+  <p>L'ordre des pédales dans la chaîne de signal n'est pas une règle absolue — c'est un point de départ. Mais il existe un consensus professionnel qui fonctionne dans 90% des cas :</p>
+
+  <div class="chain">
+    <div class="chain-flow">
+      <span class="chain-step hi">🎸 Guitare</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🎚️ Accordeur</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🎛️ Wah / Filtre</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🗜️ Compresseur</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🔥 Fuzz / Overdrive / Disto</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🌊 Modulation</span><span class="chain-arrow">→</span>
+      <span class="chain-step">🕐 Delay / Reverb</span><span class="chain-arrow">→</span>
+      <span class="chain-step hi">🔌 Ampli</span>
+    </div>
+  </div>
+
+  <p>Cette chaîne n'est pas une règle absolue — c'est un point de départ. Les exceptions font souvent les meilleurs sons. The Edge (U2) place son delay avant sa distorsion. <strong>Essaie, écoute, adapte.</strong></p>
+
+</article>
+
+<!-- GUITARISTS -->
+<section class="masters">
+  <div class="masters-inner">
+    <h2>🎸 Ces guitaristes qui ont élevé les pédales au rang d'instrument</h2>
+    <div class="masters-grid">
+      <div class="master">
+        <img src="../images/stevie-ray-vaughan.jpg" alt="Stevie Ray Vaughan" loading="lazy">
+        <div class="m-name">Stevie Ray Vaughan</div>
+        <div class="m-pedal">2× TS808 · Wah · Uni-Vibe</div>
+        <div class="m-track">Le son SRV tient dans 4 pédales et une Strat.</div>
+      </div>
+      <div class="master">
+        <img src="../images/jimi-hendrix-poster.jpg" alt="Jimi Hendrix" loading="lazy">
+        <div class="m-name">Jimi Hendrix</div>
+        <div class="m-pedal">Fuzz Face · Uni-Vibe · Wah</div>
+        <div class="m-track">L'inventeur du langage pédales — une révolution sonore complète.</div>
+      </div>
+      <div class="master">
+        <img src="../images/Q999999904-klon-ktr.jpg" alt="Klon Centaur, pédale emblématique du pédalier de John Mayer" loading="lazy">
+        <div class="m-name">John Mayer</div>
+        <div class="m-pedal">TS10 · Klon · Uni-Vibe · Big Muff</div>
+        <div class="m-track">Son pédalier est une étude de cas en ingénierie de son blues-rock.</div>
+      </div>
+      <div class="master">
+        <img src="../images/thomann-strymon_timeline.jpg" alt="Delay Strymon Timeline, l'effet signature de The Edge" loading="lazy">
+        <div class="m-name">The Edge (U2)</div>
+        <div class="m-pedal">Delay · Temps pointé</div>
+        <div class="m-track">Ses rythmes en temps pointé syncopé définissent le post-rock des années 80 et 90.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="a-wrap">
+
+  <h2>📊 Tableau de bord — les 5 effets clés<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pédale</th><th>Type d'effet</th><th>Circuit</th><th>Style idéal</th><th>Placement</th></tr></thead>
+      <tbody>
+        <tr><td class="win">Ibanez TS9</td><td>Overdrive</td><td>Analogique</td><td>Blues, rock, country</td><td>Après accordeur &amp; wah</td></tr>
+        <tr><td class="win">Dunlop Cry Baby</td><td>Wah-wah (filtre)</td><td>Analogique</td><td>Funk, blues, rock</td><td>Avant compresseur et drive</td></tr>
+        <tr><td class="win">Boss DD-3T</td><td>Delay numérique</td><td>Numérique</td><td>Universel</td><td>En fin de chaîne</td></tr>
+        <tr><td class="win">MXR Dyna Comp</td><td>Compresseur</td><td>Analogique</td><td>Funk, country, pop</td><td>Après accordeur &amp; wah</td></tr>
+        <tr><td class="win">Boss TU-3</td><td>Accordeur</td><td>Numérique</td><td>Universel</td><td>Toujours en 1re position</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>💰 Par où commencer selon ton budget<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Budget total</th><th>Achète dans cet ordre</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td class="win">Sous 80 €</td><td>TU-3 ou TS9 (un seul)</td><td>L'accordeur est obligatoire. Si tu as déjà un accordeur clip, commence par le TS9.</td></tr>
+        <tr><td class="win">80–160 €</td><td>TU-3 + TS9</td><td>La base absolue. Un accordeur + un overdrive = déjà un son professionnel.</td></tr>
+        <tr><td class="win">160–280 €</td><td>TU-3 + TS9 + DD-3T</td><td>Ajouter le delay ouvre tout : des solos qui respirent, des ambiances, du doubling.</td></tr>
+        <tr><td class="win">280–400 €</td><td>+ Cry Baby ou Dyna Comp</td><td>La wah pour le funk &amp; blues expressif. Le compresseur pour les styles clean et country.</td></tr>
+        <tr><td class="win">400 € et +</td><td>Rig complet + pédalier</td><td>Ajouter un chorus, une reverb, et investir dans un pédalier Pedaltrain ou Rockboard.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>🏆 Le verdict : par où commencer ?<span class="u"></span></h2>
+  <div class="verdict">
+    <div class="verdict-item">🎸 <strong>Tu joues blues / rock →</strong> Commence par le TS9. C'est la pédale qui transforme le plus le son pour le moins d'argent. Le reste viendra après.</div>
+    <div class="verdict-item">🎵 <strong>Tu joues funk / soul →</strong> Cry Baby + Dyna Comp. Le filtre wah + la compression = le duo qui définit le son funk de Nile Rodgers à Bootsy Collins.</div>
+    <div class="verdict-item">🌊 <strong>Tu joues post-rock / ambient →</strong> Boss DD-3T dès le départ. Le delay est l'effet fondateur du post-rock. Associe-le ensuite à une reverb.</div>
+    <div class="verdict-item">🔌 <strong>Ton premier achat →</strong> Boss TU-3. Toujours. Avant une seule autre pédale. Jouer désaccordé, c'est le moyen le plus rapide de sonner amateur.</div>
+  </div>
+
+  <h2>❓ Questions fréquentes<span class="u"></span></h2>
+  <div class="faq-item">
+    <h3>Faut-il un pédalier pour commencer ?</h3>
+    <p>Non. Avec 1 ou 2 pédales, un pédalier n'est pas indispensable. À partir de 3-4 pédales, un format compact comme le Pedaltrain Nano+ ou le Boss BCB-30X devient très utile pour organiser le câblage et avoir un setup stable en live.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Quelle différence entre overdrive, distorsion et fuzz ?</h3>
+    <p>L'overdrive simule la saturation douce d'un ampli à lampes poussé. La distorsion clippe le signal de façon symétrique et agressive. Le fuzz est une saturation brutale et asymétrique qui génère des harmoniques riches et un son organique imparfait. Ordre de « violence » : overdrive → distorsion → fuzz.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Une alimentation secteur ou des piles ?</h3>
+    <p>Les piles donnent un son légèrement différent (certains disent « plus chaud ») sur les pédales analogiques. Mais en pratique, une alimentation multi-sorties 9V comme le Truetone 1 Spot ou le Strymon Zuma est indispensable dès que tu as 3 pédales ou plus. Les piles qui lâchent en plein concert, c'est l'une des expériences les plus traumatisantes de la vie de guitariste.</p>
+  </div>
+  <div class="faq-item">
+    <h3>True bypass ou buffer : ça change quoi ?</h3>
+    <p>En true bypass, le signal passe directement de l'entrée à la sortie sans toucher au circuit de la pédale quand elle est éteinte. Avec un buffer, il passe par un circuit actif qui renforce le signal — utile sur un long pédalier pour éviter la perte de hautes fréquences. En pratique : quelques pédales true bypass + le Boss TU-3 (qui est buffered) = le meilleur des deux mondes.</p>
+  </div>
+
+  <h2>🛍️ Où acheter<span class="u"></span></h2>
+  <ul class="buy-list">
+    <li id="buy-ts9">
+      <img class="buy-img" src="../images/thomann-ibanez_ts9_tube_screamer.jpg" alt="Ibanez TS9 Tube Screamer" loading="lazy">
+      <div class="buy-name">Ibanez TS9 Tube Screamer</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4PJC6?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=ibanez+ts9" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/vintage-1970s-aria-diamond-wah-fuzz.jpg" alt="Dunlop Cry Baby GCB95" loading="lazy">
+      <div class="buy-name">Dunlop Cry Baby GCB95</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002CZVK0?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+cry+baby+gcb95" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/thomann-boss_rv_6.jpg" alt="Boss DD-3T" loading="lazy">
+      <div class="buy-name">Boss DD-3T</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B07YDGK9M1?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=boss+dd-3t" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/mxr-flanger-0710137026537.jpg" alt="MXR Dyna Comp" loading="lazy">
+      <div class="buy-name">MXR Dyna Comp</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002E51ZS?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=mxr+dyna+comp" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/thomann-boss_tu3.jpg" alt="Boss TU-3" loading="lazy">
+      <div class="buy-name">Boss TU-3</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B004D8KX7K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=boss+tu-3" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+  </ul>
+
+  <!-- RELATED -->
+  <div class="related">
+    <h2>📖 Pour continuer à lire<span class="u"></span></h2>
+    <ul>
+      <li><a href="https://fuzz-et-friture.fr/meilleures-pedales-overdrive-guitare/">🎸 Top 7 pédales overdrive — le classement 2026</a></li>
+      <li><a href="la-guerre-des-fuzz.html">🔥 Guerre des Fuzz — Fuzz Face vs Big Muff vs Boss FZ-5</a></li>
+      <li><a href="https://fuzz-et-friture.fr/wha-wha-pedale-de-jimi-et-de-tous-les-saints/">👄 Wah Wah — la reine qui n'a jamais abdiqué</a></li>
+      <li><a href="https://fuzz-et-friture.fr/meilleurs-pedaliers-effets-guitare-2026/">🎛️ Meilleurs pédaliers d'effets guitare 2026 — le guide</a></li>
+    </ul>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    🔗 En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises. Certains liens de cet article sont des liens affiliés (Amazon, Reverb) — votre prix reste identique.
+  </div>
+
+</article>
+
+<footer class="a-foot">
+  <p>✦ Fuzz &amp; Friture · <a href="../index.html">Retour à l'accueil</a> · Un blog par des guitaristes, pour des guitaristes ✦</p>
+</footer>
+
+</body>
+</html>
