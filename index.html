@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuzz & Friture — Since 2026</title>
+<meta name="description" content="Blog indépendant sur les pédales d'effets guitare : guides, comparatifs, histoire du son et jeux gratuits pour tester tes connaissances.">
+<link rel="canonical" href="https://hello-hop.github.io/fuzz2/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fuzz &amp; Friture">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Fuzz &amp; Friture — Le son bien gras comme on aime">
+<meta property="og:description" content="Blog indépendant sur les pédales d'effets guitare : guides, comparatifs, histoire du son et jeux gratuits pour tester tes connaissances.">
+<meta property="og:url" content="https://hello-hop.github.io/fuzz2/">
+<meta property="og:image" content="https://hello-hop.github.io/fuzz2/images/fuzz-face-mini-ffm3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fuzz &amp; Friture — Le son bien gras comme on aime">
+<meta name="twitter:description" content="Blog indépendant sur les pédales d'effets guitare : guides, comparatifs, histoire du son et jeux gratuits pour tester tes connaissances.">
+<meta name="twitter:image" content="https://hello-hop.github.io/fuzz2/images/fuzz-face-mini-ffm3.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Fuzz & Friture",
+"url":"https://hello-hop.github.io/fuzz2/","inLanguage":"fr-FR",
+"description":"Blog indépendant sur les pédales d'effets guitare : guides, comparatifs, histoire du son et jeux gratuits pour tester tes connaissances."}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,900;1,700&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -297,6 +315,14 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 .bg-purp{background:transparent;}
 .bg-green{background:transparent;}
 .bg-blue{background:transparent;}
+
+#cats-nav{max-width:1400px;margin:3rem auto 0;padding:0 3rem;}
+.cats-row{display:flex;gap:.7rem;flex-wrap:wrap;}
+.cats-row a{font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--cream);background:rgba(240,232,216,.07);border:1px solid var(--border);border-radius:22px;
+  padding:.65em 1.3em;text-decoration:none;font-weight:700;transition:border-color .2s,color .2s,background .2s;}
+.cats-row a:hover{border-color:var(--teal);color:var(--teal);background:rgba(62,184,192,.08);}
+@media(max-width:640px){#cats-nav{padding:0 1.2rem;margin-top:2rem;}.cats-row a{font-size:.75rem;padding:.55em 1em;}}
 </style>
 </head>
 <body>
@@ -335,7 +361,8 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
     <a href="#pedal-match" class="btn-ghost">Tester mes connaissances</a>
   </div>
   <nav class="hero-quicknav">
-    <a href="#articles">📰 Articles</a>
+    <a href="categories/index.html">📚 Tous les articles</a>
+    <a href="#articles">📰 À la une</a>
     <a href="#arcade">🕹️ Arcade</a>
     <a href="#pedal-match">🎯 Quiz</a>
     <a href="#gallery-vintage">📻 Vintage</a>
@@ -366,6 +393,19 @@ footer{position:relative;z-index:2;padding:3rem 2.5rem 2rem;display:flex;flex-di
 </section>
 
 <!-- NETFLIX ARTICLES -->
+
+<!-- ═══ NAVIGATION PAR CATÉGORIE ═══ -->
+<section id="cats-nav">
+  <div class="sec-head rev"><div><span class="sec-label">// Explore par famille</span><h2>PAR <span>CATÉGORIE</span></h2></div><a href="categories/index.html" class="see-all">Tous les articles →</a></div>
+  <div class="cats-row rev">
+    <a href="categories/fuzz.html">🔥 Fuzz</a>
+    <a href="categories/overdrive.html">🎸 Overdrive</a>
+    <a href="categories/modulation.html">🌊 Modulation</a>
+    <a href="categories/guides.html">🎚️ Guides</a>
+    <a href="categories/moderne.html">🤖 Moderne</a>
+    <a href="categories/index.html">📚 Tout voir</a>
+  </div>
+</section>
 <section id="articles">
   <div class="sec-head rev"><h2>LES <span>ARTICLES</span></h2><a href="https://fuzz-et-friture.fr" class="see-all">Voir tout →</a></div>
 
