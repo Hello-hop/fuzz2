@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 7 pédales overdrive en 2026 : le classement honnête | Fuzz &amp; Friture</title>
+<meta name="description" content="Les 7 meilleures pédales overdrive de 2026 comparées sans langue de bois : TS808, BD-2, Soul Food, OCD, RAT 2, OD-3, M77. Un vainqueur par profil et par budget.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0a0e14;--space2:#0f1520;--space3:#161d2b;
+    --orange:#f5921e;--gold:#f9c84a;
+    --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(245,241,232,.92);
+    --border:rgba(245,146,30,.18);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;font-size:18px;line-height:1.8;overflow-x:hidden;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  img{max-width:100%;display:block;}
+
+  /* NAV */
+  .a-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,14,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+  .a-nav .logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.05em;color:var(--orange);text-decoration:none;}
+  .a-nav .logo span{color:var(--teal);}
+  .a-nav .back{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream);opacity:.7;text-decoration:none;transition:opacity .2s,color .2s;}
+  .a-nav .back:hover{opacity:1;color:var(--teal);}
+
+  /* HERO */
+  .a-hero{position:relative;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden;border-bottom:1px solid var(--border);}
+  .a-hero::before{content:'GUIDE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(7rem,22vw,17rem);color:rgba(245,146,30,.05);pointer-events:none;white-space:nowrap;z-index:0;letter-spacing:.05em;}
+  .a-hero>*{position:relative;z-index:1;}
+  .a-kicker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;}
+  .a-hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;text-transform:uppercase;letter-spacing:.01em;}
+  .a-hero h1 em{color:var(--orange);font-style:normal;}
+  .a-hero .subtitle{font-style:italic;font-size:1.2rem;color:var(--dim);max-width:640px;margin:1.6rem auto 0;}
+  .a-hero .meta{margin-top:1.8rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+
+  /* LAYOUT */
+  .a-wrap{max-width:820px;margin:0 auto;padding:0 1.5rem;}
+  .a-wrap p{margin:1.4rem 0;color:var(--dim);}
+  .a-wrap h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;letter-spacing:.01em;margin:3.5rem 0 .4rem;color:var(--cream);line-height:1.05;}
+  .a-wrap h2 .u{display:block;width:56px;height:4px;background:var(--orange);margin-top:.7rem;border-radius:2px;}
+  .a-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;margin:2rem 0 .5rem;color:var(--cream);}
+  .a-wrap strong{color:var(--cream);}
+  .a-wrap em{color:var(--gold);font-style:italic;}
+  .a-wrap a:not(.btn):not(.music-link){color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
+
+  /* TL;DR */
+  .tldr{background:var(--space2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:2rem 2.2rem;margin:3rem auto;}
+  .tldr h2{margin:0 0 1.2rem;font-size:1.4rem;}
+  .tldr ul{list-style:none;}
+  .tldr li{padding:.7rem 0;border-bottom:1px solid rgba(245,241,232,.08);font-size:1rem;color:var(--dim);}
+  .tldr li:last-child{border-bottom:none;}
+  .tldr .fav{margin-top:1.3rem;padding-top:1.3rem;border-top:2px solid var(--orange);display:flex;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .btn-fav{background:var(--orange);color:var(--space)!important;border:none;padding:.7em 1.3em;border-radius:8px;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;}
+
+  /* CRITERIA CARDS */
+  .criteria{display:grid;gap:1rem;margin:2rem 0;}
+  .crit{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:1.3rem 1.6rem;}
+  .crit h3{margin:0 0 .4rem;font-size:1.25rem;}
+  .crit p{margin:0;font-size:.98rem;}
+
+  /* PRODUCT CARD */
+  .prod{background:var(--space2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:2.5rem 0;}
+  .prod-img{width:100%;height:260px;object-fit:cover;border-bottom:1px solid var(--border);background:#fff;}
+  .prod-body{padding:2rem;}
+  .prod-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:.3em .8em;border-radius:20px;margin-bottom:1rem;background:rgba(249,200,74,.14);color:var(--gold);border:1px solid rgba(249,200,74,.3);}
+  .prod-body h3{margin:0 0 .3rem;font-size:1.8rem;}
+  .prod-maker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+  .ideal{background:rgba(62,184,192,.08);border:1px solid rgba(62,184,192,.25);border-radius:8px;padding:.9rem 1.2rem;font-size:.95rem;margin:1.2rem 0;color:var(--dim);}
+  .ideal strong{color:var(--teal);}
+
+  /* AFFILIATE BUTTONS */
+  .aff-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem;}
+  .btn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8em 1.4em;border-radius:8px;text-decoration:none;font-weight:700;transition:transform .15s,filter .2s;border:2px solid;}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .btn-amazon{background:var(--orange);color:var(--space);border-color:var(--orange);}
+  .btn-reverb{background:transparent;color:var(--gold);border-color:var(--gold);}
+  .music-link{color:var(--teal);font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);}
+
+  /* SIGNAL CHAIN */
+  .chain{background:var(--space2);border:1px solid var(--border);border-radius:14px;padding:2rem;margin:2rem 0;}
+  .chain-flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;}
+  .chain-step{background:var(--space3);border:1px solid var(--border);border-radius:8px;padding:.6em 1em;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.05em;color:var(--cream);white-space:nowrap;}
+  .chain-step.hi{border-color:var(--orange);color:var(--gold);}
+  .chain-arrow{color:var(--orange);font-weight:700;}
+
+  /* GUITARISTS */
+  .masters{background:var(--space2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3.5rem 1.5rem;margin:4rem 0;}
+  .masters-inner{max-width:900px;margin:0 auto;}
+  .masters h2{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);text-transform:uppercase;margin-bottom:2.5rem;}
+  .masters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;}
+  .master{text-align:center;}
+  .master img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:1px solid var(--border);filter:grayscale(.3);transition:filter .3s;}
+  .master:hover img{filter:grayscale(0);}
+  .master .m-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-top:.8rem;color:var(--cream);}
+  .master .m-pedal{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin:.3rem 0;}
+  .master .m-track{font-size:.9rem;font-style:italic;color:var(--dim);line-height:1.5;}
+
+  /* TABLE */
+  .table-wrap{overflow-x:auto;margin:2rem 0;border-radius:12px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px;}
+  thead th{background:var(--space3);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;padding:1rem;text-align:left;}
+  tbody td{padding:.9rem 1rem;border-top:1px solid var(--border);color:var(--dim);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02);}
+  .win{color:var(--gold);font-weight:700;}
+
+  /* VERDICT */
+  .verdict{background:linear-gradient(135deg,rgba(245,146,30,.1),rgba(62,184,192,.06));border:1px solid var(--border);border-radius:16px;padding:2.5rem;margin:3rem 0;}
+  .verdict h2{margin-top:0;}
+  .verdict-item{padding:1rem 0;border-bottom:1px solid rgba(245,241,232,.08);color:var(--dim);}
+  .verdict-item:last-child{border-bottom:none;}
+  .verdict-item strong{color:var(--orange);}
+
+  /* FAQ */
+  .faq-item{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1rem;}
+  .faq-item h3{margin:0 0 .5rem;font-size:1.2rem;color:var(--gold);}
+  .faq-item p{margin:0;font-size:.98rem;}
+
+  /* WHERE TO BUY */
+  .buy-list{list-style:none;margin:1.5rem 0;}
+  .buy-list li{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+  .buy-list .buy-img{width:100%;height:180px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:1rem;padding:.5rem;}
+  .buy-list .buy-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:var(--cream);margin-bottom:.8rem;}
+
+  /* RELATED */
+  .related{margin:3rem 0;}
+  .related ul{list-style:none;display:grid;gap:.7rem;}
+  .related li a{display:block;background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.3rem;text-decoration:none;color:var(--cream);font-weight:500;transition:border-color .2s,transform .2s;}
+  .related li a:hover{border-color:var(--teal);transform:translateX(4px);color:var(--teal);}
+
+  /* DISCLAIMER */
+  .disclaimer{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;margin:3rem 0;font-size:.85rem;font-style:italic;color:var(--dim);opacity:.85;line-height:1.6;}
+
+  /* FOOTER */
+  .a-foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);color:var(--dim);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+  .a-foot a{color:var(--teal);text-decoration:none;}
+
+  @media(max-width:640px){
+    .a-hero{padding:3.5rem 1rem 3rem;}
+    .prod-body{padding:1.4rem;}
+    .masters{padding:2.5rem 1rem;}
+    .chain{padding:1.3rem;}
+    .verdict{padding:1.6rem;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .variant-year{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+  .who{border-top:1px solid rgba(245,241,232,.1);margin-top:1.2rem;padding-top:1rem;}
+  .who-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem;}
+  .who p{margin:0;font-style:italic;font-size:.95rem;}
+  .vintage{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:10px;padding:1.4rem 1.6rem;margin:1.2rem 0;}
+  .vintage h3{margin:0 0 .2rem;font-size:1.25rem;}
+  .vintage .v-maker{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;}
+  .vintage p{margin:0;font-size:.95rem;}
+
+  .rank-list{list-style:none;margin:1.5rem 0;}
+  .rank-list li{display:flex;gap:1rem;align-items:baseline;background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.3rem;margin-bottom:.6rem;}
+  .rank-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;color:var(--orange);min-width:32px;}
+  .rank-txt{color:var(--dim);font-size:1rem;}
+  .rank-txt strong{color:var(--cream);}
+</style>
+</head>
+<body>
+
+<nav class="a-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="../index.html" class="back">← Retour au site</a>
+</nav>
+
+<header class="a-hero">
+  <p class="a-kicker">✦ Classement 2026 · Overdrive ✦</p>
+  <h1>Top 7 pédales <em>overdrive</em></h1>
+  <p class="subtitle">Le classement honnête — du Tube Screamer au RAT, sans langue de bois.</p>
+  <p class="meta">👇 Scroll ça donne la frite</p>
+</header>
+
+<article class="a-wrap">
+
+  <h2>Les 7 en un coup d'œil<span class="u"></span></h2>
+  <ul class="rank-list">
+    <li><span class="rank-num">01</span><span class="rank-txt"><strong>Ibanez TS808</strong> — la référence absolue du blues. Le son de Stevie Ray Vaughan.</span></li>
+    <li><span class="rank-num">02</span><span class="rank-txt"><strong>Boss BD-2 Blues Driver</strong> — meilleur rapport Q/P du comparatif. Polyvalent, incassable.</span></li>
+    <li><span class="rank-num">03</span><span class="rank-txt"><strong>EHX Soul Food</strong> — l'alternative au Klon. Transparent, clean, funk-friendly.</span></li>
+    <li><span class="rank-num">04</span><span class="rank-txt"><strong>Fulltone OCD</strong> — la plus dynamique. Réagit comme un vrai ampli.</span></li>
+    <li><span class="rank-num">05</span><span class="rank-txt"><strong>ProCo RAT 2</strong> — le punk de la bande. Son granuleux et reconnaissable.</span></li>
+    <li><span class="rank-num">06</span><span class="rank-txt"><strong>Boss OD-3</strong> — le naturaliste. Son ampli-like, idéal en studio.</span></li>
+    <li><span class="rank-num">07</span><span class="rank-txt"><strong>MXR M77</strong> — le couteau suisse live. EQ 3 bandes pour dompter les salles.</span></li>
+  </ul>
+  <div class="tldr">
+    <div class="fav" style="border-top:none;padding-top:0;margin-top:0;">
+      <span>⭐ <strong>Coup de cœur :</strong></span>
+      <a href="#buy-b0002czv6e" class="btn-fav">Voir le Boss BD-2 →</a>
+    </div>
+  </div>
+
+  <p>T'as déjà passé deux heures sur un forum à lire des avis contradictoires sur les pédales overdrive ? On est passés par là. Un gars dit que le Tube Screamer est le Saint-Graal, l'autre jure que c'est de la daube pour guitariste de mariage. La vérité, c'est que <strong>la meilleure pédale overdrive n'existe pas dans l'absolu</strong> — elle dépend de toi, de ton ampli, et de ta façon de jouer.</p>
+
+  <p>On a bossé pour toi : voici les 7 meilleures pédales overdrive du moment, classées sans chichis. Du blues le plus fondant au rock le plus agressif, il y en a une pour chaque guitariste ici. Si tu pars de zéro, jette d'abord un œil à notre <a href="comment-choisir-ses-pedales.html">guide pour choisir ses pédales d'effets</a>.</p>
+
+  <h2>Quand un ampli qui claque devient une pédale<span class="u"></span></h2>
+  <p>L'overdrive est né d'une frustration : les guitaristes voulaient le son d'un ampli poussé à fond, mais sans crever les tympans du voisinage. Dans les années 70, les ingénieurs ont commencé à reproduire cette saturation douce dans des boîtiers compacts. Le <a href="tube-screamer.html">Tube Screamer d'Ibanez</a>, lancé en 1979, change tout — il capture ce son chaud et compressé avec une précision qui fait encore référence plus de quarante ans plus tard.</p>
+  <p>Stevie Ray Vaughan en empilait deux pour ses concerts texans. John Mayer ne monte pas sur scène sans un. Le Tube Screamer est devenu le baromètre absolu du genre — et les 6 autres pédales de ce classement ont toutes, à leur façon, cherché à définir leur identité par rapport à lui.</p>
+  <p>🎵 <a class="music-link" href="https://www.google.com/search?q=Stevie+Ray+Vaughan+Pride+and+Joy" target="_blank" rel="noopener">Stevie Ray Vaughan — Pride and Joy</a></p>
+
+  <h2>Les 7 prétendants au trône<span class="u"></span></h2>
+
+  <div class="prod" id="prod-b000t4si1k">
+    <img class="prod-img" src="../images/thomann-ibanez_ts808.jpg" alt="Ibanez TS808 Tube Screamer">
+    <div class="prod-body">
+      <p class="variant-year">01 · Overdrive</p>
+      <h3>Ibanez TS808 Tube Screamer</h3>
+      <p class="prod-maker">Ibanez</p>
+      <p>Si l'overdrive avait une mère, ce serait le Tube Screamer. Le TS808 reissue reproduit fidèlement le circuit original JRC4558D : mid-push naturel, compression douce, son qui respire avec le jeu. <strong>Sur un ampli à lampes, c'est une révélation.</strong></p>
+      <div class="ideal"><strong>Idéale pour :</strong> Blues, rock classique — le son de Stevie Ray Vaughan.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4SI1K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=Ibanez+TS808" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b0002czv6e">
+    <img class="prod-img" src="../images/thomann-boss_sd1_super_overdrive.jpg" alt="Boss BD-2 Blues Driver">
+    <div class="prod-body">
+      <p class="variant-year">02 · Overdrive</p>
+      <h3>Boss BD-2 Blues Driver</h3>
+      <p class="prod-maker">Boss</p>
+      <p>Le BD-2 est une de ces pédales qu'on retrouve sur les pédaliers de débutants comme de pros sans que ça choque personne. Son overdrive doux, son caractère texan en gain poussé, sa réactivité au jeu — <strong>tout ça pour moins de 80 euros</strong>.</p>
+      <div class="ideal"><strong>Idéale pour :</strong> Tous styles — le meilleur rapport qualité/prix du comparatif.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002CZV6E?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=Boss+BD-2" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b00heq6j0i">
+    <img class="prod-img" src="../images/thomann-electro_harmonix_soul_food.jpg" alt="EHX Soul Food">
+    <div class="prod-body">
+      <p class="variant-year">03 · Overdrive</p>
+      <h3>EHX Soul Food</h3>
+      <p class="prod-maker">Electro-Harmonix</p>
+      <p>Le Klon Centaur original s'échange à des prix de tableau impressionniste. L'EHX Soul Food fait le même boulot pour le prix d'un bon repas. Branché en boost devant un Tube Screamer, c'est une combinaison qu'on retrouve chez beaucoup de pros.</p>
+      <div class="ideal"><strong>Idéale pour :</strong> Funk, clean boost — l'alternative au Klon.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00HEQ6J0I?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=EHX+Soul+Food" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b006cuvzba">
+    <img class="prod-img" src="../images/pedal_tumnus.jpg" alt="Fulltone OCD Overdrive">
+    <div class="prod-body">
+      <p class="variant-year">04 · Overdrive</p>
+      <h3>Fulltone OCD Overdrive</h3>
+      <p class="prod-maker">Fulltone</p>
+      <p>L'OCD est la pédale des guitaristes qui aiment le détail. Son circuit répond à chaque micro-variation de dynamique : baisse le volume de ta guitare, il se nettoie instantanément. Pousse le gain, il grogne sans perdre la définition des notes. <strong>Le switch HP/LP change radicalement la réponse fréquentielle.</strong></p>
+      <div class="ideal"><strong>Idéale pour :</strong> Rock, blues dynamique — la plus réactive au toucher.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B006CUVZBA?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=Fulltone+OCD" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b0002msqvq">
+    <img class="prod-img" src="../images/boss-pedale-ds-1-distorsion-50th-anniversary-edition-limitee.jpg" alt="ProCo RAT 2">
+    <div class="prod-body">
+      <p class="variant-year">05 · Overdrive</p>
+      <h3>ProCo RAT 2</h3>
+      <p class="prod-maker">ProCo</p>
+      <p>Le RAT est là depuis 1978. Agressif, granuleux, avec une compression qui comprime les transitoires et laisse sortir le sustain. Son potard « Filter » (qui fonctionne à l'inverse d'un tone classique) est l'une des commandes les plus intuitives du monde des pédales. <strong>Jeff Beck, Thom Yorke, Graham Coxon — le même RAT, des sonorités totalement différentes.</strong></p>
+      <div class="ideal"><strong>Idéale pour :</strong> Rock, punk, indie — le caractère brut depuis 1978.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002MSQVQ?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=ProCo+RAT+2" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b000rvyyj0">
+    <img class="prod-img" src="../images/thomann-boss_rv_6.jpg" alt="Boss OD-3 OverDrive">
+    <div class="prod-body">
+      <p class="variant-year">06 · Overdrive</p>
+      <h3>Boss OD-3 OverDrive</h3>
+      <p class="prod-maker">Boss</p>
+      <p>Dans la famille Boss, le BD-2 est le funky, le OD-3 est le sage. Son circuit dual-stage pousse plus de bas-médiums et livre un son « ampli qui sature naturellement ». <strong>C'est lui qu'on branche en studio quand on veut un overdrive qui ne s'entend pas comme une pédale.</strong></p>
+      <div class="ideal"><strong>Idéale pour :</strong> Rock, blues studio — le plus naturel du comparatif.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000RVYYJ0?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=Boss+OD-3" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod" id="prod-b01k601wbe">
+    <img class="prod-img" src="../images/mxr-flanger-0710137026537.jpg" alt="MXR M77 Custom Badass OD">
+    <div class="prod-body">
+      <p class="variant-year">07 · Overdrive</p>
+      <h3>MXR M77 Custom Badass OD</h3>
+      <p class="prod-maker">MXR</p>
+      <p>MXR a pris le circuit du légendaire Distortion+ et lui a greffé un EQ actif 3 bandes. Résultat : un overdrive taillé pour la scène. Tu sculptes ton son pour compenser les défauts de la salle, booster les mids pour sortir dans le mix, ou adoucir les aigus si la pièce est trop brillante.</p>
+      <div class="ideal"><strong>Idéale pour :</strong> Rock live, scène — le couteau suisse avec EQ intégré.</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B01K601WBE?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=MXR+M77" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<section class="masters">
+  <div class="masters-inner">
+    <h2>🎸 Les Maîtres de l'Overdrive</h2>
+    <div class="masters-grid">
+      <div class="master">
+        <img src="../images/stevie-ray-vaughan-live-1983.jpg" alt="Stevie Ray Vaughan" loading="lazy">
+        <div class="m-name">Stevie Ray Vaughan</div>
+        <div class="m-pedal">✦ TS808 × 2</div>
+        <div class="m-track">Texas blues au niveau maximum — deux Tube Screamer empilés.</div>
+      </div>
+      <div class="master">
+        <img src="../images/john-mayer-2019.jpg" alt="John Mayer" loading="lazy">
+        <div class="m-name">John Mayer</div>
+        <div class="m-pedal">✦ BD-2 / TS</div>
+        <div class="m-track">Blues funk moderne — le son le plus copié de sa génération.</div>
+      </div>
+      <div class="master">
+        <img src="../images/jeff-beck.jpg" alt="Gary Moore" loading="lazy">
+        <div class="m-name">Gary Moore</div>
+        <div class="m-pedal">✦ Overdrive</div>
+        <div class="m-track"><em>Still Got the Blues</em> — overdrive + Les Paul = une évidence.</div>
+      </div>
+      <div class="master">
+        <img src="../images/joe-perry.jpg" alt="Joe Bonamassa" loading="lazy">
+        <div class="m-name">Joe Bonamassa</div>
+        <div class="m-pedal">✦ OCD / TS</div>
+        <div class="m-track">Blues rock contemporain — tone sculpteur hors pair.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="a-wrap">
+
+  <h2>📊 Tableau comparatif<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pédale</th><th>Style principal</th><th>Circuit</th><th>Bypass</th><th>Niveau</th></tr></thead>
+      <tbody>
+        <tr><td class="win">Ibanez TS808</td><td>Blues, rock classique</td><td>Analogique (JRC4558D)</td><td>True bypass</td><td>Tous niveaux</td></tr>
+        <tr><td class="win">Boss BD-2</td><td>Tous styles</td><td>Analogique Boss</td><td>Buffer Boss</td><td>Débutant → Pro</td></tr>
+        <tr><td class="win">EHX Soul Food</td><td>Funk, clean boost</td><td>Analogique Klon-style</td><td>True bypass</td><td>Intermédiaire</td></tr>
+        <tr><td class="win">Fulltone OCD</td><td>Rock, blues dynamique</td><td>Analogique USA</td><td>True bypass</td><td>Intermédiaire → Pro</td></tr>
+        <tr><td class="win">ProCo RAT 2</td><td>Rock, punk, indie</td><td>Analogique (LM308)</td><td>True bypass</td><td>Tous niveaux</td></tr>
+        <tr><td class="win">Boss OD-3</td><td>Rock, blues studio</td><td>Dual stage Boss</td><td>Buffer Boss</td><td>Tous niveaux</td></tr>
+        <tr><td class="win">MXR M77</td><td>Rock live, scène</td><td>Analogique + EQ actif</td><td>True bypass</td><td>Intermédiaire → Pro</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>💰 Selon tes moyens<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Budget</th><th>Recommandation</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td class="win">Petit (~65–80 €)</td><td>Boss BD-2 ou EHX Soul Food</td><td>Meilleur rapport Q/P — polyvalent et solide. Idéal pour débuter.</td></tr>
+        <tr><td class="win">Milieu (~90–120 €)</td><td>ProCo RAT 2 ou MXR M77</td><td>RAT pour un son caractéristique, M77 pour la scène avec EQ intégré.</td></tr>
+        <tr><td class="win">Référence (~150–190 €)</td><td>Ibanez TS808 ou Fulltone OCD</td><td>Le TS808 pour le son de légende, l'OCD pour la dynamique maximale.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>🏁 Notre verdict<span class="u"></span></h2>
+  <div class="verdict">
+    <div class="verdict-item">🏆 <strong>Meilleur global :</strong> Ibanez TS808 — la référence absolue du blues et du rock depuis 45 ans.</div>
+    <div class="verdict-item">💰 <strong>Meilleur rapport Q/P :</strong> Boss BD-2 — incassable, polyvalent, accessible. Impossible à détrôner sous les 100 euros.</div>
+    <div class="verdict-item">🌊 <strong>Pour le funk et la soul :</strong> EHX Soul Food — transparent, clean, addictif. Le Klon du peuple.</div>
+    <div class="verdict-item">🔥 <strong>Pour le rock agressif :</strong> ProCo RAT 2 — caractère, sustain, brutalité maîtrisée depuis 1978.</div>
+    <div class="verdict-item">🎙️ <strong>Pour le studio :</strong> Boss OD-3 — naturel et discret, parfait en enregistrement.</div>
+    <div class="verdict-item">🎛️ <strong>Pour la scène live :</strong> MXR M77 — EQ 3 bandes pour dompter n'importe quelle salle.</div>
+    <div class="verdict-fav">⭐ <strong>Coup de cœur rédac :</strong> Boss BD-2 Blues Driver. Parce qu'il fait tout bien, pour tout le monde, sans se ruiner.</div>
+  </div>
+
+  <h2>🛍️ Où acheter<span class="u"></span></h2>
+  <ul class="buy-list">
+    <li id="buy-b000t4si1k">
+      <img class="buy-img" src="../images/thomann-ibanez_ts808.jpg" alt="Ibanez TS808 Tube Screamer" loading="lazy">
+      <div class="buy-name">Ibanez TS808 Tube Screamer</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4SI1K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=Ibanez+TS808" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b0002czv6e">
+      <img class="buy-img" src="../images/thomann-boss_sd1_super_overdrive.jpg" alt="Boss BD-2 Blues Driver" loading="lazy">
+      <div class="buy-name">Boss BD-2 Blues Driver</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002CZV6E?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=Boss+BD-2" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b00heq6j0i">
+      <img class="buy-img" src="../images/thomann-electro_harmonix_soul_food.jpg" alt="EHX Soul Food" loading="lazy">
+      <div class="buy-name">EHX Soul Food</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00HEQ6J0I?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=EHX+Soul+Food" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b006cuvzba">
+      <img class="buy-img" src="../images/pedal_tumnus.jpg" alt="Fulltone OCD Overdrive" loading="lazy">
+      <div class="buy-name">Fulltone OCD Overdrive</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B006CUVZBA?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=Fulltone+OCD" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b0002msqvq">
+      <img class="buy-img" src="../images/boss-pedale-ds-1-distorsion-50th-anniversary-edition-limitee.jpg" alt="ProCo RAT 2" loading="lazy">
+      <div class="buy-name">ProCo RAT 2</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002MSQVQ?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=ProCo+RAT+2" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b000rvyyj0">
+      <img class="buy-img" src="../images/thomann-boss_rv_6.jpg" alt="Boss OD-3 OverDrive" loading="lazy">
+      <div class="buy-name">Boss OD-3 OverDrive</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000RVYYJ0?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=Boss+OD-3" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li id="buy-b01k601wbe">
+      <img class="buy-img" src="../images/mxr-flanger-0710137026537.jpg" alt="MXR M77 Custom Badass OD" loading="lazy">
+      <div class="buy-name">MXR M77 Custom Badass OD</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B01K601WBE?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=MXR+M77" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="related">
+    <h2>📖 Pour continuer à lire<span class="u"></span></h2>
+    <p>Tu as ton overdrive. Voilà comment aller plus loin :</p>
+    <ul>
+      <li><a href="comment-choisir-ses-pedales.html">🎚️ <strong>Tu débutes ?</strong> Le guide complet pour choisir ses pédales d'effets en 2026</a></li>
+      <li><a href="tube-screamer.html">💚 <strong>Le n°1 en détail :</strong> le Tube Screamer, le hurlement vert qui a sauvé le blues</a></li>
+      <li><a href="klon-vs-clones.html">💎 <strong>L'overdrive transparent :</strong> Klon vs clones — le son du Centaur sans le prix</a></li>
+      <li><a href="https://fuzz-et-friture.fr/ces-overdrives-qui-ont-rendu-vos-amplis-accros/">🔊 <strong>Pour aller plus loin :</strong> ces overdrives qui ont rendu vos amplis accros</a></li>
+      <li><a href="la-guerre-des-fuzz.html">🔥 <strong>Plus violent que l'overdrive :</strong> la Guerre des Fuzz</a></li>
+      <li><a href="ordre-des-pedales.html">🔌 <strong>Question technique :</strong> où placer son overdrive dans la chaîne</a></li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    🔗 En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises. Certains liens de cet article sont des liens affiliés (Amazon, Reverb) — votre prix reste identique.
+  </div>
+
+</article>
+
+<footer class="a-foot">
+  <p>✦ Fuzz &amp; Friture · <a href="../index.html">Retour à l'accueil</a> · Un blog par des guitaristes, pour des guitaristes ✦</p>
+</footer>
+
+</body>
+</html>
