@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ces overdrives qui ont rendu vos amplis accros | Fuzz &amp; Friture</title>
+<meta name="description" content="TS808, Boss SD-1, EHX Soul Food, EQD Plumes : quatre overdrives qui transforment un ampli propre en machine à riff. Histoire, circuits et guitaristes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0a0e14;--space2:#0f1520;--space3:#161d2b;
+    --orange:#f5921e;--gold:#f9c84a;
+    --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(245,241,232,.92);
+    --border:rgba(245,146,30,.18);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;font-size:18px;line-height:1.8;overflow-x:hidden;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  img{max-width:100%;display:block;}
+
+  /* NAV */
+  .a-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,14,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+  .a-nav .logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.05em;color:var(--orange);text-decoration:none;}
+  .a-nav .logo span{color:var(--teal);}
+  .a-nav .back{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream);opacity:.7;text-decoration:none;transition:opacity .2s,color .2s;}
+  .a-nav .back:hover{opacity:1;color:var(--teal);}
+
+  /* HERO */
+  .a-hero{position:relative;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden;border-bottom:1px solid var(--border);}
+  .a-hero::before{content:'GUIDE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(7rem,22vw,17rem);color:rgba(245,146,30,.05);pointer-events:none;white-space:nowrap;z-index:0;letter-spacing:.05em;}
+  .a-hero>*{position:relative;z-index:1;}
+  .a-kicker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;}
+  .a-hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;text-transform:uppercase;letter-spacing:.01em;}
+  .a-hero h1 em{color:var(--orange);font-style:normal;}
+  .a-hero .subtitle{font-style:italic;font-size:1.2rem;color:var(--dim);max-width:640px;margin:1.6rem auto 0;}
+  .a-hero .meta{margin-top:1.8rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+
+  /* LAYOUT */
+  .a-wrap{max-width:820px;margin:0 auto;padding:0 1.5rem;}
+  .a-wrap p{margin:1.4rem 0;color:var(--dim);}
+  .a-wrap h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;letter-spacing:.01em;margin:3.5rem 0 .4rem;color:var(--cream);line-height:1.05;}
+  .a-wrap h2 .u{display:block;width:56px;height:4px;background:var(--orange);margin-top:.7rem;border-radius:2px;}
+  .a-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;margin:2rem 0 .5rem;color:var(--cream);}
+  .a-wrap strong{color:var(--cream);}
+  .a-wrap em{color:var(--gold);font-style:italic;}
+  .a-wrap a:not(.btn):not(.music-link){color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
+
+  /* TL;DR */
+  .tldr{background:var(--space2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:2rem 2.2rem;margin:3rem auto;}
+  .tldr h2{margin:0 0 1.2rem;font-size:1.4rem;}
+  .tldr ul{list-style:none;}
+  .tldr li{padding:.7rem 0;border-bottom:1px solid rgba(245,241,232,.08);font-size:1rem;color:var(--dim);}
+  .tldr li:last-child{border-bottom:none;}
+  .tldr .fav{margin-top:1.3rem;padding-top:1.3rem;border-top:2px solid var(--orange);display:flex;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .btn-fav{background:var(--orange);color:var(--space)!important;border:none;padding:.7em 1.3em;border-radius:8px;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;}
+
+  /* CRITERIA CARDS */
+  .criteria{display:grid;gap:1rem;margin:2rem 0;}
+  .crit{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:1.3rem 1.6rem;}
+  .crit h3{margin:0 0 .4rem;font-size:1.25rem;}
+  .crit p{margin:0;font-size:.98rem;}
+
+  /* PRODUCT CARD */
+  .prod{background:var(--space2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:2.5rem 0;}
+  .prod-img{width:100%;height:260px;object-fit:cover;border-bottom:1px solid var(--border);background:#fff;}
+  .prod-body{padding:2rem;}
+  .prod-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:.3em .8em;border-radius:20px;margin-bottom:1rem;background:rgba(249,200,74,.14);color:var(--gold);border:1px solid rgba(249,200,74,.3);}
+  .prod-body h3{margin:0 0 .3rem;font-size:1.8rem;}
+  .prod-maker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+  .ideal{background:rgba(62,184,192,.08);border:1px solid rgba(62,184,192,.25);border-radius:8px;padding:.9rem 1.2rem;font-size:.95rem;margin:1.2rem 0;color:var(--dim);}
+  .ideal strong{color:var(--teal);}
+
+  /* AFFILIATE BUTTONS */
+  .aff-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem;}
+  .btn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8em 1.4em;border-radius:8px;text-decoration:none;font-weight:700;transition:transform .15s,filter .2s;border:2px solid;}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .btn-amazon{background:var(--orange);color:var(--space);border-color:var(--orange);}
+  .btn-reverb{background:transparent;color:var(--gold);border-color:var(--gold);}
+  .music-link{color:var(--teal);font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);}
+
+  /* SIGNAL CHAIN */
+  .chain{background:var(--space2);border:1px solid var(--border);border-radius:14px;padding:2rem;margin:2rem 0;}
+  .chain-flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;}
+  .chain-step{background:var(--space3);border:1px solid var(--border);border-radius:8px;padding:.6em 1em;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.05em;color:var(--cream);white-space:nowrap;}
+  .chain-step.hi{border-color:var(--orange);color:var(--gold);}
+  .chain-arrow{color:var(--orange);font-weight:700;}
+
+  /* GUITARISTS */
+  .masters{background:var(--space2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3.5rem 1.5rem;margin:4rem 0;}
+  .masters-inner{max-width:900px;margin:0 auto;}
+  .masters h2{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);text-transform:uppercase;margin-bottom:2.5rem;}
+  .masters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;}
+  .master{text-align:center;}
+  .master img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:1px solid var(--border);filter:grayscale(.3);transition:filter .3s;}
+  .master:hover img{filter:grayscale(0);}
+  .master .m-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-top:.8rem;color:var(--cream);}
+  .master .m-pedal{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin:.3rem 0;}
+  .master .m-track{font-size:.9rem;font-style:italic;color:var(--dim);line-height:1.5;}
+
+  /* TABLE */
+  .table-wrap{overflow-x:auto;margin:2rem 0;border-radius:12px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px;}
+  thead th{background:var(--space3);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;padding:1rem;text-align:left;}
+  tbody td{padding:.9rem 1rem;border-top:1px solid var(--border);color:var(--dim);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02);}
+  .win{color:var(--gold);font-weight:700;}
+
+  /* VERDICT */
+  .verdict{background:linear-gradient(135deg,rgba(245,146,30,.1),rgba(62,184,192,.06));border:1px solid var(--border);border-radius:16px;padding:2.5rem;margin:3rem 0;}
+  .verdict h2{margin-top:0;}
+  .verdict-item{padding:1rem 0;border-bottom:1px solid rgba(245,241,232,.08);color:var(--dim);}
+  .verdict-item:last-child{border-bottom:none;}
+  .verdict-item strong{color:var(--orange);}
+
+  /* FAQ */
+  .faq-item{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1rem;}
+  .faq-item h3{margin:0 0 .5rem;font-size:1.2rem;color:var(--gold);}
+  .faq-item p{margin:0;font-size:.98rem;}
+
+  /* WHERE TO BUY */
+  .buy-list{list-style:none;margin:1.5rem 0;}
+  .buy-list li{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+  .buy-list .buy-img{width:100%;height:180px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:1rem;padding:.5rem;}
+  .buy-list .buy-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:var(--cream);margin-bottom:.8rem;}
+
+  /* RELATED */
+  .related{margin:3rem 0;}
+  .related ul{list-style:none;display:grid;gap:.7rem;}
+  .related li a{display:block;background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.3rem;text-decoration:none;color:var(--cream);font-weight:500;transition:border-color .2s,transform .2s;}
+  .related li a:hover{border-color:var(--teal);transform:translateX(4px);color:var(--teal);}
+
+  /* DISCLAIMER */
+  .disclaimer{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;margin:3rem 0;font-size:.85rem;font-style:italic;color:var(--dim);opacity:.85;line-height:1.6;}
+
+  /* FOOTER */
+  .a-foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);color:var(--dim);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+  .a-foot a{color:var(--teal);text-decoration:none;}
+
+  @media(max-width:640px){
+    .a-hero{padding:3.5rem 1rem 3rem;}
+    .prod-body{padding:1.4rem;}
+    .masters{padding:2.5rem 1rem;}
+    .chain{padding:1.3rem;}
+    .verdict{padding:1.6rem;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .variant-year{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+  .who{border-top:1px solid rgba(245,241,232,.1);margin-top:1.2rem;padding-top:1rem;}
+  .who-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem;}
+  .who p{margin:0;font-style:italic;font-size:.95rem;}
+  .vintage{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:10px;padding:1.4rem 1.6rem;margin:1.2rem 0;}
+  .vintage h3{margin:0 0 .2rem;font-size:1.25rem;}
+  .vintage .v-maker{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;}
+  .vintage p{margin:0;font-size:.95rem;}
+</style>
+</head>
+<body>
+
+<nav class="a-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="../index.html" class="back">← Retour au site</a>
+</nav>
+
+<header class="a-hero">
+  <p class="a-kicker">✦ Le guide sans langue de bois ✦</p>
+  <h1>Ces overdrives qui ont <em>rendu vos amplis accros</em></h1>
+  <p class="subtitle">La pédale qui transforme votre ampli propre en machine à riff — ou comment un circuit à 30 € a changé la face du rock.</p>
+  <p class="meta">🔥 Scroll ça donne la frite 🔥</p>
+</header>
+
+<article class="a-wrap">
+
+  <div class="tldr">
+    <h2>⚡ Pas le temps : le résumé 30 secondes</h2>
+    <ul>
+      <li>👑 <strong>Ibanez TS808 (~180 €)</strong> — l'original, le vrai, le sacré. Le circuit le plus copié de l'histoire.</li>
+      <li>💪 <strong>Boss SD-1 (~50 €)</strong> — le cheval de trait. Clipping asymétrique, inchangé depuis 1981.</li>
+      <li>💎 <strong>EHX Soul Food (~79 €)</strong> — le Klon du peuple. La transparence sans les 3000 €.</li>
+      <li>🪶 <strong>EQD Plumes (~129 €)</strong> — le Screamer 2.0. JFET au lieu du JRC4558.</li>
+    </ul>
+  </div>
+
+  <p>C'est l'histoire d'un ingénieur japonais qui voulait juste éviter que les amplis transistors sonnent comme des sèche-cheveux en colère. En 1977, Susumu Tamura chez Ibanez bricole un circuit à base d'un chip JRC4558 qu'il trouve dans un tiroir, et <strong>invente sans le savoir la pédale la plus copiée du monde</strong>.</p>
+
+  <p>Quarante-cinq ans plus tard, des centaines de fabricants ont eu la brillante idée de « s'inspirer » de ce circuit. Certains l'ont amélioré, d'autres l'ont massacré, et quelques-uns ont eu l'honnêteté d'appeler leur pédale « Soul Food » plutôt que d'inventer un nom prétentieux. Voici les quatre qui comptent. Et si tu montes ton premier board, commence par notre <a href="comment-choisir-ses-pedales.html">guide des pédales d'effets</a>.</p>
+
+  <h2>4 overdrives qui révolutionnent le genre<span class="u"></span></h2>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/thomann-ibanez_ts808.jpg" alt="Ibanez TS808">
+    <div class="prod-body">
+      <p class="variant-year">1979 · Analogique · Icône absolue · ~180 €</p>
+      <h3>Tube Screamer TS808</h3>
+      <p class="prod-maker">Ibanez</p>
+      <p>L'original, le vrai, le sacré. Né en 1979 avec un seul chip JRC4558D qui vaut aujourd'hui environ 50 centimes. <strong>Ironie absolue : le circuit le moins cher du monde est devenu le plus copié de l'histoire.</strong> On en parle en détail dans notre <a href="tube-screamer.html">article dédié au Tube Screamer</a>.</p>
+      <div class="who">
+        <p class="who-label">🎸 Qui l'a utilisée ?</p>
+        <p>Stevie Ray Vaughan en utilisait deux en cascade pour ses solos de blues explosifs. Tomo Fujita l'utilise en boost pour pousser ses Fender à la limite du breakup, sans jamais perdre la dynamique.</p>
+      </div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4SI1K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=ibanez+ts808" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/thomann-boss_sd1_super_overdrive.jpg" alt="Boss SD-1 Super Overdrive">
+    <div class="prod-body">
+      <p class="variant-year">1981 · Analogique · Le cheval de trait · ~50 €</p>
+      <h3>Super Overdrive SD-1</h3>
+      <p class="prod-maker">Boss</p>
+      <p>Le SD-1 existe depuis 1981 et coûte toujours moins de 50 €. C'est soit le signe que Boss ne sait pas faire du marketing, soit <strong>la preuve irréfutable que certains circuits naissent parfaits</strong> et n'ont aucune raison de changer. Son clipping asymétrique produit un grain plus mordant que le TS808.</p>
+      <div class="who">
+        <p class="who-label">🎸 Qui l'a utilisée ?</p>
+        <p>Kurt Cobain en aurait eu un sur son pédalier — enfin, parmi les cinquante autres pédales qu'il traînait partout. Eddie Van Halen l'utilisait en boost devant son fameux rig Marshall pour déclencher les harmoniques de ses solos.</p>
+      </div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0013NDBS6?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=boss+sd-1" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/thomann-electro_harmonix_soul_food.jpg" alt="EHX Soul Food">
+    <div class="prod-body">
+      <p class="variant-year">2013 · Analogique · Le Klon du peuple · ~79 €</p>
+      <h3>Soul Food</h3>
+      <p class="prod-maker">Electro-Harmonix</p>
+      <p>La <a href="klon-vs-clones.html">Klon Centaur</a> originale se vend aujourd'hui entre 3000 et 5000 € sur le marché de l'occasion. Pourquoi ? Mystère absolu — et c'est là qu'intervient la Soul Food. <strong>EHX a eu la brillante idée de s'en inspirer très librement pour proposer une transparence à la Klon pour le prix d'un repas.</strong></p>
+      <div class="who">
+        <p class="who-label">🎸 Qui l'a utilisée ?</p>
+        <p>Des milliers de guitaristes qui ne peuvent pas se payer une Klon Centaur d'origine. Et honnêtement ? À l'aveugle, même les puristes ont du mal à entendre la différence. Ce qui dit beaucoup sur le marché des pédales boutique.</p>
+      </div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00HEQ6J0I?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=ehx+soul+food" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/eqd-plumes.jpg" alt="EarthQuaker Devices Plumes">
+    <div class="prod-body">
+      <p class="variant-year">2019 · Analogique JFET · Le Screamer 2.0 · ~129 €</p>
+      <h3>Plumes</h3>
+      <p class="prod-maker">EarthQuaker Devices</p>
+      <p>EarthQuaker est basé à Akron, Ohio — une ville que Jamie Stillman décrit lui-même comme un « désert post-apocalyptique ». De là, ils fabriquent à la main des pédales qui ridiculisent beaucoup de boutiques bien plus prétentieuses. <strong>Le Plumes jette le sacré JRC4558 à la poubelle et le remplace par un circuit JFET</strong> — plus ouvert, moins compressé.</p>
+      <div class="who">
+        <p class="who-label">🎸 Qui l'a utilisée ?</p>
+        <p>Jamie Stillman lui-même (le fondateur d'EarthQuaker) l'a portée sur son pédalier pendant des années avant de la commercialiser — signe rare qu'un luthier fait confiance à son propre travail. Mark Morales (Suicidal Tendencies) l'utilise pour ses riffs punk-métal.</p>
+      </div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B07VY2TCSS?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=earthquaker+plumes" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+</article>
+
+<section class="masters">
+  <div class="masters-inner">
+    <h2>🎸 Ceux qui ont prouvé que ça marche</h2>
+    <div class="masters-grid">
+      <div class="master">
+        <img src="../images/stevie-ray-vaughan-live-1983.jpg" alt="Stevie Ray Vaughan" loading="lazy">
+        <div class="m-name">Stevie Ray Vaughan</div>
+        <div class="m-pedal">✦ TS808 en double · 1978–1990</div>
+        <div class="m-track">Deux TS808 en cascade — l'un en boost pur, l'autre avec un peu de grain. En 1983, il a refusé de jouer sans eux.</div>
+      </div>
+      <div class="master">
+        <img src="../images/john-mayer-2019.jpg" alt="John Mayer" loading="lazy">
+        <div class="m-name">John Mayer</div>
+        <div class="m-pedal">✦ Klon Centaur &amp; Soul Food · 2003–présent</div>
+        <div class="m-track">Il a contribué à l'inflation délirante du prix de la Klon, puis rendu service à l'humanité en adoptant la Soul Food.</div>
+      </div>
+      <div class="master">
+        <img src="../images/gary-moore.jpg" alt="Gary Moore" loading="lazy">
+        <div class="m-name">Gary Moore</div>
+        <div class="m-pedal">✦ TS808 &amp; TS9 devant Marshall · 1980–2011</div>
+        <div class="m-track">Un son de larme qui ressemble à ce que ferait un violon s'il était en acier et amplifié à 100 watts.</div>
+      </div>
+      <div class="master">
+        <img src="../images/mick-taylor.jpg" alt="Josh Homme" loading="lazy">
+        <div class="m-name">Josh Homme</div>
+        <div class="m-pedal">✦ SD-1 en boost · 1996–présent</div>
+        <div class="m-track">Son SD-1 a une mission simple : transformer un ampli déjà saturé en quelque chose d'encore plus inconvenant. <em>No One Knows</em>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="a-wrap">
+
+  <h2>📊 Les 4 overdrives face à face<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pédale</th><th>Année</th><th>Prix ~</th><th>Circuit</th><th>Caractère</th></tr></thead>
+      <tbody>
+        <tr><td class="win">Ibanez TS808</td><td>1979</td><td>~180 €</td><td>JRC4558D</td><td>Mid-push chaud, compressé</td></tr>
+        <tr><td class="win">Boss SD-1</td><td>1981</td><td>~50 €</td><td>Clipping asymétrique</td><td>Plus mordant, plus brut</td></tr>
+        <tr><td class="win">EHX Soul Food</td><td>2013</td><td>~79 €</td><td>Klon-style</td><td>Transparent, dynamique</td></tr>
+        <tr><td class="win">EQD Plumes</td><td>2019</td><td>~129 €</td><td>JFET</td><td>Ouvert, peu compressé</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>🎛️ Pédales vintage complémentaires<span class="u"></span></h2>
+  <p>Avant que le Tube Screamer ne prenne le pouvoir, il y avait d'autres façons de faire pleurer votre ampli. Certaines se trouvent encore sur Reverb pour un prix raisonnable.</p>
+  <div class="vintage">
+    <h3>Ibanez TS9 Tube Screamer (1982)</h3>
+    <p class="v-maker">Ibanez</p>
+    <p>Le petit frère du TS808. Sorti en 1982 avec un chip légèrement différent (RC4558P au lieu du JRC4558D), il sonne un poil plus brillant et plus agressif. Des générations de guitaristes l'ont eu sur leur pédalier sans jamais vraiment comprendre la différence avec le 808 — ce qui prouve qu'en musique, le marketing compte autant que l'électronique. <a href="https://reverb.com/marketplace?query=ibanez+ts9" rel="nofollow sponsored" target="_blank">Voir sur Reverb →</a></p>
+  </div>
+  <div class="vintage">
+    <h3>DOD 250 Overdrive/Preamp (1976)</h3>
+    <p class="v-maker">DOD Electronics</p>
+    <p>Sorti trois ans avant le TS808, le DOD 250 est l'ancêtre méconnu de la pédale overdrive. Son circuit au LM741 sonnait « harsh » par rapport aux standards modernes, mais Randy Rhoads en utilisait un systématiquement devant ses Marshall pour ses riffs d'Ozzy Osbourne. <strong>Si vous trouvez un original en bon état sous les 200 €, achetez-le les yeux fermés.</strong> <a href="https://reverb.com/marketplace?query=dod+250+overdrive" rel="nofollow sponsored" target="_blank">Voir sur Reverb →</a></p>
+  </div>
+  <div class="vintage">
+    <h3>MXR Distortion+ (1973)</h3>
+    <p class="v-maker">MXR Innovations</p>
+    <p>Techniquement une « distorsion », mais tellement douce sur les réglages bas qu'elle fonctionne parfaitement comme overdrive. Randy Rhoads encore — décidément — et surtout Eddie Van Halen en 1978 sur <em>Eruption</em>. <a href="https://reverb.com/marketplace?query=mxr+distortion+plus" rel="nofollow sponsored" target="_blank">Voir sur Reverb →</a></p>
+  </div>
+  <div class="tip">
+    <p>ℹ️ <strong>À noter :</strong> les originaux des années 70-80 peuvent valoir plusieurs centaines d'euros selon l'état et la date de fabrication. Les rééditions modernes restent souvent de très bonne facture et largement préférables à des faux « vintage » refaits avec de mauvais composants.</p>
+  </div>
+
+  <h2>🛍️ Où acheter<span class="u"></span></h2>
+  <ul class="buy-list">
+    <li>
+      <img class="buy-img" src="../images/thomann-ibanez_ts808.jpg" alt="Ibanez TS808" loading="lazy">
+      <div class="buy-name">Ibanez TS808</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B000T4SI1K?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=ibanez+ts808" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/thomann-boss_sd1_super_overdrive.jpg" alt="Boss SD-1" loading="lazy">
+      <div class="buy-name">Boss SD-1 Super Overdrive</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0013NDBS6?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=boss+sd-1" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/thomann-electro_harmonix_soul_food.jpg" alt="EHX Soul Food" loading="lazy">
+      <div class="buy-name">EHX Soul Food</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00HEQ6J0I?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=ehx+soul+food" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/eqd-plumes.jpg" alt="EQD Plumes" loading="lazy">
+      <div class="buy-name">EarthQuaker Devices Plumes</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B07VY2TCSS?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=earthquaker+plumes" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="related">
+    <h2>📖 Pour continuer à lire<span class="u"></span></h2>
+    <p>L'overdrive est une famille large. Voilà par où continuer :</p>
+    <ul>
+      <li><a href="top-7-overdrive.html">🎸 <strong>Le classement complet :</strong> Top 7 des pédales overdrive en 2026</a></li>
+      <li><a href="tube-screamer.html">💚 <strong>Le n°1 en détail :</strong> le Tube Screamer, le hurlement vert qui a sauvé le blues</a></li>
+      <li><a href="klon-vs-clones.html">💎 <strong>L'overdrive transparent :</strong> Klon vs clones</a></li>
+      <li><a href="ampli-combo-debutant.html">🔊 <strong>Quel ampli pour un overdrive ?</strong> Le guide de l'ampli combo débutant</a></li>
+      <li><a href="comment-choisir-ses-pedales.html">🎚️ <strong>Tu débutes ?</strong> Le guide complet pour choisir ses pédales d'effets</a></li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    🔗 En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises. Certains liens de cet article sont des liens affiliés (Amazon, Reverb) — votre prix reste identique.
+  </div>
+
+</article>
+
+<footer class="a-foot">
+  <p>✦ Fuzz &amp; Friture · <a href="../index.html">Retour à l'accueil</a> · Un blog par des guitaristes, pour des guitaristes ✦</p>
+</footer>
+
+</body>
+</html>
