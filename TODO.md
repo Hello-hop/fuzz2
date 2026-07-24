@@ -1,7 +1,7 @@
 # 📋 TODO — Fuzz & Friture
 
 > Mis à jour automatiquement à chaque migration d'article.
-> Dernière mise à jour : article 4 (Wah Wah)
+> Dernière mise à jour : article 8 (Fuzz sous-cotée)
 
 ---
 
@@ -36,14 +36,31 @@ La pédale affichée n'est pas le bon modèle.
 |---|---|---|
 | 12 | Photos de concert des guitaristes | Règle des 3 images/article : pédale + guitariste + concert |
 
+### 🔴 Nouveaux manques (articles 6-8)
+| # | Image à trouver | Où la chercher | Utilisée dans |
+|---|---|---|---|
+| 13 | **Keith Richards** | commons.wikimedia.org/wiki/Category:Keith_Richards | Fuzz sous-cotée — Maîtres du Fuzz |
+| 14 | **Billy Corgan** | commons.wikimedia.org/wiki/Category:Billy_Corgan | Fuzz sous-cotée — Maîtres du Fuzz |
+| 15 | **Gary Moore** | commons.wikimedia.org/wiki/Category:Gary_Moore | Top 7 overdrive — Maîtres |
+| 16 | **Joe Bonamassa** | commons.wikimedia.org/wiki/Category:Joe_Bonamassa | Top 7 overdrive — Maîtres |
+| 17 | **Boss BD-2 Blues Driver** | boss.info → BD-2 | Top 7 overdrive (fiche + Où acheter) |
+| 18 | **Fulltone OCD** | fulltone.com | Top 7 overdrive (fiche + Où acheter) |
+| 19 | **ProCo RAT 2** | ratdistortion.com | Top 7 overdrive (fiche + Où acheter) |
+| 20 | **Boss OD-3** | boss.info → OD-3 | Top 7 overdrive (fiche + Où acheter) |
+| 21 | **MXR M77 Custom Badass** | jimdunlop.com → M77 | Top 7 overdrive (fiche + Où acheter) |
+
 ---
 
 ## ⚙️ ACTIONS TECHNIQUES
 
 ### À faire par toi
-- [ ] **Ajouter les domaines réseau** dans les paramètres Claude (permettrait de supprimer 80% des téléchargements manuels ci-dessus) :
-  `upload.wikimedia.org` · `commons.wikimedia.org` · `hello-hop.github.io`
-  → Paramètres Claude → outil d'exécution de code / analyse de données → domaines autorisés
+- [ ] **Ouvrir l'accès réseau de Claude** (supprimerait ~80% des téléchargements manuels ci-dessus)
+  **Chemin exact** : icône de profil (en bas à gauche) → **Paramètres** → **Capacités** →
+  section « Exécution de code et création de fichiers » → **Liste d'autorisation de domaines**
+  → choisir **« Tous les domaines »**
+  ⚠️ Note : ajouter des domaines un par un ne fonctionne pas tant que le mode reste
+  sur « Gestionnaires de paquets uniquement » (bug connu). Il faut basculer sur « Tous les domaines ».
+  ℹ️ Réversible : tu peux revenir au mode restreint après la migration.
 - [ ] **Vérifier le rendu** des articles migrés sur mobile
 - [ ] **Décider** : garder les photos de presse (Gilmour, Jack White, SRV…) ou les remplacer par des Wikimedia (licences libres) — enjeu juridique pour un site monétisé
 
@@ -61,24 +78,24 @@ La pédale affichée n'est pas le bon modèle.
 
 ## 📄 MIGRATION DES ARTICLES
 
-### ✅ Migrés (4/19)
+### ✅ Migrés (8/19)
 - [x] La Guerre des Fuzz → `articles/la-guerre-des-fuzz.html`
 - [x] Comment choisir ses pédales d'effets → `articles/comment-choisir-ses-pedales.html`
 - [x] Tube Screamer → `articles/tube-screamer.html`
 - [x] Wah Wah → `articles/wah-wah.html`
+- [x] Ordre des pédales (PILIER) → `articles/ordre-des-pedales.html`
+- [x] Klon vs clones → `articles/klon-vs-clones.html`
+- [x] Top 7 pédales overdrive → `articles/top-7-overdrive.html`
+- [x] Fuzz mythique et sous-cotée → `articles/fuzz-sous-cotee.html`
 
-### ⏳ Restants (15)
-- [ ] Fuzz mythique et disputée : la plus sous-cotée
+### ⏳ Restants (11)
 - [ ] Dallas Arbiter Fuzz Face
-- [ ] Top 7 pédales overdrive 2026
 - [ ] Overdrive : la pédale incontournable
 - [ ] Ces overdrives qui ont rendu vos amplis accros
-- [ ] Klon vs clones
 - [ ] Chorus
 - [ ] Flanger : mode avion
 - [ ] Flanger : les 3 pédales de légende
 - [ ] Phaser : quand la guitare se met à respirer
-- [ ] Ordre des pédales (PILIER)
 - [ ] Les 6 pédales indispensables
 - [ ] Guide ampli combo débutant
 - [ ] Pédales IA en 2026
