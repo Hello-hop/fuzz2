@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tous les articles — Fuzz &amp; Friture</title>
+<meta name="description" content="Les 18 articles de Fuzz &amp; Friture : fuzz, overdrive, modulation, guides et pédales modernes.">
+<link rel="canonical" href="https://hello-hop.github.io/fuzz2/categories/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fuzz &amp; Friture">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Tous les articles — Fuzz &amp; Friture">
+<meta property="og:description" content="Les 18 articles de Fuzz &amp; Friture : fuzz, overdrive, modulation, guides et pédales modernes.">
+<meta property="og:url" content="https://hello-hop.github.io/fuzz2/categories/index.html">
+<meta property="og:image" content="https://hello-hop.github.io/fuzz2/images/fuzz-face-mini-ffm3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{--space:#0a0e14;--space2:#0f1520;--space3:#161d2b;--orange:#f5921e;--gold:#f9c84a;
+    --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(245,241,232,.92);--border:rgba(245,146,30,.18);}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;font-size:18px;line-height:1.75;}
+  a{color:inherit;} img{max-width:100%;display:block;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  .a-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 2rem;background:rgba(10,14,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+  .a-nav .logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;color:var(--orange);text-decoration:none;}
+  .a-nav .logo span{color:var(--teal);}
+  .a-nav .back{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--cream);opacity:.7;text-decoration:none;}
+  .a-nav .back:hover{opacity:1;color:var(--teal);}
+  .c-hero{text-align:center;padding:4rem 1.5rem 2.5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+  .c-hero .ic{font-size:3rem;margin-bottom:.6rem;}
+  .c-hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.4rem,7vw,4.2rem);
+    text-transform:uppercase;line-height:1;}
+  .c-hero h1 em{color:var(--orange);font-style:normal;}
+  .c-hero p{color:var(--dim);max-width:600px;margin:1rem auto 0;font-size:1.1rem;}
+  .c-count{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-top:1.2rem;}
+  .cats-bar{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;padding:1.8rem 1.5rem;max-width:1000px;margin:0 auto;}
+  .cats-bar a{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--cream);background:rgba(240,232,216,.07);border:1px solid var(--border);border-radius:22px;
+    padding:.6em 1.2em;text-decoration:none;font-weight:700;transition:border-color .2s,color .2s,background .2s;}
+  .cats-bar a:hover{border-color:var(--teal);color:var(--teal);background:rgba(62,184,192,.08);}
+  .cats-bar a.on{border-color:var(--orange);color:var(--orange);background:rgba(245,146,30,.1);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem;
+    max-width:1150px;margin:1rem auto 4rem;padding:0 1.5rem;}
+  .card{background:var(--space2);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+    text-decoration:none;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s;}
+  .card:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 14px 40px rgba(0,0,0,.45);}
+  .card .thumb{height:170px;overflow:hidden;background:#000;position:relative;}
+  .card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .card .chip{position:absolute;top:.7rem;left:.7rem;font-family:'Space Mono',monospace;font-size:.6rem;
+    letter-spacing:.15em;text-transform:uppercase;background:rgba(10,14,20,.82);color:var(--gold);
+    padding:.3em .7em;border-radius:20px;border:1px solid var(--border);}
+  .card .body{padding:1.3rem 1.4rem 1.5rem;flex:1;display:flex;flex-direction:column;}
+  .card h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.35rem;text-transform:uppercase;
+    line-height:1.08;margin-bottom:.5rem;color:var(--cream);}
+  .card p{font-size:.95rem;color:var(--dim);line-height:1.6;flex:1;}
+  .card .meta{margin-top:1rem;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--teal);}
+  .a-foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);color:var(--dim);
+    font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+  .a-foot a{color:var(--teal);text-decoration:none;}
+  @media(max-width:640px){.c-hero{padding:2.8rem 1rem 2rem;}.grid{padding:0 1rem;}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+<nav class="a-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="../index.html" class="back">← Retour à l'accueil</a>
+</nav>
+
+<header class="c-hero">
+  <div class="ic">📚</div>
+  <h1>Tous les <em>articles</em></h1>
+  <p>Dix-huit articles pour tout comprendre aux pédales d'effets — de la fuzz de 1962 aux pédales à intelligence artificielle.</p>
+  <p class="c-count">18 articles</p>
+</header>
+
+<nav class="cats-bar"><a href="index.html" class="on">📚 Tous</a><a href="fuzz.html">🔥 Fuzz</a><a href="overdrive.html">🎸 Overdrive</a><a href="modulation.html">🌊 Modulation</a><a href="guides.html">🎚️ Guides</a><a href="moderne.html">🤖 Moderne</a></nav>
+
+<main class="grid">
+  <a class="card" href="../articles/la-guerre-des-fuzz.html">
+    <div class="thumb"><img src="../images/fuzz-face-mini-ffm3.jpg" alt="" loading="lazy"><span class="chip">Fuzz</span></div>
+    <div class="body"><h2>La Guerre des Fuzz</h2><p>Fuzz Face vs Big Muff Pi vs Boss FZ-5 : le comparatif sans concession, avec un vainqueur par profil.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/fuzz-sous-cotee.html">
+    <div class="thumb"><img src="../images/fuzztone.jpg" alt="" loading="lazy"><span class="chip">Fuzz</span></div>
+    <div class="body"><h2>Fuzz : mythique et sous-cotée</h2><p>Maestro Fuzz-Tone, Fuzz Face, Tone Bender MkII, Big Muff : les 4 fuzz qui ont fait l'histoire du rock.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/dallas-arbiter-fuzz-face.html">
+    <div class="thumb"><img src="../images/fuzz-face-mini-ffm3.jpg" alt="" loading="lazy"><span class="chip">Fuzz</span></div>
+    <div class="body"><h2>Dallas Arbiter Fuzz Face</h2><p>La pédale ronde qui a tout changé : histoire, circuit, germanium vs silicium, et quelle version acheter.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/tube-screamer.html">
+    <div class="thumb"><img src="../images/thomann-ibanez_ts808.jpg" alt="" loading="lazy"><span class="chip">Overdrive</span></div>
+    <div class="body"><h2>Tube Screamer</h2><p>TS808, TS9, Maxon OD-9, JHS Bonsai : les 4 Tube Screamers comparés sans concession.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/top-7-overdrive.html">
+    <div class="thumb"><img src="../images/thomann-ibanez_ts808.jpg" alt="" loading="lazy"><span class="chip">Overdrive</span></div>
+    <div class="body"><h2>Top 7 pédales overdrive 2026</h2><p>Le classement honnête des 7 meilleures pédales overdrive, avec un vainqueur par profil et par budget.</p><div class="meta">Lire · 10 min</div></div>
+  </a>
+  <a class="card" href="../articles/klon-vs-clones.html">
+    <div class="thumb"><img src="../images/thomann-electro_harmonix_soul_food.jpg" alt="" loading="lazy"><span class="chip">Overdrive</span></div>
+    <div class="body"><h2>Klon vs clones</h2><p>Un Centaur dépasse les 5000 € : voici les 4 alternatives pour retrouver le son sans se ruiner.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/overdrives-amplis-accros.html">
+    <div class="thumb"><img src="../images/thomann-ibanez_ts808.jpg" alt="" loading="lazy"><span class="chip">Overdrive</span></div>
+    <div class="body"><h2>Ces overdrives qui ont rendu vos amplis accros</h2><p>TS808, Boss SD-1, EHX Soul Food, EQD Plumes : comment un circuit à 30 € a changé la face du rock.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/wah-wah.html">
+    <div class="thumb"><img src="../images/vintage-1970s-aria-diamond-wah-fuzz.jpg" alt="" loading="lazy"><span class="chip">Modulation</span></div>
+    <div class="body"><h2>Wah Wah : la reine qui n&#x27;a jamais abdiqué</h2><p>Cry Baby, Vox V847, 535Q, Bad Horsie : les 4 wah qui ont fait l'histoire, de Hendrix à Steve Vai.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/chorus.html">
+    <div class="thumb"><img src="../images/q315758-andy-summers.jpg" alt="" loading="lazy"><span class="chip">Modulation</span></div>
+    <div class="body"><h2>Le Chorus, du rock au zouk</h2><p>CE-1, CE-2, Small Clone, Corona : le son aquatique de The Police, Nirvana et The Cure expliqué.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/phaser.html">
+    <div class="thumb"><img src="../images/Q272012-eddie-van-halen-at-emmy-rehearsal-211282.jpg" alt="" loading="lazy"><span class="chip">Modulation</span></div>
+    <div class="body"><h2>Phaser : quand la guitare respire</h2><p>Phase 90, Small Stone, Mu-Tron Bi-Phase : le son de Van Halen, Robin Trower et Peter Frampton.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/flanger-mode-avion.html">
+    <div class="thumb"><img src="../images/boss-bf361ne4po8lbL.jpg" alt="" loading="lazy"><span class="chip">Modulation</span></div>
+    <div class="body"><h2>Flanger : active le mode avion</h2><p>BF-3, M117R, Electric Mistress, Emperor V2 : les 4 flangers qui dominent le rayon en 2026.</p><div class="meta">Lire · 9 min</div></div>
+  </a>
+  <a class="card" href="../articles/flanger-3-pedales.html">
+    <div class="thumb"><img src="../images/ehx-stereo-electric-mistress.jpg" alt="" loading="lazy"><span class="chip">Modulation</span></div>
+    <div class="body"><h2>Flanger : les 3 pédales de légende</h2><p>Electric Mistress, Boss BF-2, MXR M117 — et les quatre sorciers du whoosh.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/comment-choisir-ses-pedales.html">
+    <div class="thumb"><img src="../images/thomann-ibanez_ts9_tube_screamer.jpg" alt="" loading="lazy"><span class="chip">Guides</span></div>
+    <div class="body"><h2>Comment choisir ses pédales d&#x27;effets</h2><p>Le guide complet 2026 : 5 critères, les 5 pédales essentielles, l'ordre de branchement et un plan d'achat.</p><div class="meta">Lire · 11 min</div></div>
+  </a>
+  <a class="card" href="../articles/ordre-des-pedales.html">
+    <div class="thumb"><img src="../images/thomann-strymon_timeline.jpg" alt="" loading="lazy"><span class="chip">Guides</span></div>
+    <div class="body"><h2>Ordre des pédales</h2><p>La chaîne idéale expliquée pédale par pédale, avec les inversions qui marchent et celles à éviter.</p><div class="meta">Lire · 8 min</div></div>
+  </a>
+  <a class="card" href="../articles/6-pedales-pedalboard.html">
+    <div class="thumb"><img src="../images/thomann-boss_tu3.jpg" alt="" loading="lazy"><span class="chip">Guides</span></div>
+    <div class="body"><h2>Les 6 pédales indispensables</h2><p>Tuner, compresseur, overdrive, distorsion, delay, reverb : le starter pack qui couvre 90 % des sons.</p><div class="meta">Lire · 10 min</div></div>
+  </a>
+  <a class="card" href="../articles/ampli-combo-debutant.html">
+    <div class="thumb"><img src="../images/iridium-amp-ir-cab-hd-163780.webp" alt="" loading="lazy"><span class="chip">Guides</span></div>
+    <div class="body"><h2>Choisir son premier ampli combo</h2><p>Lampes, transistors ou modélisation ? Le guide honnête pour choisir son premier ampli en 2026.</p><div class="meta">Lire · 7 min</div></div>
+  </a>
+  <a class="card" href="../articles/pedales-ia-2026.html">
+    <div class="thumb"><img src="../images/iridium-amp-ir-cab-hd-163780.webp" alt="" loading="lazy"><span class="chip">Moderne</span></div>
+    <div class="body"><h2>Pédales IA en 2026</h2><p>TONEX, Quad Cortex Mini, Boss XS-100, Polyend Endless : les 4 pédales qui apprennent ton son.</p><div class="meta">Lire · 10 min</div></div>
+  </a>
+  <a class="card" href="../articles/boss-px-1.html">
+    <div class="thumb"><img src="../images/81613.webp" alt="" loading="lazy"><span class="chip">Moderne</span></div>
+    <div class="body"><h2>Boss PX-1 Plugout FX</h2><p>16 pédales Boss cultes dans un seul boîtier numérique : révolution ou gadget ?</p><div class="meta">Lire · 6 min</div></div>
+  </a>
+</main>
+
+<footer class="a-foot">
+  <p>✦ Fuzz &amp; Friture · <a href="../index.html">Accueil</a> · <a href="index.html">Tous les articles</a> ✦</p>
+</footer>
+</body>
+</html>
