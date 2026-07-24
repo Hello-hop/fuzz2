@@ -1,7 +1,7 @@
 # 📋 TODO — Fuzz & Friture
 
 > Mis à jour automatiquement à chaque migration d'article.
-> Dernière mise à jour : article 8 (Fuzz sous-cotée)
+> Dernière mise à jour : article 11 (Flanger)
 
 ---
 
@@ -49,6 +49,19 @@ La pédale affichée n'est pas le bon modèle.
 | 20 | **Boss OD-3** | boss.info → OD-3 | Top 7 overdrive (fiche + Où acheter) |
 | 21 | **MXR M77 Custom Badass** | jimdunlop.com → M77 | Top 7 overdrive (fiche + Où acheter) |
 
+### 🟠 Nouveaux manques (articles 9-11)
+| # | Image à trouver | Où la chercher | Utilisée dans |
+|---|---|---|---|
+| 22 | **Boss CE-1 / CE-2** (pédales) | boss.info → CE-2W | Chorus (fiches + Où acheter) |
+| 23 | **EHX Small Clone** | ehx.com → Small Clone | Chorus (fiche + Où acheter) |
+| 24 | **TC Corona Chorus** | tcelectronic.com | Chorus (fiche + Où acheter) |
+| 25 | **MXR Phase 90** (pédale) | jimdunlop.com → M101 | Phaser (fiche + Où acheter) |
+| 26 | **EHX Small Stone** | ehx.com → Small Stone | Phaser (fiche + Où acheter) |
+| 27 | **Mu-Tron Bi-Phase** | reverb.com (vintage) | Phaser (fiche + Où acheter) |
+| 28 | **Brian May** (portrait) | commons.wikimedia.org/wiki/Category:Brian_May | Phaser — Sorciers du Phasing |
+| 29 | **Eddie Van Halen** (portrait) | commons.wikimedia.org/wiki/Category:Eddie_Van_Halen | Flanger — Quatre sweeps |
+| 30 | **Mark Lettieri** (portrait) | commons.wikimedia.org | Flanger — Quatre sweeps |
+
 ---
 
 ## ⚙️ ACTIONS TECHNIQUES
@@ -78,7 +91,7 @@ La pédale affichée n'est pas le bon modèle.
 
 ## 📄 MIGRATION DES ARTICLES
 
-### ✅ Migrés (8/19)
+### ✅ Migrés (11/19)
 - [x] La Guerre des Fuzz → `articles/la-guerre-des-fuzz.html`
 - [x] Comment choisir ses pédales d'effets → `articles/comment-choisir-ses-pedales.html`
 - [x] Tube Screamer → `articles/tube-screamer.html`
@@ -87,15 +100,15 @@ La pédale affichée n'est pas le bon modèle.
 - [x] Klon vs clones → `articles/klon-vs-clones.html`
 - [x] Top 7 pédales overdrive → `articles/top-7-overdrive.html`
 - [x] Fuzz mythique et sous-cotée → `articles/fuzz-sous-cotee.html`
+- [x] Chorus → `articles/chorus.html`
+- [x] Phaser → `articles/phaser.html`
+- [x] Flanger : mode avion → `articles/flanger-mode-avion.html`
 
-### ⏳ Restants (11)
+### ⏳ Restants (8)
 - [ ] Dallas Arbiter Fuzz Face
 - [ ] Overdrive : la pédale incontournable
 - [ ] Ces overdrives qui ont rendu vos amplis accros
-- [ ] Chorus
-- [ ] Flanger : mode avion
 - [ ] Flanger : les 3 pédales de légende
-- [ ] Phaser : quand la guitare se met à respirer
 - [ ] Les 6 pédales indispensables
 - [ ] Guide ampli combo débutant
 - [ ] Pédales IA en 2026
