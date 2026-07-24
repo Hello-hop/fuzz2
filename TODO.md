@@ -1,7 +1,7 @@
 # 📋 TODO — Fuzz & Friture
 
 > Mis à jour automatiquement à chaque migration d'article.
-> Dernière mise à jour : article 11 (Flanger)
+> Dernière mise à jour : article 14 (Ampli combo)
 
 ---
 
@@ -91,7 +91,7 @@ La pédale affichée n'est pas le bon modèle.
 
 ## 📄 MIGRATION DES ARTICLES
 
-### ✅ Migrés (11/19)
+### ✅ Migrés (14/19)
 - [x] La Guerre des Fuzz → `articles/la-guerre-des-fuzz.html`
 - [x] Comment choisir ses pédales d'effets → `articles/comment-choisir-ses-pedales.html`
 - [x] Tube Screamer → `articles/tube-screamer.html`
@@ -103,16 +103,23 @@ La pédale affichée n'est pas le bon modèle.
 - [x] Chorus → `articles/chorus.html`
 - [x] Phaser → `articles/phaser.html`
 - [x] Flanger : mode avion → `articles/flanger-mode-avion.html`
+- [x] Dallas Arbiter Fuzz Face → `articles/dallas-arbiter-fuzz-face.html`
+- [x] Les 6 pédales indispensables → `articles/6-pedales-pedalboard.html`
+- [x] Guide ampli combo débutant → `articles/ampli-combo-debutant.html`
 
-### ⏳ Restants (8)
-- [ ] Dallas Arbiter Fuzz Face
+### ⏳ Restants (5)
 - [ ] Overdrive : la pédale incontournable
 - [ ] Ces overdrives qui ont rendu vos amplis accros
 - [ ] Flanger : les 3 pédales de légende
-- [ ] Les 6 pédales indispensables
-- [ ] Guide ampli combo débutant
 - [ ] Pédales IA en 2026
 - [ ] Boss PX-1 Plugout FX
+
+### ⚠️ À arbitrer — doublon détecté
+- **« Overdrive : la pédale incontournable »** reprend exactement les mêmes 7 produits et la même
+  structure que « Top 7 pédales overdrive » (déjà migré). Publier les deux nuirait au SEO
+  (contenu dupliqué). Deux options : (a) l'abandonner et faire une 301 vers `top-7-overdrive.html`,
+  (b) le réécrire en article pédagogique « qu'est-ce qu'un overdrive » sans liste de produits.
+  **→ Ton arbitrage nécessaire.**
 
 ### ❌ Abandonné
 - Comparatif Fuzz Face / Big Muff / Boss FZ-5 (doublon de "La Guerre des Fuzz")
