@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dallas Arbiter Fuzz Face : la pédale ronde qui a tout changé | Fuzz &amp; Friture</title>
+<meta name="description" content="Histoire, circuit et choix de la Dallas Arbiter Fuzz Face : germanium vs silicium, les guitaristes qui l'ont portée, et quelle version acheter en 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0a0e14;--space2:#0f1520;--space3:#161d2b;
+    --orange:#f5921e;--gold:#f9c84a;
+    --teal:#3eb8c0;--cream:#f0e8d8;--dim:rgba(245,241,232,.92);
+    --border:rgba(245,146,30,.18);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--space);color:var(--cream);font-family:'Barlow',sans-serif;font-size:18px;line-height:1.8;overflow-x:hidden;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;}
+  img{max-width:100%;display:block;}
+
+  /* NAV */
+  .a-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,14,20,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+  .a-nav .logo{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.05em;color:var(--orange);text-decoration:none;}
+  .a-nav .logo span{color:var(--teal);}
+  .a-nav .back{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream);opacity:.7;text-decoration:none;transition:opacity .2s,color .2s;}
+  .a-nav .back:hover{opacity:1;color:var(--teal);}
+
+  /* HERO */
+  .a-hero{position:relative;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden;border-bottom:1px solid var(--border);}
+  .a-hero::before{content:'GUIDE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(7rem,22vw,17rem);color:rgba(245,146,30,.05);pointer-events:none;white-space:nowrap;z-index:0;letter-spacing:.05em;}
+  .a-hero>*{position:relative;z-index:1;}
+  .a-kicker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:1.5rem;}
+  .a-hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.3rem,7vw,4.6rem);line-height:.98;text-transform:uppercase;letter-spacing:.01em;}
+  .a-hero h1 em{color:var(--orange);font-style:normal;}
+  .a-hero .subtitle{font-style:italic;font-size:1.2rem;color:var(--dim);max-width:640px;margin:1.6rem auto 0;}
+  .a-hero .meta{margin-top:1.8rem;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);}
+
+  /* LAYOUT */
+  .a-wrap{max-width:820px;margin:0 auto;padding:0 1.5rem;}
+  .a-wrap p{margin:1.4rem 0;color:var(--dim);}
+  .a-wrap h2{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,2.6rem);text-transform:uppercase;letter-spacing:.01em;margin:3.5rem 0 .4rem;color:var(--cream);line-height:1.05;}
+  .a-wrap h2 .u{display:block;width:56px;height:4px;background:var(--orange);margin-top:.7rem;border-radius:2px;}
+  .a-wrap h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;margin:2rem 0 .5rem;color:var(--cream);}
+  .a-wrap strong{color:var(--cream);}
+  .a-wrap em{color:var(--gold);font-style:italic;}
+  .a-wrap a:not(.btn):not(.music-link){color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
+
+  /* TL;DR */
+  .tldr{background:var(--space2);border:1px solid var(--border);border-left:4px solid var(--orange);border-radius:12px;padding:2rem 2.2rem;margin:3rem auto;}
+  .tldr h2{margin:0 0 1.2rem;font-size:1.4rem;}
+  .tldr ul{list-style:none;}
+  .tldr li{padding:.7rem 0;border-bottom:1px solid rgba(245,241,232,.08);font-size:1rem;color:var(--dim);}
+  .tldr li:last-child{border-bottom:none;}
+  .tldr .fav{margin-top:1.3rem;padding-top:1.3rem;border-top:2px solid var(--orange);display:flex;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .btn-fav{background:var(--orange);color:var(--space)!important;border:none;padding:.7em 1.3em;border-radius:8px;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-decoration:none;}
+
+  /* CRITERIA CARDS */
+  .criteria{display:grid;gap:1rem;margin:2rem 0;}
+  .crit{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:10px;padding:1.3rem 1.6rem;}
+  .crit h3{margin:0 0 .4rem;font-size:1.25rem;}
+  .crit p{margin:0;font-size:.98rem;}
+
+  /* PRODUCT CARD */
+  .prod{background:var(--space2);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:2.5rem 0;}
+  .prod-img{width:100%;height:260px;object-fit:cover;border-bottom:1px solid var(--border);background:#fff;}
+  .prod-body{padding:2rem;}
+  .prod-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:.3em .8em;border-radius:20px;margin-bottom:1rem;background:rgba(249,200,74,.14);color:var(--gold);border:1px solid rgba(249,200,74,.3);}
+  .prod-body h3{margin:0 0 .3rem;font-size:1.8rem;}
+  .prod-maker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+  .ideal{background:rgba(62,184,192,.08);border:1px solid rgba(62,184,192,.25);border-radius:8px;padding:.9rem 1.2rem;font-size:.95rem;margin:1.2rem 0;color:var(--dim);}
+  .ideal strong{color:var(--teal);}
+
+  /* AFFILIATE BUTTONS */
+  .aff-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem;}
+  .btn{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.8em 1.4em;border-radius:8px;text-decoration:none;font-weight:700;transition:transform .15s,filter .2s;border:2px solid;}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .btn-amazon{background:var(--orange);color:var(--space);border-color:var(--orange);}
+  .btn-reverb{background:transparent;color:var(--gold);border-color:var(--gold);}
+  .music-link{color:var(--teal);font-family:'Space Mono',monospace;font-size:.85rem;letter-spacing:.05em;text-decoration:none;border-bottom:1px solid rgba(62,184,192,.35);}
+
+  /* SIGNAL CHAIN */
+  .chain{background:var(--space2);border:1px solid var(--border);border-radius:14px;padding:2rem;margin:2rem 0;}
+  .chain-flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:center;}
+  .chain-step{background:var(--space3);border:1px solid var(--border);border-radius:8px;padding:.6em 1em;font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.05em;color:var(--cream);white-space:nowrap;}
+  .chain-step.hi{border-color:var(--orange);color:var(--gold);}
+  .chain-arrow{color:var(--orange);font-weight:700;}
+
+  /* GUITARISTS */
+  .masters{background:var(--space2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3.5rem 1.5rem;margin:4rem 0;}
+  .masters-inner{max-width:900px;margin:0 auto;}
+  .masters h2{text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.4rem);text-transform:uppercase;margin-bottom:2.5rem;}
+  .masters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;}
+  .master{text-align:center;}
+  .master img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:1px solid var(--border);filter:grayscale(.3);transition:filter .3s;}
+  .master:hover img{filter:grayscale(0);}
+  .master .m-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.3rem;text-transform:uppercase;margin-top:.8rem;color:var(--cream);}
+  .master .m-pedal{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin:.3rem 0;}
+  .master .m-track{font-size:.9rem;font-style:italic;color:var(--dim);line-height:1.5;}
+
+  /* TABLE */
+  .table-wrap{overflow-x:auto;margin:2rem 0;border-radius:12px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px;}
+  thead th{background:var(--space3);color:var(--cream);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;text-transform:uppercase;letter-spacing:.05em;padding:1rem;text-align:left;}
+  tbody td{padding:.9rem 1rem;border-top:1px solid var(--border);color:var(--dim);vertical-align:top;}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02);}
+  .win{color:var(--gold);font-weight:700;}
+
+  /* VERDICT */
+  .verdict{background:linear-gradient(135deg,rgba(245,146,30,.1),rgba(62,184,192,.06));border:1px solid var(--border);border-radius:16px;padding:2.5rem;margin:3rem 0;}
+  .verdict h2{margin-top:0;}
+  .verdict-item{padding:1rem 0;border-bottom:1px solid rgba(245,241,232,.08);color:var(--dim);}
+  .verdict-item:last-child{border-bottom:none;}
+  .verdict-item strong{color:var(--orange);}
+
+  /* FAQ */
+  .faq-item{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1rem;}
+  .faq-item h3{margin:0 0 .5rem;font-size:1.2rem;color:var(--gold);}
+  .faq-item p{margin:0;font-size:.98rem;}
+
+  /* WHERE TO BUY */
+  .buy-list{list-style:none;margin:1.5rem 0;}
+  .buy-list li{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:1rem;}
+  .buy-list .buy-img{width:100%;height:180px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border);margin-bottom:1rem;padding:.5rem;}
+  .buy-list .buy-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;text-transform:uppercase;color:var(--cream);margin-bottom:.8rem;}
+
+  /* RELATED */
+  .related{margin:3rem 0;}
+  .related ul{list-style:none;display:grid;gap:.7rem;}
+  .related li a{display:block;background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.3rem;text-decoration:none;color:var(--cream);font-weight:500;transition:border-color .2s,transform .2s;}
+  .related li a:hover{border-color:var(--teal);transform:translateX(4px);color:var(--teal);}
+
+  /* DISCLAIMER */
+  .disclaimer{background:var(--space2);border:1px solid var(--border);border-radius:10px;padding:1.3rem 1.5rem;margin:3rem 0;font-size:.85rem;font-style:italic;color:var(--dim);opacity:.85;line-height:1.6;}
+
+  /* FOOTER */
+  .a-foot{text-align:center;padding:3rem 1.5rem;border-top:1px solid var(--border);color:var(--dim);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+  .a-foot a{color:var(--teal);text-decoration:none;}
+
+  @media(max-width:640px){
+    .a-hero{padding:3.5rem 1rem 3rem;}
+    .prod-body{padding:1.4rem;}
+    .masters{padding:2.5rem 1rem;}
+    .chain{padding:1.3rem;}
+    .verdict{padding:1.6rem;}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  .variant-year{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+  .who{border-top:1px solid rgba(245,241,232,.1);margin-top:1.2rem;padding-top:1rem;}
+  .who-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem;}
+  .who p{margin:0;font-style:italic;font-size:.95rem;}
+  .vintage{background:var(--space2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:10px;padding:1.4rem 1.6rem;margin:1.2rem 0;}
+  .vintage h3{margin:0 0 .2rem;font-size:1.25rem;}
+  .vintage .v-maker{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem;}
+  .vintage p{margin:0;font-size:.95rem;}
+
+  .spec-table td:first-child{color:var(--teal);font-weight:600;white-space:nowrap;}
+  .timeline{position:relative;margin:2rem 0;padding-left:1.6rem;border-left:2px solid var(--border);}
+  .tl-ev{position:relative;padding:0 0 1.6rem 1.2rem;}
+  .tl-ev::before{content:'';position:absolute;left:-1.95rem;top:.45rem;width:11px;height:11px;border-radius:50%;background:var(--orange);border:2px solid var(--space);}
+  .tl-year{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.15em;color:var(--gold);}
+  .tl-ev h3{margin:.2rem 0 .4rem;font-size:1.2rem;}
+  .tl-ev p{margin:0;font-size:.96rem;}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.8rem 0;}
+  .duo .col{background:var(--space2);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
+  .duo .col h3{margin-top:0;}
+  .duo .col.ge{border-top:3px solid var(--gold);}
+  .duo .col.si{border-top:3px solid var(--teal);}
+  .duo ul{list-style:none;margin:.8rem 0 0;}
+  .duo li{padding:.35rem 0;color:var(--dim);font-size:.94rem;}
+  .quote{border-left:3px solid var(--orange);background:var(--space2);padding:1.3rem 1.6rem;margin:2rem 0;font-style:italic;color:var(--cream);border-radius:0 10px 10px 0;}
+  @media(max-width:640px){.duo{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="a-nav">
+  <a href="../index.html" class="logo">Fuzz<span>&amp;</span>Friture</a>
+  <a href="../index.html" class="back">← Retour au site</a>
+</nav>
+
+<header class="a-hero">
+  <p class="a-kicker">✦ Histoire · Fuzz · Depuis 1966 ✦</p>
+  <h1>La pédale ronde <em>qui a tout changé</em></h1>
+  <p class="subtitle">Dallas Arbiter Fuzz Face — deux transistors, deux potards, et un son qui a redéfini le rock pour les cinquante années suivantes.</p>
+  <p class="meta">🔴 Scroll ça donne la frite 🔴</p>
+</header>
+
+<article class="a-wrap">
+
+  <div class="tldr">
+    <h2>⚡ Pas le temps : le résumé 30 secondes</h2>
+    <ul>
+      <li>🔴 <strong>1966, Londres</strong> — Ivor Arbiter met un circuit germanium dans un boîtier rond. La légende naît.</li>
+      <li>⚡ <strong>Hendrix l'adopte en 1967</strong> — <em>Purple Haze</em>, <em>Foxy Lady</em> : la pédale devient culte.</li>
+      <li>🔬 <strong>Germanium vs silicium</strong> — velours contre rasoir. Aucun n'est meilleur, ils sont différents.</li>
+      <li>🎚️ <strong>Sa magie :</strong> elle réagit au volume de ta guitare comme aucune autre pédale.</li>
+    </ul>
+  </div>
+
+  <p>En 1966, Ivor Arbiter, patron d'une chaîne de magasins de musique londonienne, a eu une idée aussi simple que géniale : mettre un circuit de saturation germanium dans un boîtier circulaire. Selon la légende, il aurait choisi cette forme ronde parce que c'était exactement celle des socles de pied de micro qu'il avait en stock.</p>
+
+  <p>La Dallas Arbiter Fuzz Face n'est pas la première pédale de fuzz de l'histoire — ce titre revient à la <a href="fuzz-sous-cotee.html">Maestro FZ-1 de 1962</a>, celle que les Stones ont rendue célèbre dans <em>Satisfaction</em>. <strong>Mais c'est la Fuzz Face qui est devenue la référence absolue du genre.</strong> Celle qu'on cite. Celle qu'on copie. Celle qu'on cherche encore, cinquante ans plus tard.</p>
+
+  <h2>Anatomie d'une légende<span class="u"></span></h2>
+  <div class="table-wrap">
+    <table class="spec-table">
+      <tbody>
+        <tr><td>Fabricant</td><td>Dallas Arbiter</td></tr>
+        <tr><td>Année de création</td><td>1966</td></tr>
+        <tr><td>Transistors (origine)</td><td>NKT275 / AC128</td></tr>
+        <tr><td>Topologie</td><td>PNP germanium</td></tr>
+        <tr><td>Contrôles</td><td>Fuzz · Volume</td></tr>
+        <tr><td>Alimentation</td><td>9 V (polarité +)</td></tr>
+        <tr><td>Boîtier</td><td>Circulaire</td></tr>
+        <tr><td>Propriétaire actuel</td><td>Jim Dunlop</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Deux transistors pour réécrire l'histoire<span class="u"></span></h2>
+  <p>Ce qui rend la Fuzz Face fascinante d'un point de vue électronique, c'est sa <strong>simplicité radicale</strong>. Le circuit de base tient sur une demi-page : deux transistors en configuration commune, quelques résistances, trois condensateurs. C'est tout. Et c'est précisément cette simplicité qui le rend imprévisible et vivant.</p>
+  <p>Le circuit amplifie le signal dans un premier étage (Q1), puis le sature profondément dans un second (Q2). Le potentiomètre Fuzz agit sur la polarisation de Q2 — c'est pourquoi tourner le volume de la guitare change radicalement la texture de la distorsion.</p>
+  <p>L'impédance d'entrée très basse (environ 10 kΩ) est aussi un trait distinctif : la Fuzz Face interagit directement avec les micros de la guitare. <strong>C'est pourquoi elle doit idéalement être placée en premier dans la chaîne d'effets</strong>, avant tout buffer. Un buffer tue l'interaction, un true bypass la préserve. On en parle en détail dans notre article sur <a href="ordre-des-pedales.html">l'ordre des pédales</a>.</p>
+
+  <h2>L'histoire en quelques dates<span class="u"></span></h2>
+  <div class="timeline">
+    <div class="tl-ev"><p class="tl-year">1966</p><h3>Naissance à Londres</h3><p>Ivor Arbiter conçoit la Fuzz Face avec des transistors germanium NKT275. Le boîtier rouge carmin fait immédiatement sensation dans les vitrines de ses magasins.</p></div>
+    <div class="tl-ev"><p class="tl-year">1967</p><h3>Jimi Hendrix entre dans la légende</h3><p>Hendrix enregistre <em>Are You Experienced</em> avec une Fuzz Face germanium. <em>Purple Haze</em>, <em>Foxy Lady</em> — la pédale ronde est partout. Elle devient instantanément l'objet de désir de toute une génération.</p></div>
+    <div class="tl-ev"><p class="tl-year">1968–69</p><h3>La transition silicium</h3><p>Arbiter bascule sur des transistors NPN silicium (BC108C, BC183L), moins chers et plus stables. Le son change : plus agressif, plus brillant, mais aussi plus imprévisible.</p></div>
+    <div class="tl-ev"><p class="tl-year">1969–70</p><h3>Hendrix à Woodstock — l'apogée</h3><p>La performance de <em>The Star-Spangled Banner</em> distordu — silicium ou germanium ? Le débat continue. Ce qui est certain : la Fuzz Face est dans la chaîne.</p></div>
+    <div class="tl-ev"><p class="tl-year">1975</p><h3>Fin de production britannique</h3><p>Dallas Music Industries transfère la production aux États-Unis, puis la pédale disparaît brièvement du marché avant d'être relancée par Jim Dunlop.</p></div>
+  </div>
+
+  <div class="quote">
+    « Arbiter n'avait pris aucune précaution contre les radiofréquences. Le silicium avait un gain bien plus élevé, et le câble de guitare se comportait littéralement comme une antenne. »
+  </div>
+
+  <h2>Germanium vs silicium<span class="u"></span></h2>
+  <p>Si tu passes dix minutes sur n'importe quel forum de pédales, tu croiseras inévitablement ce débat. Voilà ce qu'il faut retenir, sans idéologie.</p>
+  <div class="duo">
+    <div class="col ge">
+      <h3>🟡 Germanium · 1966–1968</h3>
+      <p class="prod-maker">NKT275 · AC128</p>
+      <ul>
+        <li>✓ Son chaud, épais, organique</li>
+        <li>✓ Compression naturelle douce</li>
+        <li>✓ Réagit magnifiquement au volume guitare</li>
+        <li>✕ Sensible à la température (drift thermique)</li>
+        <li>✕ Variabilité d'une pédale à l'autre</li>
+      </ul>
+      <p style="margin-top:.9rem;font-size:.9rem;"><em>Hendrix sur</em> Are You Experienced</p>
+    </div>
+    <div class="col si">
+      <h3>🔵 Silicium · 1969+</h3>
+      <p class="prod-maker">BC108C · BC183L</p>
+      <ul>
+        <li>✓ Son plus vif, plus agressif</li>
+        <li>✓ Sustain plus long, plus « brûlé »</li>
+        <li>✓ Plus stable thermiquement</li>
+        <li>✓ Moins cher, plus fiable en production</li>
+        <li>✕ Problèmes RF sur les premiers modèles</li>
+      </ul>
+      <p style="margin-top:.9rem;font-size:.9rem;"><em>Hendrix sur</em> Band of Gypsys</p>
+    </div>
+  </div>
+  <div class="tip">
+    <p><strong>Le verdict :</strong> le germanium n'est pas « meilleur » — il est <em>différent</em>. La vraie question à se poser : quel son veux-tu ? Velours ou rasoir ?</p>
+  </div>
+
+</article>
+
+<section class="masters">
+  <div class="masters-inner">
+    <h2>🎸 Les guitaristes qui l'ont portée</h2>
+    <div class="masters-grid">
+      <div class="master">
+        <img src="../images/jimi-hendrix-poster.jpg" alt="Jimi Hendrix" loading="lazy">
+        <div class="m-name">Jimi Hendrix</div>
+        <div class="m-pedal">✦ 1966–1970</div>
+        <div class="m-track">Le parrain. <em>Purple Haze</em>, <em>Foxy Lady</em>, Woodstock. Sans Hendrix, la Fuzz Face serait une curiosité de collectionneur.</div>
+      </div>
+      <div class="master">
+        <img src="../images/david-gilmour-live.jpg" alt="David Gilmour" loading="lazy">
+        <div class="m-name">David Gilmour</div>
+        <div class="m-pedal">✦ années 1970–présent</div>
+        <div class="m-track">Des Fuzz Faces sur plusieurs enregistrements de Pink Floyd, combinées avec un Uni-Vibe pour ce son cosmique caractéristique.</div>
+      </div>
+      <div class="master">
+        <img src="../images/jeff-beck.jpg" alt="Eric Johnson" loading="lazy">
+        <div class="m-name">Eric Johnson</div>
+        <div class="m-pedal">✦ années 1980–présent</div>
+        <div class="m-track">Collectionneur obsessionnel de Fuzz Faces germanium vintage. Il sélectionne ses transistors au hFE-mètre avec une précision chirurgicale.</div>
+      </div>
+      <div class="master">
+        <img src="../images/john-mayer-2019.jpg" alt="John Mayer" loading="lazy">
+        <div class="m-name">John Mayer</div>
+        <div class="m-pedal">✦ années 2000–présent</div>
+        <div class="m-track">Mayer a contribué à remettre la Fuzz Face au goût du jour dans les années 2000, pour ses tons bluesés à la Stratocaster.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<article class="a-wrap">
+
+  <h2>🛒 Quelle Fuzz Face choisir en 2026 ?<span class="u"></span></h2>
+  <p>Le marché s'est considérablement étoffé. Voici les versions qui méritent vraiment ton attention.</p>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/fuzz-face-mini-ffm3.jpg" alt="Dunlop Fuzz Face">
+    <div class="prod-body">
+      <span class="prod-tag">★ Recommandation principale</span>
+      <h3>Dunlop JDF2 Fuzz Face Distortion</h3>
+      <p class="prod-maker">Germanium AC128 · True bypass · 9 V</p>
+      <p>La référence accessible. Transistors germanium AC128, circuit fidèle aux specs d'origine, boîtier taille réelle. <strong>Le point d'entrée idéal avant de partir à la chasse aux vintages.</strong></p>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002E1G5C?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+jdf2+fuzz+face" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/fuzz-face-mini-ffm3.jpg" alt="Dunlop FFM2 Mini Fuzz Face">
+    <div class="prod-body">
+      <span class="prod-tag">Idéal pedalboard</span>
+      <h3>Dunlop FFM2 Mini Fuzz Face</h3>
+      <p class="prod-maker">Germanium · Format mini · LED status · 9 V DC</p>
+      <p>Même circuit, moitié du volume. <strong>La Mini Fuzz Face résout l'éternel problème du boîtier surdimensionné original.</strong> Transistors germanium, LED d'état, alimentation standard.</p>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00B7XGKLE?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+ffm2+mini+fuzz+face" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod">
+    <img class="prod-img" src="../images/q5928-jimi-hendrix.jpg" alt="Dunlop JHF1 Jimi Hendrix Fuzz Face">
+    <div class="prod-body">
+      <span class="prod-tag">Pour les fanatiques de Jimi</span>
+      <h3>Dunlop JHF1 Jimi Hendrix Fuzz Face</h3>
+      <p class="prod-maker">Silicium BC108C · Hand-wired · Finition turquoise</p>
+      <p>Reproduction méticuleuse du modèle 1969-70 qu'Hendrix utilisait sur <em>Electric Ladyland</em>. Transistors BC108C silicium, circuit câblé à la main.</p>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/s?k=dunlop+jhf1+fuzz+face&tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Voir le prix sur Amazon →</a>
+        <a href="https://reverb.com/marketplace?query=Dunlop+Fuzz+Face+JHF1" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Occasion sur Reverb →</a>
+      </div>
+    </div>
+  </div>
+
+  <h2>🎚️ Comment bien l'utiliser<span class="u"></span></h2>
+  <div class="step">
+    <h3>Règle n°1 — Elle vient en premier</h3>
+    <p>La Fuzz Face a une impédance d'entrée très basse. Si tu mets un buffer avant elle, tu changes fondamentalement son comportement. Pour retrouver le son original, branche-la directement après la guitare, sans rien entre les deux.</p>
+  </div>
+  <div class="step">
+    <h3>Règle n°2 — Le volume de guitare est ton meilleur ami</h3>
+    <p>Contrairement à la plupart des pédales, la Fuzz Face réagit de manière spectaculaire au volume de ta guitare. À 10, elle rugit. À 5, elle se nettoie pour un crunch chaud. À 3, elle peut sonner presque clean. <strong>C'est le « cleanup » — une caractéristique quasi unique au circuit Fuzz Face.</strong></p>
+  </div>
+  <div class="step">
+    <h3>Règle n°3 — La température compte (pour le germanium)</h3>
+    <p>Les transistors germanium sont sensibles à la chaleur. À froid, elle peut sonner un peu morte. Après quelques minutes de jeu, elle s'ouvre. C'est du folklore, certes — mais c'est aussi de la physique.</p>
+  </div>
+  <div class="step">
+    <h3>Règle n°4 — Deux potards, une seule exploration possible</h3>
+    <p>La plupart des joueurs poussent le Fuzz à fond et règlent le volume pour matcher le niveau bypass. La vraie exploration vient du Fuzz : en dessous de 9h, le son change complètement de nature — de la fuzz à quelque chose de presque octave.</p>
+  </div>
+
+  <h2>🛍️ Où acheter<span class="u"></span></h2>
+  <ul class="buy-list">
+    <li>
+      <img class="buy-img" src="../images/fuzz-face-mini-ffm3.jpg" alt="Dunlop JDF2 Fuzz Face" loading="lazy">
+      <div class="buy-name">Dunlop JDF2 Fuzz Face Distortion</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B0002E1G5C?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+jdf2+fuzz+face" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/fuzz-face-mini-ffm3.jpg" alt="Dunlop FFM2 Mini" loading="lazy">
+      <div class="buy-name">Dunlop FFM2 Mini Fuzz Face</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/dp/B00B7XGKLE?tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=dunlop+ffm2+mini+fuzz+face" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+    <li>
+      <img class="buy-img" src="../images/q5928-jimi-hendrix.jpg" alt="Dunlop JHF1" loading="lazy">
+      <div class="buy-name">Dunlop JHF1 Jimi Hendrix Fuzz Face</div>
+      <div class="aff-btns">
+        <a href="https://www.amazon.fr/s?k=dunlop+jhf1+fuzz+face&tag=fuzzpartenair-21" rel="nofollow sponsored" target="_blank" class="btn btn-amazon">Amazon.fr →</a>
+        <a href="https://reverb.com/marketplace?query=Dunlop+Fuzz+Face+JHF1" rel="nofollow sponsored" target="_blank" class="btn btn-reverb">Reverb →</a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="related">
+    <h2>📖 Pour continuer à lire<span class="u"></span></h2>
+    <p>La Fuzz Face est la porte d'entrée du fuzz. Voilà la suite :</p>
+    <ul>
+      <li><a href="comment-choisir-ses-pedales.html">🎚️ <strong>Tu débutes ?</strong> Le guide complet pour choisir ses pédales d'effets en 2026</a></li>
+      <li><a href="la-guerre-des-fuzz.html">🔥 <strong>Le comparatif :</strong> Fuzz Face vs Big Muff vs Boss FZ-5</a></li>
+      <li><a href="fuzz-sous-cotee.html">👴 <strong>Les origines :</strong> les 4 fuzz qui ont fait l'histoire</a></li>
+      <li><a href="wah-wah.html">👄 <strong>Le combo Hendrix :</strong> Wah + Fuzz, la reine qui n'a jamais abdiqué</a></li>
+      <li><a href="ordre-des-pedales.html">🔌 <strong>Question technique :</strong> pourquoi un fuzz déteste être placé après un buffer</a></li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    🔗 En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises. Certains liens de cet article sont des liens affiliés (Amazon, Reverb) — votre prix reste identique.
+  </div>
+
+</article>
+
+<footer class="a-foot">
+  <p>✦ Fuzz &amp; Friture · <a href="../index.html">Retour à l'accueil</a> · Un blog par des guitaristes, pour des guitaristes ✦</p>
+</footer>
+
+</body>
+</html>
