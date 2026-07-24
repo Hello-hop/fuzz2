@@ -1,7 +1,7 @@
 # 📋 TODO — Fuzz & Friture
 
 > Mis à jour automatiquement à chaque migration d'article.
-> Dernière mise à jour : article 14 (Ampli combo)
+> Dernière mise à jour : MIGRATION TERMINÉE (18/18)
 
 ---
 
@@ -91,7 +91,7 @@ La pédale affichée n'est pas le bon modèle.
 
 ## 📄 MIGRATION DES ARTICLES
 
-### ✅ Migrés (14/19)
+### ✅ Migrés (18/18) — TERMINÉ 🎉
 - [x] La Guerre des Fuzz → `articles/la-guerre-des-fuzz.html`
 - [x] Comment choisir ses pédales d'effets → `articles/comment-choisir-ses-pedales.html`
 - [x] Tube Screamer → `articles/tube-screamer.html`
@@ -106,13 +106,14 @@ La pédale affichée n'est pas le bon modèle.
 - [x] Dallas Arbiter Fuzz Face → `articles/dallas-arbiter-fuzz-face.html`
 - [x] Les 6 pédales indispensables → `articles/6-pedales-pedalboard.html`
 - [x] Guide ampli combo débutant → `articles/ampli-combo-debutant.html`
+- [x] Flanger : les 3 pédales de légende → `articles/flanger-3-pedales.html`
+- [x] Ces overdrives qui ont rendu vos amplis accros → `articles/overdrives-amplis-accros.html`
+- [x] Pédales IA en 2026 → `articles/pedales-ia-2026.html`
+- [x] Boss PX-1 Plugout FX → `articles/boss-px-1.html`
 
-### ⏳ Restants (5)
-- [ ] Overdrive : la pédale incontournable
-- [ ] Ces overdrives qui ont rendu vos amplis accros
-- [ ] Flanger : les 3 pédales de légende
-- [ ] Pédales IA en 2026
-- [ ] Boss PX-1 Plugout FX
+### ✅ Maillage : 100 % interne
+Tous les liens entre articles pointent désormais vers les pages locales.
+**Aucune dépendance WordPress restante** dans le contenu des articles.
 
 ### ⚠️ À arbitrer — doublon détecté
 - **« Overdrive : la pédale incontournable »** reprend exactement les mêmes 7 produits et la même
